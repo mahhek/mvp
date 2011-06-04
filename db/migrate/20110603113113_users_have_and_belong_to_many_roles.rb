@@ -4,9 +4,9 @@ class UsersHaveAndBelongToManyRoles < ActiveRecord::Migration
       t.references :role, :user
     end
 
-#    user = User.new(:username =>  "admin",:email => "admin@website.com", :password => "admin123", :password_confirmation => "admin123", :active => true)
-#    user.roles << Role.find_by_name("Admin")
-#    user.save
+    user = User.new(:username =>  "admin",:email => "admin@website.com", :password => "admin123", :password_confirmation => "admin123", :active => true)
+    user.roles << Role.find_by_name("Admin")
+    user.save
     
   end
 
