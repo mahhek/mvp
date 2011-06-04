@@ -1,0 +1,84 @@
+<% remote_form_for :user, @user, :url => user_create_path do |f| %>
+
+  <h1>New User? Register:</h1>
+  <hr/>
+
+  <div id="errors_div_user">
+    <%= render :partial => "errors", :locals => {:object => @user}%>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="width: 25%;float: left;">
+      First Name:
+    </div>
+    <div style="width: 70%;float: left;">
+      <%= f.text_field :first_name, :class=>"field", :size => "23" %>
+    </div>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="width: 25%;float: left;">
+      Last Name:
+    </div>
+    <div style="width: 70%;float: left;">
+      <%= f.text_field :last_name, :class=>"field", :size => "23" %>
+      <span style="float: right;width: 265px;color: gray;">
+        We'll only display your last initial
+      </span>
+    </div>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="width: 25%;float: left;">
+      Username:
+    </div>
+    <div style="width: 70%;float: left;">
+      <%= f.text_field :username, :class=>"field", :size => "23" %>
+      <span style="float: right;width: 265px;color: gray;">
+        We'll only display your last initial
+      </span>
+    </div>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="width: 25%;float: left;">
+      Email Address:
+    </div>
+    <div style="width: 70%;float: left;">
+      <%= f.text_field :email, :class=>"field", :size => "23" %>
+    </div>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="width: 25%;float: left;">
+      Password:
+    </div>
+    <div style="width: 70%;float: left;">
+      <%= f.password_field :password, :class=>"field", :size => "23" %>
+      <span style="float: right;width: 265px;color: gray;">
+        6 characters or more
+      </span>
+    </div>
+  </div>
+
+
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="width: 25%;float: left;">
+      Confirm Password:
+    </div>
+    <div style="width: 70%;float: left;">
+      <%= f.password_field :password_confirmation, :class=>"field", :size => "23" %>
+    </div>
+  </div>
+
+
+
+  <!--  <div style="width: 100%;float: left;">
+      <input name="rememberme" id="rememberme" type="checkbox" checked="checked" value="forever" /> &nbsp;Remember me</label>
+    </div> -->
+
+  <div style="width: 100%;float: right;text-align: right;margin-top: 10px;">
+    <%= f.submit "Sign me up!", :class => "bt_login" %>
+  </div>
+
+<%end%>

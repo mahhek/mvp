@@ -1,0 +1,161 @@
+<%= f.hidden_field :user_id, :value => current_user.id %>
+
+<div style="padding: 20px;background-color: lavender;border: 1px solid black;width: 90%;float: left;">
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="font-size: 16px;float: left;width: auto;">
+      What is your space?
+    </div>
+    <br/>
+    <div style="float: left;width: auto;">
+      Don't worry this information will only <br/>be shared with the renters you accept.      
+    </div>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="width: 25%;float: left;">
+      Your Street Address*:
+    </div>
+    <div style="width: 70%;float: left;">
+      <%= f.text_field :address, :size => "40" %>
+    </div>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 5px;margin-bottom: 25px;">
+    <div style="width: 25%;float: left;">
+      Phone Number*:
+    </div>
+    <div style="width: 70%;float: left;">
+      <%= f.text_field :phone, :size => "40" %>
+    </div>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 5px;margin-bottom: 25px;">
+    <div style="width: 25%;float: left;">
+      &nbsp;
+    </div>
+    <div style="width: 70%;float: left;">
+      <% if @location.errors.any? %>
+        <div id="errorExplanation">
+          <h2><%= pluralize(@location.errors.count, "error") %> prohibited this space from being saved:</h2>
+          <ul>
+            <% @location.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+<div style="padding: 20px;background-color: lavender;border: 1px solid black;width: 90%;float: left;margin-top: 20px;">
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="font-size: 16px;float: left;width: auto;">
+      Tell us about your space.
+    </div>
+    <br/>
+    <div style="float: left;width: auto;">
+      This information will be shared <br/>with potential renters.
+    </div>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="width: 25%;float: left;">
+      Storage Space type:
+    </div>
+    <div style="width: 70%;float: left;">
+      <%= select_tag "location[storage_type]", options_for_select([["Attic" , "Attic"],["Basement" ,"Basement"] , ["Closet", "Closet"], ["Garage","Garage"], ["Room","Room"], ["Parking Space","Parking Space"]], @location.storage_type), :onchange =>"if($('#location_storage_type option:selected').text() == 'Parking Space'){$('#location_accommodates option:selected').text('A Car');}" , :style => "width:250px;" %>
+    </div>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="width: 25%;float: left;">
+      Accommodates:
+    </div>
+    <div style="width: 70%;float: left;">
+      <%= select_tag "location[accommodates]", options_for_select([["A few boxes" , "A few boxes"],["Several boxes" ,"Several boxes"] , ["Boxes & furniture", "Boxes & furniture"], ["A small apartment","A small apartment"], ["A car","A car"]], @location.accommodates) , :style => "width:250px;"  %>
+    </div>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="width: 25%;float: left;">
+      Floor:
+    </div>
+    <div style="width: 70%;float: left;">
+      <%= select_tag "location[floor]", options_for_select([["Ground" , "Ground"],["Basement" ,"Basement"] , ["1st Floor", "1st Floor"], ["2nd Floor","2nd Floor"], ["2+ Floors","2+ Floors"]], @location.storage_type)  , :style => "width:250px;"  %>
+    </div>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="width: 25%;float: left;">
+      Access:
+    </div>
+    <div style="width: 70%;float: left;">
+      <%= select_tag "location[access]", options_for_select([["Renter requests access" , "Renter requests access"],["Access day or night" ,"Access day or night"] , ["Fixed hours", "Fixed hours"]], @location.storage_type) , :style => "width:250px;"  %>
+    </div>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="width: 25%;float: left;">
+      Security
+    </div>
+    <div style="width: 70%;float: left;">
+      <%= select_tag "location[security]", options_for_select([["Building Locks" , "Building Locks"],["Building & Storage Locks" ,"Building & Storage Locks"] , ["Food", "Food"], ["Misc","Misc"]], @location.storage_type) , :style => "width:250px;"  %>
+    </div>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="width: 25%;float: left;">
+      Features:
+    </div>
+    <div style="width: 70%;float: left;">
+      <% @features.each do |feature| %>
+        <div style="float:left;width:250px;margin-top: 5px;">
+          <%= check_box_tag("features[]", feature.id, @location.features.include?(feature)) %>&nbsp;<%= feature.name %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 10px;">
+    <div style="width: 25%;float: left;">
+      Headlines:
+    </div>
+    <div style="width: 70%;float: left;">
+      <%= f.text_field :headline, :size => "40" %>
+    </div>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="width: 25%;float: left;">
+      Description:
+    </div>
+    <div style="width: 70%;float: left;">
+      <%= f.text_area :description, :size => "46" %>
+    </div>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="width: 25%;float: left;">
+      Available Starting:
+    </div>
+    <div style="width: 70%;float: left;">
+      <%= f.date_select :start_date , :size => "40" %>
+    </div>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 5px;margin-bottom: 5px;">
+    <div style="width: 25%;float: left;">
+      Monthly Price:
+    </div>
+    <div style="width: 70%;float: left;">
+      <%= f.text_field :price , :size => "20" %>
+    </div>
+  </div>
+
+
+
+  <div style="float: right;margin: 20px;">
+    <%= f.submit "Save & Add Photos" %>
+  </div>
+</div>

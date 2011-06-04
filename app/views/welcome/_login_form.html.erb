@@ -1,0 +1,53 @@
+<% remote_form_for :user_session, @user_session, :url => user_session_create_path do |f| %>
+
+  <h1>Sign In:</h1>
+  <hr/>
+  <div style="width: 100%;float: left;">
+    <h3>
+      Using Facebook:
+    </h3>
+
+    <%= link_to "FB Login", "#" %>
+  </div>
+  <div style="width: 100%;float: left;">
+    <hr style="width: 150px;color: silver;float: left;"></hr>
+  </div>
+
+  <div style="width: 100%;float: left;">
+    <h3>
+      Using Your Username and password
+    </h3>
+  </div>
+
+  <div id="errors_div_session">
+    <%= render :partial => "errors", :locals => {:object => @user_session}%>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="width: 25%;float: left;">
+      Email Address: 
+    </div>
+    <div style="width: 70%;float: left;">
+      <%= f.text_field :email, :class=>"field", :size => "23" %>
+    </div>
+  </div>
+
+  <div style="width: 100%;float: left;margin-top: 5px;">
+    <div style="width: 25%;float: left;">
+      Password:
+    </div>
+    <div style="width: 70%;float: left;">
+      <%= f.password_field :password, :class=>"field", :size => "23" %>
+    </div>
+  </div>
+
+  <!--  <div style="width: 100%;float: left;">
+      <input name="rememberme" id="rememberme" type="checkbox" checked="checked" value="forever" /> &nbsp;Remember me</label>
+    </div> -->
+
+  <div style="width: 100%;float: right;text-align: right;margin-top: 10px;">
+    <%= f.submit "Sign me in!", :class => "bt_login" %><br/>
+    <%= link_to "Forgot your password?", "#",:class => "lost-pwd" %>
+  </div>
+
+<%end%>

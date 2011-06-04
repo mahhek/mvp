@@ -1,0 +1,10 @@
+<div style="float: left;width: 100%;padding: 10px;">
+  <% unless current_user %>
+    <div style="width: 45%;float: left;">
+      <%= render :partial => "login_form" %>
+    </div>
+    <div style="width: 45%;float: left;margin-left: 5%;">
+      <%= render :partial => "registration_form" %>
+    </div>
+  <% end %>
+</div>

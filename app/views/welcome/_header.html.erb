@@ -1,0 +1,8 @@
+<h1>
+  <%if current_user%>
+    Welcome back to Storably! &nbsp;<%= current_user.username %>&nbsp;
+    <%#= link_to "My Profile", edit_user_path(current_user) %>
+  <% else %>
+    Welcome to Storably!
+  <%end%>
+</h1>

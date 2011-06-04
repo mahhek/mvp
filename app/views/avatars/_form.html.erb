@@ -1,0 +1,52 @@
+<div style="padding: 20px;background-color: lavender;border: 1px solid black;width: 100%;float: left;">
+  <span style="float: left;">
+    <%= link_to "Details", edit_location_path(@location) %>
+  </span>
+  <span style="float: left;margin-left: 10px;">
+    <%= link_to "Photos", "#" %>
+  </span>
+  <span style="float: left;margin-left: 10px;">
+    <%= link_to "Preivew","#" %>
+  </span>
+  <span style="float: left;margin-left: 10px;">
+    <%= select_tag "location_status", options_for_select([["Show Listing" , "Show Listign"],["Hide Listing" , "Hide Listign"]]) , :style => "width:250px;" %>
+  </span>
+</div>
+<div style="float: left;margin-top: 20px;">
+  <h1>
+    <%= @location.headline %>
+  </h1>
+</div>
+<div style="padding: 20px;background-color: lavender;border: 1px solid black;width: 100%;float: left;">
+  <div style="width:30%;float: left;">
+    Your Listing Thumbnail
+  </div>
+  <div style="width:70%;float: left;">
+    Photos<br/>
+    GIF / JPEG / PNG accepted<br/>
+
+    <% if @avatar.new_record? %>
+      <div style="float: left; width: 100%;margin-top: 10px;">
+        <%= f.file_field :photo %>
+      </div>
+      <div style="float: left; width: 100%;margin-top: 10px;">
+        <%= f.text_field :caption %>
+        <span style="float: right;width: 265px;color: gray;">
+          Give this photo a caption
+        </span>
+      </div>
+    <% else %>
+      <div style="float:left;width:100%;margin-top: 10px; ">
+        <%= link_to( image_tag(@avatar.photo.url(:small) ), @avatar.photo.url(:original) ) %>
+      </div>
+      <div style="float:left;width:100%;margin-top: 10px; ">
+        <%= link_to "Delete photo & caption:", location_avatar_path(@location,@avatar), :method => :delete, :confirm => "Are you sure?" %>
+      </div>
+    <% end %>
+  </div>
+  <% if @avatar.new_record? %>
+    <div style="width: 100%;float: left;text-align: right;">
+      <%= f.submit "Save" %>
+    </div>
+  <% end %>
+</div>

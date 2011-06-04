@@ -1,0 +1,43 @@
+html, body {border: 0; margin: 0; padding: 0;}
+
+body {
+    font: 85%/0.9 arial, helvetica, sans-serif;
+    line-height: 130%;
+    width: 100%;
+    min-width: 970px;
+    color: black;
+    
+}
+
+a {
+    color: #0099CC;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #00CCFF;
+}
+
+a img {
+    border: none;/*remove border for linked images*/
+}
+
+h1 {
+    font-size: 1.6em;
+    height: 20px;
+    padding-top: 0;
+}
+
+h2{
+    font-size: 1.2em;
+    height: 20px;
+    padding-top: 0;
+}
+
+#main-container{
+    background: none repeat scroll 0 0 #FFFFFF;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: left;
+    width: 850px;
+}
