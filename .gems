@@ -1,4 +1,4 @@
 rails --version 2.3.10
-authlogic  
-paperclip  
-mysql
+authlogic  --version 2.1.6
+paperclip  --version 2.3.11
+mysql     --version 2.8.1
