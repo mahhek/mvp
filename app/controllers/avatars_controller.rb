@@ -7,7 +7,7 @@ class AvatarsController < ApplicationController
   end
   
   def create    
-    @avatar = Avatar.new(params[:avatar])
+    @avatar = @location.avatars.build(params[:avatar])
     if @avatar.save
       @location.update_attribute("location_status", params[:location_status])
       flash[:notice] = "We have successfully saved the photo of your space!"

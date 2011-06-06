@@ -30,7 +30,8 @@ class UserSessionsController < ApplicationController
         end
       else
         render :update do |page|
-          page[:errors_div_session].replace_html :partial => "welcome/errors", :locals => {:object => @user_session}
+          page[:flash_messages_div].hide
+          page[:errors_div].replace_html :partial => "welcome/errors", :locals => {:object => @user_session}
         end
       end
     else

@@ -64,7 +64,10 @@
       Storage Space type:
     </div>
     <div style="width: 70%;float: left;">
-      <%= select_tag "location[storage_type]", options_for_select([["Attic" , "Attic"],["Basement" ,"Basement"] , ["Closet", "Closet"], ["Garage","Garage"], ["Room","Room"], ["Parking Space","Parking Space"]], @location.storage_type), :onchange =>"if($('#location_storage_type option:selected').text() == 'Parking Space'){$('#location_accommodates option:selected').text('A Car');}" , :style => "width:250px;" %>
+      <%= select_tag "location[storage_type]",
+        options_for_select([["Attic" , "Attic"],["Basement" ,"Basement"] , ["Closet", "Closet"], ["Garage","Garage"], ["Room","Room"], ["Parking Space","Parking Space"]], @location.storage_type),
+        :onchange =>"if($(this).val() == 'Parking Space'){$('#location_accommodates').val('A car');}" ,
+        :style => "width:250px;" %>
     </div>
   </div>
 
@@ -119,11 +122,17 @@
 
   <div style="width: 100%;float: left;margin-top: 10px;">
     <div style="width: 25%;float: left;">
-      Headlines:
+      Headline:
     </div>
     <div style="width: 70%;float: left;">
       <%= f.text_field :headline, :size => "40" %>
     </div>
+    <script type="text/javascript">
+      $("#location_headline").counter({
+        count: 'down',
+        goal: 40
+      });
+    </script>
   </div>
 
   <div style="width: 100%;float: left;margin-top: 5px;">
@@ -135,14 +144,29 @@
     </div>
   </div>
 
+  <script>
+    $(document).ready(function(){
+      Date.firstDayOfWeek = 0;
+      Date.format = 'yyyy-mm-dd';
+
+      if($('#location_start_date').val() == ""){
+        $('#location_start_date').datePicker({startDate:'1996-01-01'}).val(new Date().asString()).trigger('change');
+      }else{
+        $('#location_start_date').datePicker({startDate:'1996-01-01'});
+      }
+    });
+  </script>
+
+
   <div style="width: 100%;float: left;margin-top: 5px;">
     <div style="width: 25%;float: left;">
       Available Starting:
     </div>
     <div style="width: 70%;float: left;">
-      <%= f.date_select :start_date , :size => "40" %>
+      <%= f.text_field :start_date , :size => "40" %>
     </div>
   </div>
+
 
   <div style="width: 100%;float: left;margin-top: 5px;margin-bottom: 5px;">
     <div style="width: 25%;float: left;">

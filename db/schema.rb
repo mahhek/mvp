@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(:version => 20110603220349) do
     t.string   "security"
     t.string   "headline"
     t.text     "description"
-    t.datetime "start_date"
+    t.date     "start_date"
     t.string   "park_store"
     t.float    "price"
     t.string   "country_code"
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(:version => 20110603220349) do
   create_table "users", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "username",                               :null => false
+    t.string   "username"
     t.string   "email",                                  :null => false
     t.string   "crypted_password",                       :null => false
     t.string   "password_salt",                          :null => false

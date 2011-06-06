@@ -1,0 +1,14 @@
+<div style="float: left;width: 100%;padding: 10px;">
+  <div id="errors_div" style="background-color: #9F1B1B;color: whitesmoke;width: 91%;">
+    <%= render :partial => "errors" %>
+  </div>
+
+  <% unless current_user %>
+    <div style="width: 45%;float: left;">
+      <%= render :partial => "login_form" %>
+    </div>
+    <div style="width: 45%;float: left;margin-left: 5%;">
+      <%= render :partial => "registration_form" %>
+    </div>
+  <% end %>
+</div>

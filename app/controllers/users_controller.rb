@@ -7,11 +7,12 @@ class UsersController < ApplicationController
       @user.activate!
       flash[:notice] = "Your account has been created!"
       render :update do |page|
-        page << "window.location='/'"
+        page << "window.location='/welcome/signup_and_signin'"
       end
     else
       render :update do |page|
-        page[:errors_div_user].replace_html :partial => "welcome/errors", :locals => {:object => @user}
+        page[:flash_messages_div].hide
+        page[:errors_div].replace_html :partial => "welcome/errors", :locals => {:object => @user}
       end
     end
   end

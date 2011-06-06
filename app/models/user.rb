@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   acts_as_authentic do |c|
 
     c.login_field = 'email'
-
+    c.require_password_confirmation = false
     password_length_constraints = c.validates_length_of_password_field_options.reject { |k,v| [:minimum, :maximum].include?(k) }
     c.validates_length_of_password_field_options = password_length_constraints.merge :within => 6..24
 

@@ -13,7 +13,7 @@ class CreateLocations < ActiveRecord::Migration
       t.string :security
       t.string :headline
       t.text   :description
-      t.datetime :start_date
+      t.date :start_date
       t.string :park_store
       t.float  :price
       t.string :country_code
