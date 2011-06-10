@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110603220349) do
+ActiveRecord::Schema.define(:version => 20110610005939) do
 
   create_table "avatars", :force => true do |t|
     t.string   "caption"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20110603220349) do
     t.string   "locatable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "rent_status",                                     :default => "Available"
   end
 
   create_table "roles", :force => true do |t|

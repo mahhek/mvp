@@ -13,13 +13,15 @@
   <body>
 
     <div id="main-container">
-      <div class="tab" style="float: left;">
+      <div class="tab" style="float: left;margin-top: 10px;margin-bottom: 20px;">
         <span><%= link_to "Home", homepage_path %></span>
         <span>|</span>
         <span><%= link_to "About", root_path %></span>
         <% if current_user %>
           <span class="sep">|</span>
           <span>Hello <%= current_user.username %>!</span>
+          <span class="sep">|</span>
+          <span><%= link_to "Manage Your Spaces", locations_path %></span>
           <span class="sep">|</span>
           <span><%= link_to "List Your Space", new_location_path %></span>
           <span class="sep">|</span>

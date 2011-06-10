@@ -1,0 +1,85 @@
+<div style="background-color: lavender;border: 1px solid black;width: 100%;float: left;">
+  <div style="float: left;width: 100%;font-size: 25px;font-weight: bold;margin: 20px;">
+    Manage your listings
+  </div>  
+</div>
+<div style="background-color: lavender;border: 1px solid black;width: 100%;float: left;margin-top: 10px;">
+  <% unless @locations.blank? %>
+    <% @locations.each do | location | %>
+      <div style="float: left;width: 100%;border-bottom: 1px solid silver;">
+        <div style="width: 100%;float: left;margin: 10px;">
+          <div style="float: left;width: 150px;">
+            <% if location.avatars.size > 0 %>
+              <%= image_tag(location.avatars.first.photo.url(:small)) %>
+            <% end %>
+          </div>
+          <div style="float: left;width: 650px;margin-left: 10px;">
+            <span style="float: left;width: 100%;font-size: 25px;;margin-top: 5px;">
+              <%= location.headline %>
+            </span>
+            <span style="float: left;width: 100%;margin-top: 50px;">
+              <span style="border: 1px solid silver;float: left;padding: 5px;text-align: center;width: 50px;">
+                <%= link_to "Edit", edit_location_path(location) %>
+              </span>
+              <span style="border: 1px solid silver;float: left;padding: 5px;text-align: center;width: 50px;margin-left: 5px;">
+                <%= link_to "Preview", location_path(location) %>
+              </span>
+              <span style="float: left;padding: 5px;width: 235px;margin-left: 5px;">
+                <% if location.rent_status == "Available" %>
+                  <span style="float: left;">
+                    Available on:
+                  </span>
+                  <span style="float: left;margin-left: 5px;">
+                    <%= text_field_tag "location_#{location.id}_start_date", location.start_date, {:style=>"width:100px;", :readonly => true} %>
+                  </span>
+                  <%= observe_field( "location_#{location.id}_start_date", :on => :changed,
+                    :url => update_start_date_path(location.id),
+                    :with => "location_#{location.id}_start_date",
+                    :success => "setTimeout('hide_updated_msg(#{location.id})', 2500);" )
+                %>
+                  <script>
+                    $(document).ready(function(){
+                      Date.firstDayOfWeek = 0;
+                      Date.format = 'yyyy-mm-dd';
+
+                      if($('#location_<%= location.id %>_start_date').val() == ""){
+                        $('#location_<%= location.id %>_start_date').datePicker({startDate:'1996-01-01'}).val(new Date().asString()).trigger('change');
+                      }else{
+                        $('#location_<%= location.id %>_start_date').datePicker({startDate:'1996-01-01'});
+                      }
+                    });
+                  </script>
+                <%else%>
+                  <span style="float: left;color: red;">
+                    Rented out!
+                  </span>
+                <% end %>
+              </span>
+              <span style="float: left;padding: 3px;margin-left: 5px;">
+                <%= select_tag "location_status_#{location.id}", options_for_select([["Show Listing" , "Show Listign"],["Hide Listing" , "Hide Listign"]], location.location_status) , :style => "width:135px;" %>
+              </span>
+              <span id="updated_location_msg_div_<%= location.id %>" style="float: left;display: none;color: darkcyan;margin: 5px;">
+                Space Updated
+              </span>
+              <%= observe_field( "location_status_#{location.id}", :on => :changed,
+                :url => update_location_status_path(location.id),
+                :with => "location_status_#{location.id}",
+                :success => "setTimeout('hide_updated_msg(#{location.id})', 2500);" )
+            %>
+              <script type="text/javascript">
+                function hide_updated_msg(location_id){
+                  jQuery('#updated_location_msg_div_'+location_id).animate({ opacity: 'hide' }, "slow");
+                }
+              </script>
+            </span>
+          </div>
+
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div style="float: left;width: 100%;margin: 20px;">
+      You do not have any space to manage yet, please <%= link_to "Create new space", new_location_path %>
+    </div>
+  <% end %>
+</div>

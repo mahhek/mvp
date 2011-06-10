@@ -6,7 +6,7 @@
     <%= link_to "Photos", "#" %>
   </span>
   <span style="float: left;margin-left: 10px;">
-    <%= link_to "Preivew","#" %>
+    <%= link_to "Preivew", location_path(@location) %>
   </span>
   <span style="float: left;margin-left: 10px;">
     <%= select_tag "location_status", options_for_select([["Show Listing" , "Show Listign"],["Hide Listing" , "Hide Listign"]]) , :style => "width:250px;" %>

@@ -1,6 +1,7 @@
 class Location < ActiveRecord::Base
   has_and_belongs_to_many :features
   has_many :avatars, :dependent => :destroy
+  belongs_to :user
 
   validates_presence_of :address, :phone
   validates_format_of :phone, :allow_blank => true,

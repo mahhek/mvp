@@ -2,6 +2,8 @@ ActionController::Routing::Routes.draw do |map|
   # The priority is based upon order of creation: first created -> highest priority.
   map.resource :user_session,:collection => [:create => :get]
   map.resources :users
+  map.update_location_status "/location/update/status/:id", :controller => "locations", :action => "update_location_status"
+  map.update_start_date "/location/update/start_date/:id", :controller => "locations", :action => "update_start_date"
   map.resources :locations do|location|
     location.resources :avatars
   end
