@@ -88,11 +88,8 @@ This will be a text pulled from personal profile page. This will be a text pulle
       <span style="float:left;">
         About this space&nbsp;
       </span>
-      <span style="float: left;">
-        <%= link_to_function "+", "this.innerHTML = (this.innerHTML == '+' ? '-' : '+');$('#space_info').toggle();" %>
-      </span>
     </div>
-    <div id="space_info" style="float: left;width: 100%;margin: 5px;display: none;">
+    <div id="space_info" style="float: left;width: 100%;margin: 5px;">
       <span style="float:left;width: 73%;height: 200px;overflow-y: auto;background-color: white;">
         <%=h @location.description %>
       </span>

@@ -10,8 +10,8 @@ class WelcomeController < ApplicationController
   end
   
   def signup_and_signin
-    flash[:notice] = "Welcome back to Storably!." if params[:id] == "signin"
-    flash[:notice] = "Welcome to Storably!." if params[:id] == "signup"
+    flash[:notice] = "Welcome back to Storably!" if params[:id] == "signin"
+    flash[:notice] = "Welcome to Storably!" if params[:id] == "signup"
   end
 
 end

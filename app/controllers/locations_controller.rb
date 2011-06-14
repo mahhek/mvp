@@ -8,6 +8,9 @@ class LocationsController < ApplicationController
   def new
     @location = Location.new
     @features = Feature.all
+    @map = GMap.new("map")
+    @map.control_init(:map_type => true, :small_zoom => true)
+    @map.center_zoom_init([52.52, 13.4], 14)
   end
 
   def create
@@ -26,6 +29,11 @@ class LocationsController < ApplicationController
   def edit    
     @location = Location.find_by_id(params[:id])
     @features = Feature.all
+    @map = GMap.new("map")
+    @map.control_init(:map_type => true, :small_zoom => true)    
+    coordinates = [@location.latitude,@location.longitude]
+    @map.center_zoom_init(coordinates, 14)
+    @map.overlay_init(GMarker.new(coordinates,:title => current_user.first_name, :info_window => "#{@location.headline}"))
   end
 
   def update_location_status

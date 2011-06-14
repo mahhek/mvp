@@ -2,24 +2,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>MVP</title>
+
     <%= stylesheet_link_tag "application", "datePicker"%>
-    <%= javascript_include_tag "jquery-1.5.1" %>
-    <%= javascript_include_tag  "jquery-ui-1.8.10.custom.min"%>
+    <%= stylesheet_link_tag "jquery.ui" %>
+    <%#*<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=set_to_true_or_false"></script>%>
+
+    <%= javascript_include_tag 'jquery-1.5.2.min','jquery-validate-basic.js', 'jquery-ui-1.8.11.custom.min', 'application' %>
     <%= javascript_include_tag  "jquery.counter-1.0"%>
     <%= javascript_include_tag  "jquery.counter-1.0.min"%>
-    <%= javascript_include_tag "jrails" %>
+    <%= javascript_include_tag  "jrails" %>
     <%= javascript_include_tag "date", "jquery.datePicker" %>
+    <%= GMap.header%>
+    <%= @map.to_html if @map%>
   </head>
   <body>
 
     <div id="main-container">
       <div class="tab" style="float: left;margin-top: 10px;margin-bottom: 20px;">
-        <span><%= link_to "Home", homepage_path %></span>
-        <span>|</span>
-        <span><%= link_to "About", root_path %></span>
         <% if current_user %>
+          <span>Hello <%= current_user.first_name %></span>
           <span class="sep">|</span>
-          <span>Hello <%= current_user.username %>!</span>
+          <span><%= link_to "Home", homepage_path %></span>
           <span class="sep">|</span>
           <span><%= link_to "Manage Your Spaces", locations_path %></span>
           <span class="sep">|</span>

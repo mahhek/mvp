@@ -10,7 +10,6 @@ class AvatarsController < ApplicationController
     @avatar = @location.avatars.build(params[:avatar])
     if @avatar.save
       @location.update_attribute("location_status", params[:location_status])
-      flash[:notice] = "We have successfully saved the photo of your space!"
       return redirect_to edit_location_avatar_path(@location,@avatar)
     else
       flash[:notice] = "unable to save photo!"
@@ -25,7 +24,6 @@ class AvatarsController < ApplicationController
   def destroy
     @avatar = Avatar.find_by_id(params[:id])
     if @avatar.destroy
-      flash[:notice] = "We have successfully deleted the photo of your space!"
       return redirect_to new_location_avatar_path(@location)
     else
       flash[:notice] = "unable to delete photo!"

@@ -6,7 +6,7 @@
     <%= link_to "Photos", "#" %>
   </span>
   <span style="float: left;margin-left: 10px;">
-    <%= link_to "Preivew", location_path(@location) %>
+    <%= link_to "Preview", location_path(@location) %>
   </span>
   <span style="float: left;margin-left: 10px;">
     <%= select_tag "location_status", options_for_select([["Show Listing" , "Show Listign"],["Hide Listing" , "Hide Listign"]]) , :style => "width:250px;" %>
@@ -30,8 +30,10 @@
         <%= f.file_field :photo %>
       </div>
       <div style="float: left; width: 100%;margin-top: 10px;">
-        <%= f.text_field :caption %>
-        <span style="float: right;width: 265px;color: gray;">
+        <span style="float: left;width: 100%;">
+          <%= f.text_field :caption %>
+        </span>
+        <span style="float: left;width: 100%;color: gray;">
           Give this photo a caption
         </span>
       </div>
@@ -40,12 +42,17 @@
         <%= link_to( image_tag(@avatar.photo.url(:small) ), @avatar.photo.url(:original) ) %>
       </div>
       <div style="float:left;width:100%;margin-top: 10px; ">
+        <% unless @avatar.new_record? %>
+          <%= @avatar.caption %>
+        <% end %>
+      </div>
+      <div style="float:left;width:100%;margin-top: 10px; ">
         <%= link_to "Delete photo & caption:", location_avatar_path(@location,@avatar), :method => :delete, :confirm => "Are you sure?" %>
       </div>
     <% end %>
   </div>
   <% if @avatar.new_record? %>
-    <div style="width: 100%;float: left;text-align: right;">
+    <div style="width: 100%;float: left;text-align: center;margin-top: 20px;">
       <%= f.submit "Save" %>
     </div>
   <% end %>

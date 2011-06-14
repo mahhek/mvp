@@ -1,10 +1,6 @@
 <% unless object.nil? %>
   <% if object.errors.any? %>
     <div id="error_explanation" style="padding: 1px;">
-      <h3 style="height:auto;margin-left: 38px;">
-        <%= pluralize(object.errors.count, "error") %> prohibited this form from being saved:
-      </h3>
-
       <ul>
         <% object.errors.full_messages.each do |msg| %>
           <li style="list-style: none;"><%= msg %></li>

@@ -28,6 +28,23 @@ ActionController::Routing::Routes.draw do |map|
   map.reset_password 'reset_password/:reset_password_code' , :controller => 'users', :action => 'reset_password'
 
   map.root :controller => "welcome", :action => "index"
+
+  map.namespace :xml do |ns|
+    ns.connect 'location_search.xml',
+      :controller => 'LocationSearch',
+      :action => 'index',
+      :format => :xml
+    ns.connect 'location_timezone_search.xml',
+      :controller => 'LocationTimezoneSearch',
+      :action => 'index',
+      :format => :xml
+    ns.connect 'address_search.xml',
+      :controller => 'AddressSearch',
+      :action => 'index',
+      :format => :xml
+  end
+
+
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
   # Keep in mind you can assign values other than :controller and :action
