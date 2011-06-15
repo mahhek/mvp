@@ -25,8 +25,15 @@ class Location < ActiveRecord::Base
       # check if an actual address has been set
       if self.address.to_s.strip.size > 0
         # find information related to address
-        res = GoogleGeocoder.geocode(self.address.z_fix_charset)
+        res = GoogleGeocoder.geocode(self.address)
 
+        #        p "===================================================================="
+        #        p res.inspect
+        #        p res.street_name.inspect
+        #        p res.street_number.inspect
+        #        p res.home.inspect
+        #        p "===================================================================="
+        #        x
         # save related fields
         if(res)
           self.city = res.city
@@ -37,6 +44,8 @@ class Location < ActiveRecord::Base
           self.street = res.street_address
           self.latitude = res.lat
           self.longitude = res.lng
+          self.street_name = res.street_name
+          self.street_number = res.street_number
         else
           # address not found
           self.city = nil

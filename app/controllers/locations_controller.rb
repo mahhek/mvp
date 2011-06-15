@@ -2,7 +2,7 @@ class LocationsController < ApplicationController
   before_filter :require_user
 
   def index
-    @locations = current_user.locations
+    @locations = current_user.locations 
   end
   
   def new
@@ -10,7 +10,7 @@ class LocationsController < ApplicationController
     @features = Feature.all
     @map = GMap.new("map")
     @map.control_init(:map_type => true, :small_zoom => true)
-    @map.center_zoom_init([52.52, 13.4], 14)
+    @map.center_zoom_init([37.09, -95.71], 15)
   end
 
   def create
@@ -32,7 +32,7 @@ class LocationsController < ApplicationController
     @map = GMap.new("map")
     @map.control_init(:map_type => true, :small_zoom => true)    
     coordinates = [@location.latitude,@location.longitude]
-    @map.center_zoom_init(coordinates, 14)
+    @map.center_zoom_init(coordinates, 15)
     @map.overlay_init(GMarker.new(coordinates,:title => current_user.first_name, :info_window => "#{@location.headline}"))
   end
 
@@ -71,5 +71,10 @@ class LocationsController < ApplicationController
 
   def show
     @location = Location.find(params[:id])
+    @map = GMap.new("map")
+    @map.control_init(:map_type => true, :small_zoom => true)
+    coordinates = [@location.latitude,@location.longitude]
+    @map.center_zoom_init(coordinates, 15)
+    @map.overlay_init(GMarker.new(coordinates,:title => current_user.first_name, :info_window => "#{@location.headline}"))
   end
 end

@@ -219,7 +219,6 @@
       $('#location_latitude').val(),
       $('#location_longitude').val()
     );
-      $('#location_address').val(latlng.lng().toFixed(7) + ' / ' + latlng.lat().toFixed(7));
 
       map.setCenter(latlng);
       if(marker) {
@@ -257,11 +256,6 @@
       }
     }
 
-    $('#location_longitude').keyup(update_location_fun);
-    $('#location_longitude').blur(update_location_fun);
-    $('#location_latitude').keyup(update_location_fun);
-    $('#location_latitude').blur(update_location_fun);
-
     var register_map_event_fun = function() {
       if(!map) {
         setTimeout(register_map_event_fun, 100);
@@ -277,22 +271,6 @@
     }
     setTimeout(register_map_event_fun, 100);
 
-
-    $('#location_advanced_link').click(function() {
-      var location_advanced_div = $('#location_advanced')[0];
-      var location_advanced_link = $('#location_advanced_link')[0];
-      if(location_advanced_div && location_advanced_link) {
-        if(location_advanced_div.style.display == 'none') {
-          location_advanced_div.style.display = 'block';
-          location_advanced_link.innerHTML = 'Hide Advance Settings';
-        }
-        else {
-          location_advanced_div.style.display = 'none';
-          location_advanced_link.innerHTML = 'Advance Settings';
-        }
-      }
-    })
-
     $('#location_address').autocomplete({
       focus: function(event, ui) {
         return false;
@@ -305,20 +283,42 @@
       },
       source: function(request, cb) {
         $.ajax({
-          url: "/xml/location_search.xml?q=" + request.term, // escape
+          url: "/xml/location_search.xml?q=" + request.term,
           dataType: 'xml',
           success: function(resp) {
             cb($("location", resp).map(function() {
-              return {
-                label: $("address", this).text(),
-                id: $("longitude", this).text() + ";" + $("latitude", this).text()
+              return {label: $("address", this).text(), id: $("longitude", this).text() + ";" + $("latitude", this).text()
               };
             }).get());
           }
         });
       },
-      minLength: 2
+      minLength: 2,
+      change: function (event, ui) {
+        if (ui.item) {          
+          $('#another_element').val(ui.item.source.label);
+        }
+        else {
+          if (!$(this).data('valid')) {
+            $(this).val('');
+            $('#another_element').val('');
+          }
+        }
+        $(this).data('valid', false);        
+      }
+    }).live('blur', function (e) {
+      if ($('.ui-autocomplete li:visible').length > 0) {
+        $(".ui-autocomplete li:visible:first").click();
+        item = $($(".ui-autocomplete li:visible:first").data()).attr('item.autocomplete');
+        var position = item.id.split(";");
+        $('#location_longitude').val(position[0]);
+        $('#location_latitude').val(position[1]);
+        update_location_fun(false);
+        $(this).val(item.label);
+        $('#another_element').val(item.label);
+        $(this).data('valid', true);       
+      }
     });
-    $('#new_location').validate();
+    //$('#new_location').validate();
   });
 </script>

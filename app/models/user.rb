@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   end
 
   has_and_belongs_to_many :roles
-  has_many :locations
+  has_many :locations, :order => "created_at DESC"
 
   def role?(role)
     return !!self.roles.find_by_name(role.to_s.camelize)

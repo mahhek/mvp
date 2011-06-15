@@ -3,7 +3,7 @@
     <%= @location.headline %>
   </div>
   <div style="float: left;width: 100%;margin-top: 4px;">
-    <%= @location.storage_type %> for <%= @location.accommodates %>&nbsp;|&nbsp;<%= @location.address %>
+    <%= @location.storage_type %> for <%= @location.accommodates %>&nbsp;|&nbsp;<%= "#{@location.street_name} #{@location.region}  #{@location.city}, #{@location.zipcode}, #{@location.country_code}" %>
   </div>
 </div>
 <div style="padding: 10px;background-color: lavender;border: 1px solid black;width: 100%;float: left;margin-top: 10px;">
@@ -27,31 +27,38 @@
       <% end %>
     </div>
     <div id="map_div" style="float: left;width: 100%;display: none;">
-      <% if @location.avatars.size > 0 %>
-        <div style="float: left;width: 100%;margin-top: 10px;margin: 5px;">
-          <%= image_tag(@location.avatars.first.photo.url(:small)) %>
-        </div>
-        <div style="float: left;width: 100%;margin-top: 10px;margin: 5px;">
-          <%= @location.avatars.first.caption %>
-        </div>
-      <% end %>
+      <%= @map.div(:width => 300, :height => 300, :margin => "0  auto") %>
     </div>
   </div>
   <div style="float: left;width: 24%;margin-left: 10px;">
     <div style="float: left;width: 100%;border: 1px solid black;padding: 10px;">
       <div style="width:100%;float: left;">
         <span style="float: left;font-size: 18px;font-weight:bold;">
-          $<%= @location.price %>
+          $<%= @location.price.to_i %>
         </span>
         <span style="float: left;margin-left: 5px;">
           Per Month
         </span>
       </div>
       <div style="width:100%;float: left;margin-top: 5px;">
-        <span style="float: left;font-size: 18px;font-weight:bold;">
-          <%= @location.start_date.strftime("%m/%d/%Y") %>
+        <span style="float: left;font-weight:bold;">
+          Offer Date
+          <%= text_field_tag "offer_date","" ,{:size => "15"}  %>
         </span>        
       </div>
+      <script>
+        $(document).ready(function(){
+          Date.firstDayOfWeek = 0;
+          Date.format = 'yyyy-mm-dd';
+
+          if($('#offer_date').val() == ""){
+            $('#offer_date').datePicker({startDate:'1996-01-01'}).val(new Date().asString()).trigger('change');
+          }else{
+            $('#offer_date').datePicker({startDate:'1996-01-01'});
+          }
+        });
+      </script>
+
       <div style="width:100%;float: left;margin-top: 5px;">
         <span style="float: left;font-size: 18px;font-weight:bold;">
           <%= link_to "Store It", "#" %>
@@ -64,7 +71,7 @@
           <%= image_tag("missing_70.png") %>
         </span>
         <span style="float: left;font-size: 20px;font-weight:bold;margin-left: 2px;margin-top: 10px;">
-          <%= @location.user.first_name %> &nbsp;<%= "#{@location.user.last_name[0..0].capitalize}." if @location.user.last_name %>
+          <%= @location.user.first_name %> <%= "#{@location.user.last_name[0..0].capitalize}." if @location.user.last_name %>
         </span>        
         <span style="float: left;font-size: 9px;margin-left: 10px;">
           Response Rate 98%
@@ -112,9 +119,11 @@ This will be a text pulled from personal profile page. This will be a text pulle
         <span style="float: left;width: 100%;font-weight: bold;background-color: silver;padding: 2px;">
           <%= @location.security %>
         </span>
-        <span style="float: left;width: 100%;font-weight: bold;background-color: gray;padding: 2px;">
-          <%= @location.features.collect(&:name).to_sentence %>
-        </span>
+        <% @location.features.collect(&:name).each do |feature|   %>
+          <span style="float: left;width: 100%;font-weight: bold;background-color: <%= cycle('gray','silver') %>;padding: 2px;">
+            <%= feature %>
+          </span>
+        <% end %>
       </span>
     </div>
 
