@@ -10,10 +10,15 @@ class LocationsController < ApplicationController
     @locations = Location.all
     @map = GMap.new("map")
     @map.control_init(:map_type => true, :small_zoom => true)
+    sorted_latitudes = @locations.collect(&:latitude).compact.sort
+    sorted_longitudes = @locations.collect(&:longitude).compact.sort
+    @map.center_zoom_on_bounds_init([
+        [sorted_latitudes.first, sorted_longitudes.first],
+        [sorted_latitudes.last, sorted_longitudes.last]])
+
 
     @locations.each do |location|
-      coordinates = [location.latitude,location.longitude]
-      @map.center_zoom_init(coordinates, 15)
+      coordinates = [location.latitude,location.longitude]      
       @map.overlay_init(GMarker.new(coordinates,:title => current_user.first_name, :info_window => "#{location.headline}"))
     end
 
