@@ -1,58 +1,127 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE HTML>
+<html>
   <head>
-    <title>MVP</title>
-
-    <%= stylesheet_link_tag "application", "datePicker"%>
-    <%= stylesheet_link_tag "jquery.ui" %>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Storably</title>
+    <%= render :partial => "/layouts/google_analytics" %>
+    <%= stylesheet_link_tag "stylesheet", "stylesheet2", "datePicker", "mainstyle"%>
+    <%= stylesheet_link_tag "jquery.ui", "datePicker" %>
 <%#*<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=set_to_true_or_false"></script>%>
 
     <%= javascript_include_tag 'jquery-1.5.2.min','jquery-validate-basic.js', 'jquery-ui-1.8.11.custom.min', 'application' %>
     <%= javascript_include_tag  "jquery.counter-1.0"%>
     <%= javascript_include_tag  "jquery.counter-1.0.min"%>
     <%= javascript_include_tag  "jrails" %>
-    <%= javascript_include_tag "date", "jquery.datePicker" %>
+    <%= javascript_include_tag "date", "jquery.datePicker", "jquery.cycle.all.min" %>
     <%= GMap.header(:with_vml => false, :host => request.host).html_safe %>
     <%= raw @map.to_html if @map%>
   </head>
   <body>
 
-    <div id="main-container">
-      <div class="tab" style="float: left;margin-top: 10px;margin-bottom: 20px;">
-        <% if current_user %>
-          <span>Hello <%= current_user.first_name %></span>
-          <span class="sep">|</span>
-          <span><%= link_to "Home", homepage_path %></span>
-          <span class="sep">|</span>
-          <span><%= link_to "Manage Your Spaces", locations_path %></span>
-          <span class="sep">|</span>
-          <span><%= link_to "List Your Space", new_location_path %></span>
-          <span class="sep">|</span>
-          <span>[<%= link_to "Logout", user_session_path(current_user), :method => :delete %>]</span>
-        <% end %>
+    <div id="header">
+      <div id="logo"><img src="/images/Storably-logo.png" width="105" height="35" alt="Storably" /></div>
 
-        <span id="toggle">
+      <div id="nav">
+        <div id="links">
+          <a href="#">Tell Me More</a>
           <% unless current_user %>
-            <span class="sep">|</span>
-            <%= link_to "Sign In", :controller => "welcome", :action => "signup_and_signin", :id => "signin"  %>
-            <span class="sep">|</span>
-            <%= link_to "Sign Up", :controller => "welcome", :action => "signup_and_signin", :id => "signup"  %>
+            <%= link_to "Sign in", :controller => "welcome", :action => "signup_and_signin", :id => "signin"  %>
+            <%= link_to "Register", :controller => "welcome", :action => "signup_and_signin", :id => "signup" , :style => "border-radius: none;" %>
+          <%else%>
+            <%= link_to "Logout", user_session_path(current_user), :method => :delete %>
           <% end %>
-        </span>
-        <span class="right">&nbsp;</span>
-
-      </div>
-      <div id="container">
-        <div id="content" >
-          <div id="flash_messages_div">
-            <%= render :partial => "layouts/flash_messages" %>
-          </div>          
-          <div style="margin-top: 5px;float: left;width: 100%;">
-            <%= yield %>
-          </div>
+        </div>
+        <div id="list-space-bt">
+          <%= link_to "List Your Space", new_location_path %>
         </div>
       </div>
     </div>
+
+
+
+    <div id="wrapper">
+      <div id="left-container">
+        <% form_tag "/locations/search_location" , {:id => "search_form"} do %>
+          <div id="main-text">Storage and parking with real people just like you.</div>
+          <div id="country-field">
+            <div id="select-country">
+              <%= select_tag "requested_city",options_for_select([["Philadelphia" , "Philadelphia"],["New York" ,"New York"] , ["San Francisco", "San Francisco"], ["Add My City!","Add My City!"]]) %>
+            </div>
+            <%= observe_field("requested_city", :on => :changed,
+              :url => requested_city_path,
+              :with => "requested_city")
+          %>
+            <div id="find-button"><a href="javascript:void(0);" onclick="$('#search_form').submit();">Find</a></div>
+            <div id="requested_city_div" style="width: 100%;float: left;">
+            </div>
+          </div>
+          <div id="calander">
+            <script>
+              $(document).ready(function(){
+                Date.firstDayOfWeek = 0;
+                Date.format = 'mm / dd / yy';
+                $('#request_date').datePicker({startDate:'01-01-1996'})
+              });
+            </script>
+            <div>
+              <%= text_field_tag "request_date", "mm / dd / yy", :class => "calander-fields" %>
+            </div>
+
+            <div id="space-field">
+                <%= select_tag "storage-menus",options_for_select([["Parking" , "Parking"],["Storage" ,"Storage"] , ["Both", "Both"]]) %>
+            </div>
+            <div id="calander-text">When do you want it?</div>
+            <div id="parking-text">Parking or Storage?
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+
+      <script type="text/javascript">
+        $(document).ready(function() {
+          $('.slideshow').cycle({
+            fx: 'fade' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+          });
+        });
+      </script>
+      <style type="text/css">
+        .slideshow { float: right; }
+      </style>
+      <div class="slideshow">
+        <% @spaces.each do |space| %>
+          <% if space.avatars.size > 0 %>
+            <div id="right-content">
+              <div id="slider-img">
+                <%= link_to( image_tag(space.avatars.first.photo.url(:medium), :height => "275", :width => "306", :border => "0"), location_path(space)) %>
+              </div>
+              <div id="details-storage">
+                <div id="feature-heading">Storage </div>
+                <% space.features.collect(&:name).each do |feature|   %>
+                  <div class="<%= cycle('sub-feature-heading','sub-feature-details')%>"><%= feature %></div>
+                <% end %>
+              </div>
+              <div id="price-bar">
+                <span class="brown-text"><%= space.price.to_i %></span>
+                <%= space.headline %><%= space.city.nil? ? "" : space.city %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
+
+      <div id="featuer-boxes">
+        <%= link_to(image_tag("how-its-work.png", :height => "201", :width => "285", :alt => "how it works", :border => "0"), {:controller => "welcome", :action => "tell_me_more"}) %>
+        <%= link_to(image_tag("list-your-space.png", :height => "201", :width => "285", :alt => "list your space", :border => "0", :class => "img-space"), new_location_path) %>
+        <%= link_to(image_tag("sign-up.png", :height => "201", :width => "286", :alt => "sign up", :border => "0"), {:controller => "welcome", :action => "signup_and_signin", :id => "signup"}) %>
+      </div>
+    </div>
+
+    <div id="footer">
+      <a href="#">About</a> |  <a href="#">Blog</a> |  <a href="#">Affiliates</a> |  <a href="#">Legal</a></div>
+    <div id="copywrite">© Storably.com</div>
+
 
   </body>
 </html>

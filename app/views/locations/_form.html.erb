@@ -60,7 +60,9 @@
   </div>
 
   <div style="width: 100%;float: left;margin-top: 5px;margin-bottom: 25px;">
-    <%= @map.div(:width => 400, :height => 400, :margin => "0  auto") %>
+    <% if @map %>
+      <%= @map.div(:width => 400, :height => 400, :margin => "0  auto") %>
+    <% end %>
   </div>
 
 
@@ -208,7 +210,9 @@
 
   $(document).ready(function() {
 
+
     $('#map').css("margin", "0 auto");
+    
     var update_location_fun = function(resolveName) {
       if(resolveName == null) {
         resolveName = true;

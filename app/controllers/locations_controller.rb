@@ -1,8 +1,22 @@
 class LocationsController < ApplicationController
   before_filter :require_user
+  layout 'inner'
 
   def index
     @locations = current_user.locations 
+  end
+
+  def search_location
+    @locations = Location.all
+    @map = GMap.new("map")
+    @map.control_init(:map_type => true, :small_zoom => true)
+
+    @locations.each do |location|
+      coordinates = [location.latitude,location.longitude]
+      @map.center_zoom_init(coordinates, 15)
+      @map.overlay_init(GMarker.new(coordinates,:title => current_user.first_name, :info_window => "#{location.headline}"))
+    end
+
   end
   
   def new

@@ -16,6 +16,7 @@ ActionController::Routing::Routes.draw do |map|
   map.login 'login', :controller => 'user_sessions', :action => 'new'
   map.new_create '/user/create', :controller => 'users', :action => 'new_create'
   map.homepage '/homepage', :controller => "welcome", :action => "homepage"
+  map.requested_city '/new/requested_city', :controller => "welcome", :action => "new_requested_city"
 
   map.activate_account '/activate/:activation_code', :controller => 'users', :action => 'activate'
   map.send_activation 'send_activation(/:user_id)' , :controller => 'users', :action => 'send_activation'
