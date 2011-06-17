@@ -128,8 +128,24 @@ body {
     color: #FFF;
     text-decoration: none;
     text-shadow: 0 1px 1px rgba(0,0,0,0.5);
-
-
+}
+#small-find-button {
+    font-family: FamiliarProBold;
+    float: left;
+    margin-left: 5px;
+    margin-top: 3px;
+    background-image: url(/images/find-button.png);
+    background-repeat: no-repeat;
+    height: 25px;
+    width: 90px;
+    line-height: 25px;
+    font-size: 14px;
+    text-align: center;
+}
+#small-find-button a {
+    color: #FFF;
+    text-decoration: none;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.5);
 }
 #find-button a:hover {
     text-decoration: none;
@@ -164,7 +180,7 @@ body {
     padding-left: 30px;
     width: 200px;
 }
-#storage-menus {
+#storage_menus {
     float: left;
     height: 26px;
     width: 223px;

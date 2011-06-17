@@ -1,22 +1,20 @@
 <div style="background-color: lavender;border: 1px solid black;width: 100%;float: left;">
-  <div style="margin: 10px;float: left;">
+  <div style="margin: 10px;float: left;width: 100%;">
     <% form_tag "/locations/search_location" , {:id => "search_form"} do %>
-      <span style="float: left;margin-left: 20px;">
+      <span style="float: left;margin-left: 10px;">
         <%= select_tag "requested_city",options_for_select([["Philadelphia" , "Philadelphia"],["New York" ,"New York"] , ["San Francisco", "San Francisco"], ["Add My City!","Add My City!"]]) %>
       </span>
       <%= observe_field("requested_city", :on => :changed,
         :url => requested_city_path,
         :with => "requested_city")
     %>
-      <span id="requested_city_div" style="float: left;margin-left: 20px;">
+      <span style="float: left;margin-left: 10px;">
+        <%= select_tag "storage_menus",options_for_select([["Parking" , "Parking"],["Storage" ,"Storage"] , ["Both", "Both"]]) %>
       </span>
-      <span style="float: left;margin-left: 20px;">
-        <%= select_tag "storage-menus",options_for_select([["Parking" , "Parking"],["Storage" ,"Storage"] , ["Both", "Both"]]) %>
-      </span>
-      <span style="float: left;margin-left: 20px;">
+      <span style="float: left;margin-left: 10px;">
         <%= text_field_tag "request_date", "mm / dd / yy", :class => "calander-fields" %>
       </span>
-      <span style="float: left;margin-left: 20px;margin-top: 5px;">
+      <span style="float: left;margin-left: 10px;margin-top: 5px;">
         <a href="javascript:void(0);" onclick="$('#search_form').submit();">Find</a>
       </span>
       <script>
@@ -27,6 +25,15 @@
         });
       </script>
     <% end %>
+    <div id="requested_city_div" style="float: left;margin-left: 10px;">
+    </div>
+    <div id="requested_city_msg_div" style="float: left;color: darkcyan;margin-left: 10px;">
+    </div>
+    <script type="text/javascript">
+      function hide_updated_msg(){
+        jQuery('#requested_city_msg_div').animate({ opacity: 'hide' }, "slow");
+      }
+    </script>
   </div>
 </div>
 <div style="background-color: lavender;border: 1px solid black;width: 65%;float: left;margin-top: 10px;">
@@ -60,11 +67,13 @@
     <% end %>
   <% else %>
     <div style="float: left;width: 100%;margin: 20px;">
-      You do not have any space to manage yet, please <%= link_to "Create new space", new_location_path %>
+      No Record Found! please <%= link_to "Create new space", new_location_path %>
     </div>
   <% end %>
 </div>
-<div id="map_div" style="float: left;width: 34%;margin: 0 auto;margin-top: 10px;margin-left: 5px;">
-  <%= @map.div(:width => 290, :height => 300) %>
-</div>
+<% if @map %>
+  <div id="map_div" style="float: left;width: 34%;margin: 0 auto;margin-top: 10px;margin-left: 5px;">
+    <%= @map.div(:width => 290, :height => 300) %>
+  </div>
+<%end%>
 

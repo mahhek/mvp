@@ -7,7 +7,12 @@ class LocationsController < ApplicationController
   end
 
   def search_location
-    @locations = Location.all
+    conditions = {}
+    conditions[:start_date] = "<= #{params[:request_date]}" unless params[:request_date].blank? or params[:request_date] == "mm / dd / yy"
+    conditions[:city] = params[:requested_city] unless params[:requested_city] == "Add My City!"
+    conditions[:park_store] = params[:storage_menus] unless params[:storage_menus] == "Both"
+    @locations = Location.find(:all, :conditions => conditions, :order => "created_at DESC")
+
     @map = GMap.new("map")
     @map.control_init(:map_type => true, :small_zoom => true)
     sorted_latitudes = @locations.collect(&:latitude).compact.sort
@@ -15,13 +20,26 @@ class LocationsController < ApplicationController
     @map.center_zoom_on_bounds_init([
         [sorted_latitudes.first, sorted_longitudes.first],
         [sorted_latitudes.last, sorted_longitudes.last]])
-
-
     @locations.each do |location|
       coordinates = [location.latitude,location.longitude]      
       @map.overlay_init(GMarker.new(coordinates,:title => current_user.first_name, :info_window => "#{location.headline}"))
     end
+  end
 
+  def save_requested_city
+    if !params[:request_city].blank? and params[:request_city] != "Please enter your zip code"
+      RequestedCity.new(:name => params[:request_city]).save
+      render :update do |page|
+        page["requested_city_div"].hide 
+        page["requested_city_msg_div"].show
+        page["requested_city_msg_div"].replace_html :text => "Your requested city saved successfully!"
+      end
+    else
+      render :update do |page|
+        page["requested_city_msg_div"].show
+        page["requested_city_msg_div"].replace_html :text => "Please provide some zip code!"
+      end
+    end    
   end
   
   def new

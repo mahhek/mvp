@@ -19,7 +19,8 @@ class WelcomeController < ApplicationController
 
   def new_requested_city
     render :update do |page|
-      if params[:requested_city] and params[:requested_city] == "Add My City!"      
+      if params[:requested_city] and params[:requested_city] == "Add My City!"
+        page[:requested_city_div].show
         page[:requested_city_div].replace_html :partial => "requested_city"      
       else
         page[:requested_city_div].replace_html ""    
