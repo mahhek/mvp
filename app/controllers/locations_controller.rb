@@ -6,6 +6,10 @@ class LocationsController < ApplicationController
     @locations = current_user.locations 
   end
 
+  def send_contact_me_message
+    render :nothing => true
+  end
+
   def search_location
     conditions = {}
     conditions[:start_date] = "<= #{params[:request_date]}" unless params[:request_date].blank? or params[:request_date] == "mm / dd / yy"
@@ -15,11 +19,18 @@ class LocationsController < ApplicationController
 
     @map = GMap.new("map")
     @map.control_init(:map_type => true, :small_zoom => true)
+
     sorted_latitudes = @locations.collect(&:latitude).compact.sort
     sorted_longitudes = @locations.collect(&:longitude).compact.sort
     @map.center_zoom_on_bounds_init([
         [sorted_latitudes.first, sorted_longitudes.first],
         [sorted_latitudes.last, sorted_longitudes.last]])
+
+    if @locations.size <= 1
+      @map.center_zoom_init([sorted_latitudes.first, sorted_longitudes.first], 15)
+    end
+
+
     @locations.each do |location|
       coordinates = [location.latitude,location.longitude]
       @map.overlay_init(GMarker.new(coordinates,:title => current_user.nil? ? location.headline : current_user.first_name, :info_window => "#{location.headline}"))

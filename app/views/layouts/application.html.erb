@@ -54,6 +54,8 @@
               :with => "requested_city")
           %>
             <div id="find-button"><a href="javascript:void(0);" onclick="$('#search_form').submit();">Find</a></div>
+            <div id="requested_city_msg_div" style="width: 100%;float: left;color: darkcyan;margin-top: 5px;">
+            </div>
           </div>
           <div id="calander">
             <script>
@@ -77,8 +79,7 @@
         <% end %>
         <div id="requested_city_div" style="width: 100%;float: left;margin-top: 35px;">
         </div>
-        <div id="requested_city_msg_div" style="width: 100%;float: left;color: darkcyan;margin-top: 30px">
-        </div>
+
         <script type="text/javascript">
           function hide_updated_msg(){
             jQuery('#requested_city_msg_div').animate({ opacity: 'hide' }, "slow");

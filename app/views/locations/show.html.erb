@@ -85,8 +85,18 @@ This will be a text pulled from personal profile page. This will be a text pulle
 This will be a text pulled from personal profile page. This will be a text pulled from personal profile page." %>
       </div>
       <div style="float: left;width: 100%;margin-top: 10px;">
-        <%= link_to "Contact me", "#" %>
+        <%= link_to_function "Contact me", "$('#contact_me_div').toggle('slow');"  %>
       </div>
+      <div style="float: left;width: 100%;margin-top: 10px;display: none;" id="contact_me_div">
+        <% remote_form_for "contact_me", :url => {:controller => "locations", :action => "send_contact_me_message"} , :html => {:id => "contact_me_form"}, :success => "$('#contact_me_div').toggle('slow');$('#contact_me').val('');" do %>
+          <span style="width: auto;float: left;">
+            <%= text_area_tag "contact_me" , "",:size => "26x3" %>
+          </span>
+          <div style="float: left;margin-top: 5px;">
+            <%= submit_tag "Send" %>
+          </div>
+        <% end %>
+      </div>      
     </div>
 
 
