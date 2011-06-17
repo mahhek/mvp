@@ -1,5 +1,5 @@
 class LocationsController < ApplicationController
-  before_filter :require_user
+  before_filter :require_user, :except => [:search_location, :save_requested_city,:new ]
   layout 'inner'
 
   def index
@@ -11,7 +11,7 @@ class LocationsController < ApplicationController
     conditions[:start_date] = "<= #{params[:request_date]}" unless params[:request_date].blank? or params[:request_date] == "mm / dd / yy"
     conditions[:city] = params[:requested_city] unless params[:requested_city] == "Add My City!"
     conditions[:park_store] = params[:storage_menus] unless params[:storage_menus] == "Both"
-    @locations = Location.find(:all, :conditions => conditions, :order => "created_at DESC")
+    @locations = Location.find(:all, :conditions => conditions, :order => "price ASC")
 
     @map = GMap.new("map")
     @map.control_init(:map_type => true, :small_zoom => true)
@@ -32,7 +32,7 @@ class LocationsController < ApplicationController
       render :update do |page|
         page["requested_city_div"].hide 
         page["requested_city_msg_div"].show
-        page["requested_city_msg_div"].replace_html :text => "Your requested city saved successfully!"
+        page["requested_city_msg_div"].replace_html :text => "We will be in touch once we launch in your area."
       end
     else
       render :update do |page|
@@ -47,7 +47,7 @@ class LocationsController < ApplicationController
     @features = Feature.all
     @map = GMap.new("map")
     @map.control_init(:map_type => true, :small_zoom => true)
-    @map.center_zoom_init([37.09, -95.71], 15)
+    @map.center_zoom_init([37.09, -95.71], 4)
   end
 
   def create
@@ -111,7 +111,7 @@ class LocationsController < ApplicationController
     @map = GMap.new("map")
     @map.control_init(:map_type => true, :small_zoom => true)
     coordinates = [@location.latitude,@location.longitude]
-    @map.center_zoom_init(coordinates, 15)
+    @map.center_zoom_init(coordinates, 13)
     @map.overlay_init(GMarker.new(coordinates,:title => current_user.first_name, :info_window => "#{@location.headline}"))
   end
 end

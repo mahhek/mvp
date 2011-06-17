@@ -19,17 +19,19 @@
   <body>
 
     <div id="header">
-      <div id="logo"><img src="/images/Storably-logo.png" width="105" height="35" alt="Storably" /></div>
+      <div id="logo" onclick="window.location='/'" style="cursor: pointer;"><img src="/images/Storably-logo.png" width="105" height="35" alt="Storably" /></div>
 
       <div id="nav">
         <div id="links">
-          <a href="#">Tell Me More</a>
+
           <% unless current_user %>
-            <%= link_to "Sign in", :controller => "welcome", :action => "signup_and_signin", :id => "signin"  %>
             <%= link_to "Register", :controller => "welcome", :action => "signup_and_signin", :id => "signup" , :style => "border-radius: none;" %>
+            <%= link_to "Sign in", :controller => "welcome", :action => "signup_and_signin", :id => "signin"  %>
           <%else%>
+            <%= link_to "Hello #{current_user.first_name}", "#" %>
             <%= link_to "Logout", user_session_path(current_user), :method => :delete %>
           <% end %>
+          <a href="/welcome/tell_more">Tell Me More</a>
         </div>
         <div id="list-space-bt">
           <%= link_to "List Your Space", new_location_path %>
@@ -103,14 +105,24 @@
                 <%= link_to( image_tag(space.avatars.first.photo.url(:medium), :height => "275", :width => "306", :border => "0"), location_path(space)) %>
               </div>
               <div id="details-storage">
-                <div id="feature-heading">Storage </div>
-                <% space.features.collect(&:name).each do |feature|   %>
-                  <div class="<%= cycle('sub-feature-heading','sub-feature-details')%>"><%= feature %></div>
-                <% end %>
+                <div class="sub-feature-heading">Holds:</div>
+                <div class="sub-feature-details"><%= space.accommodates %></div>
+                <div class="sub-feature-heading">Security:</div>
+                <div class="sub-feature-details"><%= space.security %></div>
+                <div class="sub-feature-heading">Other:</div>
+                <div class="sub-feature-details">
+                  <% space.features.collect(&:name).each do |feature|   %>
+                    <%= feature %><br/>
+                  <% end %>
+                </div>
               </div>
               <div id="price-bar">
-                <span class="brown-text"><%= space.price.to_i %></span>
-                <%= space.headline %><%= space.city.nil? ? "" : space.city %>
+                <span class="brown-text">$<%= space.price.to_i %>:</span>
+                <%= space.headline %>
+                <span class="brown-text">
+                  <%= space.city.nil? ? "" : space.city %>
+                </span>
+
               </div>
             </div>
           <% end %>

@@ -29,14 +29,14 @@ class ApplicationController < ActionController::Base
     unless current_user
       store_location
       unless session[:return_to] == "/"
-        flash[:alert] = "You must be logged in to access this page"
+        flash[:error] = "You must be logged in to access this page"
       end
       redirect_to login_path
       return false
     end
 
     unless current_user.has_role?("Admin")
-      flash[:alert] = "You don't have permission to access this page."
+      flash[:error] = "You don't have permission to access this page."
       redirect_to root_path
     end
   end
@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
     logger.debug "ApplicationController::require_user"
     unless current_user
       store_location
-      flash[:alert] = "You must be logged in to access this page"
+      flash[:error] = "You must be logged in to access this page"
       redirect_to "/"
       return false
     end
@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
     logger.debug "ApplicationController::require_no_user"
     if current_user
       store_location
-      flash[:alert] = "You must be logged out to access this page"
+      flash[:error] = "You must be logged out to access this page"
       redirect_to account_url
       return false
     end

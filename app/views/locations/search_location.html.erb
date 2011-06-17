@@ -21,7 +21,7 @@
         $(document).ready(function(){
           Date.firstDayOfWeek = 0;
           Date.format = 'mm / dd / yy';
-          $('#request_date').datePicker({startDate:'01-01-1996'})
+          $('#request_date').datePicker({startDate:'01-01-1996',clickInput:true})
         });
       </script>
     <% end %>
@@ -71,7 +71,7 @@
     </div>
   <% end %>
 </div>
-<% if @map %>
+<% unless @map.blank? %>
   <div id="map_div" style="float: left;width: 34%;margin: 0 auto;margin-top: 10px;margin-left: 5px;">
     <%= @map.div(:width => 290, :height => 300) %>
   </div>
