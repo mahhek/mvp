@@ -7,16 +7,16 @@
   </div>
 </div>
 <div style="padding: 10px;background-color: lavender;border: 1px solid black;width: 100%;float: left;margin-top: 10px;">
-  <div style="float: left;width: 72%;border: 1px solid black">
+  <div style="float: left;width: 72%;border: 1px solid black; min-height: 360px;">
     <div style="float: left;width: 100%;margin: 5px;">
       <span style="float:left;">
-        <%= link_to_function "Photos", "if($('#photo_div').is(':hidden')){$('div#photo_div , div#map_div').toggle();}"  %>
+        <%= link_to_function "Map", "if($('#my_map_div').is(':hidden')){$('div#photo_div , div#my_map_div').toggle();}"  %>
       </span>
       <span style="float: left;margin-left: 10px;">
-        <%= link_to_function "Maps", "if($('#map_div').is(':hidden')){$('div#photo_div , div#map_div').toggle();}"  %>
+        <%= link_to_function "Photo", "if($('#photo_div').is(':hidden')){$('div#photo_div , div#my_map_div').toggle();}"  %>
       </span>
     </div>
-    <div id="photo_div" style="float: left;width: 100%;">
+    <div id="photo_div" style="float: left;width: 100%;display: none;">
       <% if @location.avatars.size > 0 %>
         <div style="float: left;width: 100%;margin-top: 10px;margin: 5px;">
           <%= image_tag(@location.avatars.first.photo.url(:medium)) %>
@@ -26,8 +26,8 @@
         </div>
       <% end %>
     </div>
-    <div id="map_div" style="float: left;width: 100%;display: none;">
-      <%= @map.div(:width => 400, :height => 400) %>
+    <div id="my_map_div" style="float: left;width: 100%;">
+      <%= @map.div(:width => 400, :height => 400, :margin => "0  auto") %>
     </div>
   </div>
   <div style="float: left;width: 24%;margin-left: 10px;">
@@ -48,6 +48,7 @@
       </div>
       <script>
         $(document).ready(function(){
+          $('#map').css("margin", "0 auto");
           Date.firstDayOfWeek = 0;
           Date.format = 'yyyy-mm-dd';
 
@@ -130,3 +131,6 @@ This will be a text pulled from personal profile page. This will be a text pulle
   </div>
 
 </div>
+<script>
+<%#*setTimeout($('#my_map_div').hide(), 500);%>
+</script>

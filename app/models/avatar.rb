@@ -1,7 +1,7 @@
 class Avatar < ActiveRecord::Base
   belongs_to :location
 
-  has_attached_file :photo, :styles => { :small => "150x150>", :medium => "450x300>" },
+  has_attached_file :photo, :styles => { :small => "150x150>", :medium => "275x306>" },
     :storage => :s3,
     :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
     :path => "/:style/:id/:filename"

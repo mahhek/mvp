@@ -21,16 +21,16 @@ class LocationsController < ApplicationController
         [sorted_latitudes.first, sorted_longitudes.first],
         [sorted_latitudes.last, sorted_longitudes.last]])
     @locations.each do |location|
-      coordinates = [location.latitude,location.longitude]      
-      @map.overlay_init(GMarker.new(coordinates,:title => current_user.first_name, :info_window => "#{location.headline}"))
+      coordinates = [location.latitude,location.longitude]
+      @map.overlay_init(GMarker.new(coordinates,:title => current_user.nil? ? location.headline : current_user.first_name, :info_window => "#{location.headline}"))
     end
   end
 
   def save_requested_city
     if !params[:request_city].blank? and params[:request_city] != "Please enter your zip code"
-      RequestedCity.new(:name => params[:request_city]).save
+      RequestedCity.new(:name => params[:request_city], :email => params[:email]).save
       render :update do |page|
-        page["requested_city_div"].hide 
+        page["requested_city_div"].hide
         page["requested_city_msg_div"].show
         page["requested_city_msg_div"].replace_html :text => "We will be in touch once we launch in your area."
       end
@@ -39,7 +39,7 @@ class LocationsController < ApplicationController
         page["requested_city_msg_div"].show
         page["requested_city_msg_div"].replace_html :text => "Please provide some zip code!"
       end
-    end    
+    end
   end
   
   def new
@@ -60,14 +60,15 @@ class LocationsController < ApplicationController
       @features = Feature.all
       flash[:notice] = "Location was not saved successfully!"
       render :action => "new"
-    end    
+    end
   end
 
-  def edit    
+  def edit
     @location = Location.find_by_id(params[:id])
     @features = Feature.all
+
     @map = GMap.new("map")
-    @map.control_init(:map_type => true, :small_zoom => true)    
+    @map.control_init(:map_type => true, :small_zoom => true)
     coordinates = [@location.latitude,@location.longitude]
     @map.center_zoom_init(coordinates, 15)
     @map.overlay_init(GMarker.new(coordinates,:title => current_user.first_name, :info_window => "#{@location.headline}"))
@@ -77,7 +78,7 @@ class LocationsController < ApplicationController
     @location = Location.find_by_id(params[:id])
     @location.update_attribute("location_status", params["location_status_#{@location.id}"])
     render :update do |page|
-      page["updated_location_msg_div_#{@location.id}"].show      
+      page["updated_location_msg_div_#{@location.id}"].show
     end
   end
 
@@ -92,18 +93,18 @@ class LocationsController < ApplicationController
   def update
     @location = Location.find(params[:id])
     @location.feature_ids = params[:features]
-    if @location.update_attributes(params[:location])      
+    if @location.update_attributes(params[:location])
       flash[:notice] = "Location updated successfully!"
       unless @location.avatars.blank?
         return redirect_to edit_location_avatar_path(@location,@location.avatars.first)
       else
         return redirect_to new_location_avatar_path(@location)
       end
-    else 
+    else
       @features = Feature.all
       flash[:notice] = "Location was not updated successfully!"
       render :action => "edit"
-    end    
+    end
   end
 
   def show
@@ -111,7 +112,7 @@ class LocationsController < ApplicationController
     @map = GMap.new("map")
     @map.control_init(:map_type => true, :small_zoom => true)
     coordinates = [@location.latitude,@location.longitude]
-    @map.center_zoom_init(coordinates, 13)
+    @map.center_zoom_init(coordinates, 15)
     @map.overlay_init(GMarker.new(coordinates,:title => current_user.first_name, :info_window => "#{@location.headline}"))
   end
 end

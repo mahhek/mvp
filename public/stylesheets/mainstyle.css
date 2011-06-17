@@ -131,9 +131,9 @@ body {
 }
 #small-find-button {
     font-family: FamiliarProBold;
-    float: left;
+    float: right;
     margin-left: 5px;
-    margin-top: 3px;
+    margin-top: 10px;
     background-image: url(/images/find-button.png);
     background-repeat: no-repeat;
     height: 25px;
