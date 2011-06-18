@@ -1,5 +1,5 @@
 class LocationsController < ApplicationController
-  before_filter :require_user, :except => [:search_location, :save_requested_city,:new ]
+  before_filter :require_user, :except => [:search_location, :save_requested_city,:new, :show ]
   layout 'inner'
 
   def index
@@ -124,6 +124,6 @@ class LocationsController < ApplicationController
     @map.control_init(:map_type => true, :small_zoom => true)
     coordinates = [@location.latitude,@location.longitude]
     @map.center_zoom_init(coordinates, 15)
-    @map.overlay_init(GMarker.new(coordinates,:title => current_user.first_name, :info_window => "#{@location.headline}"))
+    @map.overlay_init(GMarker.new(coordinates,:title => current_user.nil? ? @location.headline : current_user.first_name, :info_window => "#{@location.headline}"))
   end
 end
