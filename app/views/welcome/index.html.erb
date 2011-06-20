@@ -1,1 +1,95 @@
-<%= render :partial => "header" %>
+<div id="left-container">
+  <% form_tag "/locations/search_location" , {:id => "search_form"} do %>
+    <div id="main-text">Storage and parking with real people just like you.</div>
+    <div id="country-field">
+      <div id="select-country">
+        <%= select_tag "requested_city",options_for_select([["Philadelphia" , "Philadelphia"],["New York" ,"New York"] , ["San Francisco", "San Francisco"],["Boston", "Boston"],  ["Add My City!","Add My City!"]]) %>
+      </div>
+      <%= observe_field("requested_city", :on => :changed,
+        :url => requested_city_path,
+        :with => "requested_city")
+    %>
+      <div id="find-button"><a href="javascript:void(0);" onclick="$('#search_form').submit();">Find</a></div>
+      <div id="requested_city_msg_div" style="width: 100%;float: left;color: darkcyan;margin-top: 5px;">
+      </div>
+    </div>
+    <div id="calander">
+      <script>
+        $(document).ready(function(){
+          Date.firstDayOfWeek = 0;
+          Date.format = 'mm / dd / yy';
+          $('#request_date').datePicker({startDate:'01-01-1996'})
+        });
+      </script>
+      <div>
+        <%= text_field_tag "request_date", "mm / dd / yy", :class => "calander-fields" %>
+      </div>
+
+      <div id="space-field">
+        <%= select_tag "storage_menus",options_for_select([["Parking" , "Parking"],["Storage" ,"Storage"] , ["Both", "Both"]]) %>
+      </div>
+      <div id="calander-text">When do you want it?</div>
+      <div id="parking-text">Parking or Storage?
+      </div>
+    </div>
+  <% end %>
+  <div id="requested_city_div" style="width: 100%;float: left;margin-top: 35px;">
+  </div>
+
+  <script type="text/javascript">
+    function hide_updated_msg(){
+      jQuery('#requested_city_msg_div').animate({ opacity: 'hide' }, "slow");
+    }
+  </script>
+</div>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.slideshow').cycle({
+      fx: 'fade' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+    });
+  });
+</script>
+<style type="text/css">
+  .slideshow { float: right; }
+</style>
+<div class="slideshow">
+  <% @spaces.each do |space| %>
+    <% if space.avatars.size > 0 %>
+      <div id="right-content">
+        <div id="slider-img">
+          <%= link_to( image_tag(space.avatars.first.photo.url(:original), :height => "275", :width => "306", :border => "0"), location_path(space)) %>
+        </div>
+        <div id="details-storage">
+          <div id="feature-heading"><%= space.park_store %></div>
+          <div class="sub-feature-heading">Holds:</div>
+          <div class="sub-feature-details"><%= space.accommodates %></div>
+          <div class="sub-feature-heading">Security:</div>
+          <div class="sub-feature-details"><%= space.security %></div>
+          <div class="sub-feature-heading">Other:</div>
+          <div class="sub-feature-details" style="height: 120px;overflow: hidden;">
+            <% space.features.collect(&:name).each do |feature|   %>
+              <%= feature %><br/>
+            <% end %>
+          </div>
+        </div>
+        <div id="price-bar">
+          <span class="brown-text">$<%= space.price.to_i %>:</span>
+          <%= space.headline %>
+          <span class="brown-text">
+            <%= space.city.nil? ? "" : space.city %><%= @spaces.size %>
+          </span>
+
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+
+<div id="featuer-boxes">
+  <%= link_to(image_tag("how-its-work.png", :height => "201", :width => "285", :alt => "how it works", :border => "0"), {:controller => "welcome", :action => "tell_me_more"}) %>
+  <%= link_to(image_tag("list-your-space.png", :height => "201", :width => "285", :alt => "list your space", :border => "0", :class => "img-space"), new_location_path) %>
+  <%= link_to(image_tag("sign-up.png", :height => "201", :width => "286", :alt => "sign up", :border => "0"), {:controller => "welcome", :action => "signup_and_signin", :id => "signup"}) %>
+</div>

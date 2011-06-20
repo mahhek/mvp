@@ -1,56 +1,43 @@
-<% remote_form_for :user, @user, :url => user_create_path do |f| %>
-
-  <h1>New User? Register:</h1>
-  <hr/>
-
-  <div style="width: 100%;float: left;margin-top: 5px;">
-    <div style="width: 25%;float: left;">
-      First Name:
+<div class="fields-wrapper2">
+  <% remote_form_for :user, @user, :url => user_create_path, :html => {:id => "signup_form"} do |f| %>
+    <div class="sign-in-heading2">Sign Up</div>
+    <div class="fieldx-bg">
+      <div class="fieldx-txt">First Name</div>
+      <div class="fieldx-field">
+        <%= f.text_field :first_name, :class=>"fieldx" %>
+      </div>
     </div>
-    <div style="width: 70%;float: left;">
-      <%= f.text_field :first_name, :class=>"field", :size => "23" %>
-    </div>
-  </div>
 
-  <div style="width: 100%;float: left;margin-top: 5px;">
-    <div style="width: 25%;float: left;">
-      Last Name:
+    <div class="fieldx-bg">
+      <div class="fieldx-txt">Last Name</div>
+      <div class="fieldx-field">
+        <%= f.text_field :last_name, :class=>"fieldx" %>
+      </div>
     </div>
-    <div style="width: 70%;float: left;">
-      <%= f.text_field :last_name, :class=>"field", :size => "23" %>
-      <span style="float: right;width: 265px;color: gray;">
-        We'll only display your last initial
-      </span>
-    </div>
-  </div>
 
-  <div style="width: 100%;float: left;margin-top: 5px;">
-    <div style="width: 25%;float: left;">
-      Email Address:
+    <div id="display-name">We'll only display your last initial</div>
+    <div class="fieldx-bg">
+      <div class="fieldx-txt">Email</div>
+      <div class="fieldx-field">
+        <%= f.text_field :email, :class=>"fieldx" %>
+      </div>
     </div>
-    <div style="width: 70%;float: left;">
-      <%= f.text_field :email, :class=>"field", :size => "23" %>
+
+    <div class="fieldx-bg">
+      <div class="fieldx-txt">Password</div>
+      <div class="fieldx-field">
+        <%= f.password_field :password, :class=>"fieldx" %>
+      </div>
     </div>
-  </div>
 
-  <div style="width: 100%;float: left;margin-top: 5px;">
-    <div style="width: 25%;float: left;">
-      Password:
+    <div class="signme-bg2">
+      <div class="signup-btn">
+        <a href="#">
+          <img border="0" height="42" width="104" alt="sign me up" src="/images/sign-up-btn.png" onclick="$('#signup_form').submit();"/>
+        </a>
+      </div>
     </div>
-    <div style="width: 70%;float: left;">
-      <%= f.password_field :password, :class=>"field", :size => "23" %>
-      <span style="float: right;width: 265px;color: gray;">
-        6 characters or more
-      </span>
-    </div>
-  </div>
+  <%end%>
+</div>
 
-  <!--  <div style="width: 100%;float: left;">
-      <input name="rememberme" id="rememberme" type="checkbox" checked="checked" value="forever" /> &nbsp;Remember me</label>
-    </div> -->
 
-  <div style="width: 100%;float: right;text-align: right;margin-top: 10px;">
-    <%= f.submit "Sign me up!", :class => "bt_login" %>
-  </div>
-
-<%end%>

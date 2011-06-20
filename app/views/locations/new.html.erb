@@ -1,5 +1,3 @@
-<% form_for @location do|f| %>
-  <div style="float: left;width: 100%;">
-    <%= render :partial => "form", :locals => {:f => f} %>
-  </div>  
+<% form_for @location , :html => {:name => "space_form"} do|f| %>
+  <%= render :partial => "form", :locals => {:f => f} %>
 <% end %>

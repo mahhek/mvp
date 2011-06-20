@@ -1,7 +1,6 @@
 class LocationsController < ApplicationController
   before_filter :require_user, :except => [:search_location, :save_requested_city,:new, :show ]
-  layout 'inner'
-
+  
   def index
     @locations = current_user.locations 
   end

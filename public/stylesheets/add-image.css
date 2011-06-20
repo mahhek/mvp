@@ -1,0 +1,98 @@
+@charset "UTF-8";
+#get-list-header {
+	width: 880px;
+	padding-right: 2px;
+	padding-left: 2px;
+	float: left;
+	background-image: url(/images/gradient-bar.png);
+	background-repeat: repeat-x;
+	height: 53px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+.white-button {
+	font-family: FamiliarProBold;
+	background-image: url(/images/white-button.png);
+	background-repeat: no-repeat;
+	float: left;
+	height: 35px;
+	width: 87px;
+	padding-top: 9px;
+	text-align: center;
+	font-size: 12px;
+	background-position: left bottom;
+	line-height: 37px;
+	margin-left: 10px;
+}
+.white-button a {
+	text-decoration: none;
+	color: #757877;
+}
+#select-lisiting {
+	float: left;
+	height: 30px;
+	width: 200px;
+	padding-left: 15px;
+	padding-top: 12px;
+}
+.select-listing {
+	height: 28px;
+	width: 195px;
+	border: 1px solid ##afafaf;
+}
+#lisit-name {
+	font-family: FamiliarProBold;
+	float: left;
+	width: 860px;
+	padding-left: 10px;
+	padding-top: 25px;
+	font-size: 26px;
+	color: #593325;
+}
+#show-thumbnail {
+	float: left;
+	height: 500px;
+	width: 125px;
+	padding-left: 10px;
+	padding-top: 25px;
+}
+#thumbnail {
+	float: left;
+	height: 104px;
+	width: 125px;
+}
+#thumbnail-txt {
+	font-family: 'HelveticaLTStdFractions';
+	font-size: 12px;
+	color: #606362;
+	float: left;
+	width: 125px;
+	padding-top: 5px;
+}
+#thumnail-details {
+	font-family: HelveticaLTStdFractions;
+	float: left;
+	width: 600px;
+	padding-top: 25px;
+	padding-left: 30px;
+	line-height: 12px;
+}
+.gray-14 {
+	color: #606362;
+	line-height: 0px;
+}
+.familar-photo {
+	font-family: FamiliarProBold;
+	font-size: 18px;
+	color: #1d1d1f;
+}
+#caption {
+	height: 32px;
+	width: 439px;
+	padding-right: 5px;
+	padding-left: 5px;
+	font-size: 14px;
+	color: #666;
+	border: 1px solid #afafaf;
+}

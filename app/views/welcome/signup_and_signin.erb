@@ -1,14 +1,19 @@
-<div style="float: left;width: 100%;padding: 10px;">
-  <div id="errors_div" style="background-color: #9F1B1B;color: whitesmoke;width: 91%;">
-    <%= render :partial => "errors" %>
+<%= stylesheet_link_tag "signup"%>
+<div id="signup-wrapper">
+
+  <div id="signup-color">
+    <div id="signup-heading">
+      <%= render :partial => "errors" %>
+      <%= render :partial => "layouts/flash_messages" %>
+    </div>
   </div>
 
+
   <% unless current_user %>
-    <div style="width: 45%;float: left;">
-      <%= render :partial => "login_form" %>
-    </div>
-    <div style="width: 45%;float: left;margin-left: 5%;">
-      <%= render :partial => "registration_form" %>
-    </div>
+
+    <%= render :partial => "login_form" %>
+    <%= render :partial => "registration_form" %>
+
   <% end %>
+
 </div>

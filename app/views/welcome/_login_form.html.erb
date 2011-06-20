@@ -1,49 +1,37 @@
-<% remote_form_for :user_session, @user_session, :url => user_session_create_path do |f| %>
+<div class="fields-wrapper">
+  <% remote_form_for :user_session, @user_session, :url => user_session_create_path, :html => {:id => "login_form"} do |f| %>
+    <div class="sign-in-heading">Sign In</div>
 
-  <h1>Sign In:</h1>
-  <hr/>
-  <div style="width: 100%;float: left;">
-    <h3>
-      Using Facebook:
-    </h3>
-
-    <%= link_to "FB Login", "#" %>
-  </div>
-  <div style="width: 100%;float: left;">
-    <hr style="width: 150px;color: silver;float: left;"></hr>
-  </div>
-
-  <div style="width: 100%;float: left;">
-    <h3>
-      Using Your Username and password
-    </h3>
-  </div>
-
-  <div style="width: 100%;float: left;margin-top: 5px;">
-    <div style="width: 25%;float: left;">
-      Email Address: 
+    <div id="facebook-login">
+      <div id="fb-txt">Using Facebook: </div>
+      <div id="fb-btn"><a href="#"><img border="0" height="22" width="154" alt="fb-btn" src="/images/fb-login.png"></a></div>
     </div>
-    <div style="width: 70%;float: left;">
-      <%= f.text_field :email, :class=>"field", :size => "23" %>
+
+    <div id="user-txt">Your Username &amp; Password:</div>
+
+    <div class="fieldx-bg">
+      <div class="fieldx-txt">Email</div>
+      <div class="fieldx-field">
+        <%= f.text_field :email, :class=>"fieldx" %>
+      </div>
     </div>
-  </div>
 
-  <div style="width: 100%;float: left;margin-top: 5px;">
-    <div style="width: 25%;float: left;">
-      Password:
+    <div class="fieldx-bg">
+      <div class="fieldx-txt">Password</div>
+      <div class="fieldx-field">
+        <%= f.password_field :password, :class=>"fieldx" %>
+      </div>
     </div>
-    <div style="width: 70%;float: left;">
-      <%= f.password_field :password, :class=>"field", :size => "23" %>
+
+    <div class="signme-bg">
+      <div id="forgot-pass"><%= link_to "Forgot your password?", "#",:class => "lost-pwd" %></div>
+      <div class="signup-btn">
+        <a href="#">
+          <img border="0" height="42" width="104" alt="sign me up" src="/images/signin-btn.png" onclick="$('#login_form').submit();"/>
+        </a>
+      </div>
     </div>
-  </div>
+  <%end%>
+</div>
 
-  <!--  <div style="width: 100%;float: left;">
-      <input name="rememberme" id="rememberme" type="checkbox" checked="checked" value="forever" /> &nbsp;Remember me</label>
-    </div> -->
 
-  <div style="width: 100%;float: right;text-align: right;margin-top: 10px;">
-    <%= f.submit "Sign me in!", :class => "bt_login" %><br/>
-    <%= link_to "Forgot your password?", "#",:class => "lost-pwd" %>
-  </div>
-
-<%end%>

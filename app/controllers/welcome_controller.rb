@@ -14,7 +14,6 @@ class WelcomeController < ApplicationController
   def signup_and_signin
     flash[:notice] = "Welcome back to Storably!" if params[:id] == "signin"
     flash[:notice] = "Welcome to Storably!" if params[:id] == "signup"
-    render :layout => 'inner'
   end
 
   def new_requested_city
