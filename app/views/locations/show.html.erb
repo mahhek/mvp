@@ -1,52 +1,70 @@
-<div style="padding: 10px;background-color: lavender;border: 1px solid black;width: 100%;float: left;">
-  <div style="float: left;width: 100%;font-size: 25px;font-weight: bold;">
-    <%= @location.headline %>
+<%= stylesheet_link_tag "get-list"%>
+  <div id="get-list-header">
+    <div id="lisit-txt"><%= @location.headline %><br>
+      <span class="hel-14"><%= @location.storage_type %> for <%= @location.accommodates %>&nbsp;|&nbsp;<%= "#{@location.street_name} #{@location.region}  #{@location.city}, #{@location.zipcode}, #{@location.country_code}" %></span> </div>
   </div>
-  <div style="float: left;width: 100%;margin-top: 4px;">
-    <%= @location.storage_type %> for <%= @location.accommodates %>&nbsp;|&nbsp;<%= "#{@location.street_name} #{@location.region}  #{@location.city}, #{@location.zipcode}, #{@location.country_code}" %>
-  </div>
-</div>
-<div style="padding: 10px;background-color: lavender;border: 1px solid black;width: 100%;float: left;margin-top: 10px;">
-  <div style="float: left;width: 72%;border: 1px solid black; min-height: 360px;">
-    <div style="float: left;width: 100%;margin: 5px;">
-      <span style="float:left;">
-        <%= link_to_function "Map", "if($('#my_map_div').is(':hidden')){$('div#photo_div , div#my_map_div').toggle();}"  %>
-      </span>
-      <span style="float: left;margin-left: 10px;">
-        <%= link_to_function "Photo", "if($('#photo_div').is(':hidden')){$('div#photo_div , div#my_map_div').toggle();}"  %>
-      </span>
-    </div>
-    <div id="photo_div" style="float: left;width: 100%;display: none;">
-      <% if @location.avatars.size > 0 %>
-        <div style="float: left;width: 100%;margin-top: 10px;margin: 5px;">
-          <%= image_tag(@location.avatars.first.photo.url(:medium)) %>
+  <div id="left-side">
+    <div class="left-gray">
+      <div id="white-btn">
+        <%= link_to_function image_tag("map-btn.png", :border=>"0"), "if($('#my_map_div').is(':hidden')){$('div#photo_div , div#my_map_div').toggle();}"  %>
+         <%= link_to_function image_tag("photo-btn.jpg", :border=>"0") , "if($('#photo_div').is(':hidden')){$('div#photo_div , div#my_map_div').toggle();}"  %>
+      </div>
+      <div id="photo_div" style="display: none;">
+        <% if @location.avatars.size > 0 %>
+        <div id="space-img">
+           <%= image_tag(@location.avatars.first.photo.url(:large)) %>
         </div>
-        <div style="float: left;width: 100%;margin-top: 10px;margin: 5px;">
-          <%= @location.avatars.first.caption %>
+
+        <div id="field-caption">
+           <%= @location.avatars.first.caption %>
         </div>
-      <% end %>
-    </div>
-    <div id="my_map_div" style="float: left;width: 100%;">
+        <%end%>
+      </div>
+      <div id="my_map_div">
       <%= @map.div(:width => 400, :height => 400, :margin => "0  auto") %>
     </div>
+    </div>
+
+    <div class="left-gray">
+      <div id="about-header">
+        <div id="aboout-txt"> About this Space</div>
+        <div id="a1">A+</div>
+        <div id="btn"><a href="#"><img src="/images/btn.png" alt="btn" width="44" height="41" border="0"></a></div>
+      </div>
+      <div id="space-details-txt">
+        <%=h @location.description %>
+      </div>
+
+
+      <div id="storeage-detailx" style="overflow:hidden;">
+        <div id="feature-heading">Storage </div>
+        <div class="sub-feature-heading">Holds:</div>
+        <div class="sub-feature-details"><%= @location.accommodates %></div>
+        <div class="sub-feature-heading">Security:</div>
+        <div class="sub-feature-details"><%= @location.security %></div>
+        <div class="sub-feature-heading">Other:</div>
+        <div class="sub-feature-details">
+           <% @location.features.collect(&:name).each do |feature|   %>
+            <%= feature %>
+          <br/>
+            <%end%>
+        </div>
+      </div>
+    </div>
+
   </div>
-  <div style="float: left;width: 24%;margin-left: 10px;">
-    <div style="float: left;width: 100%;border: 1px solid black;padding: 10px;">
-      <div style="width:100%;float: left;">
-        <span style="float: left;font-size: 18px;font-weight:bold;">
-          $<%= @location.price.to_i %>
-        </span>
-        <span style="float: left;margin-left: 5px;">
-          Per Month
-        </span>
-      </div>
-      <div style="width:100%;float: left;margin-top: 5px;">
-        <span style="float: left;font-weight:bold;">
-          Offer Date
-          <%= text_field_tag "offer_date","" ,{:size => "15"}  %>
-        </span>        
-      </div>
-      <script>
+
+
+  <div id="right-widgets">
+    <div class="blue-box">
+      <div id="price-x"><span class="font-24">$<%= @location.price.to_i %></span> per month</div>
+
+      <div class="date-set">
+        <div style="float:left">
+        Starting on
+        </div>
+        <%= text_field_tag "offer_date","" ,{:size => "15"}  %>
+              <script>
         $(document).ready(function(){
           $('#map').css("margin", "0 auto");
           Date.firstDayOfWeek = 0;
@@ -60,32 +78,25 @@
         });
       </script>
 
-      <div style="width:100%;float: left;margin-top: 5px;">
-        <span style="float: left;font-size: 18px;font-weight:bold;">
-          <%= link_to "Store It", "#" %>
-        </span>        
-      </div>
+        </div>
+      <div id="store-btn"><a href="#"><img src="/images/store-btn.png" alt="store now" width="71" height="34" border="0"></a></div>
     </div>
-    <div style="float: left;width: 100%;border: 1px solid black;padding: 10px;margin-top: 10px;">
-      <div style="width:100%;float: left;">
-        <span style="float: left;">
-          <%= image_tag("missing_70.png") %>
-        </span>
-        <span style="float: left;font-size: 20px;font-weight:bold;margin-left: 2px;margin-top: 10px;">
-          <%= @location.user.first_name %> <%= "#{@location.user.last_name[0..0].capitalize}." if @location.user.last_name %>
-        </span>        
-        <span style="float: left;font-size: 9px;margin-left: 10px;">
-          Response Rate 98%
-        </span>
+
+
+    <div class="blue-box">
+      <div id="image-person">
+        <%= image_tag("missing_70.png") %>
+        <%= @location.user.first_name %> <%= "#{@location.user.last_name[0..0].capitalize}." if @location.user.last_name %>
+        <br>
+        <span class="hel-14">Response Rate: 98% </span></div>
+
+      <div id="user-details">
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
       </div>
-      <div style="width:100%;float: left;margin-top: 20px;overflow-y: auto;height: 100px;border: 1px solid black;background-color: white;">
-        <%=h "This will be a text pulled from personal profile page. This will be a text pulled from personal profile page.
-This will be a text pulled from personal profile page. This will be a text pulled from personal profile page.
-This will be a text pulled from personal profile page. This will be a text pulled from personal profile page.
-This will be a text pulled from personal profile page. This will be a text pulled from personal profile page." %>
-      </div>
-      <div style="float: left;width: 100%;margin-top: 10px;">
-        <%= link_to_function "Contact me", "$('#contact_me_div').toggle('slow');"  %>
+       
+      <div id="store-btn">
+        <%= link_to_function image_tag("contact-me.png", :border=>"0"), "$('#contact_me_div').toggle('slow');"  %>
       </div>
       <div style="float: left;width: 100%;margin-top: 10px;display: none;" id="contact_me_div">
         <% remote_form_for "contact_me", :url => {:controller => "locations", :action => "send_contact_me_message"} , :html => {:id => "contact_me_form"}, :success => "$('#contact_me_div').toggle('slow');$('#contact_me').val('');" do %>
@@ -97,50 +108,5 @@ This will be a text pulled from personal profile page. This will be a text pulle
           </div>
         <% end %>
       </div>      
-    </div>
-
-
   </div>
-  <div style="float: left;width: 72%;border: 1px solid black;margin-top: 10px;">
-    <div style="float: left;width: 100%;margin: 5px;">
-      <span style="float:left;">
-        About this space&nbsp;
-      </span>
-    </div>
-    <div id="space_info" style="float: left;width: 100%;margin: 5px;">
-      <span style="float:left;width: 73%;height: 200px;overflow-y: auto;background-color: white;">
-        <%=h @location.description %>
-      </span>
-      <span style="float: left;width: 24%;margin-left: 2px;">
-        <span style="float: left;width: 100%;font-weight: bold;background-color: gray;margin-bottom: 5px;padding: 2px;">
-          At a Glance
-        </span>
-        <span style="float: left;width: 100%;font-weight: bold;background-color: silver;padding: 2px;">
-          <%= @location.storage_type %>
-        </span>
-        <span style="float: left;width: 100%;font-weight: bold;background-color: gray;padding: 2px;">
-          <%= @location.accommodates %>
-        </span>
-        <span style="float: left;width: 100%;font-weight: bold;background-color: silver;padding: 2px;">
-          <%= @location.floor %>
-        </span>
-        <span style="float: left;width: 100%;font-weight: bold;background-color: gray;padding: 2px;">
-          <%= @location.access %>
-        </span>
-        <span style="float: left;width: 100%;font-weight: bold;background-color: silver;padding: 2px;">
-          <%= @location.security %>
-        </span>
-        <% @location.features.collect(&:name).each do |feature|   %>
-          <span style="float: left;width: 100%;font-weight: bold;background-color: <%= cycle('gray','silver') %>;padding: 2px;">
-            <%= feature %>
-          </span>
-        <% end %>
-      </span>
-    </div>
-
-  </div>
-
 </div>
-<script>
-<%#*setTimeout($('#my_map_div').hide(), 500);%>
-</script>

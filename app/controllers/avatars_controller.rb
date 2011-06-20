@@ -1,7 +1,7 @@
 class AvatarsController < ApplicationController
   before_filter :load_location
   before_filter :require_user
-  layout 'inner'
+  
 
   def new
     @avatar = @location.avatars.build
