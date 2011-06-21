@@ -40,6 +40,10 @@
       </div>
     </div>
 
+    <div class="field-address">Apt / Unit:<br/>
+      <%= f.text_field :apartment, :class => "field-l"%>
+    </div>
+
     <div class="field-address">Phone Number*:<br/>
       <%= f.text_field :phone, :class => "field-l"%>
     </div>
@@ -90,7 +94,7 @@
     <% double_count = 0 %>
     <% @features.each do |feature| %>
 
-       <% if (double_count % 2) != 0 %>
+      <% if (double_count % 2) != 0 %>
         <div class="radio-btn-wrapper">
         <% end %>
 
@@ -192,9 +196,10 @@
       }
 
       marker = new GMarker(latlng);
-
+      map.setZoom(15);
       map.addOverlay(marker);
-
+      
+      
 
       if(resolveName) {
 
@@ -282,7 +287,8 @@
         update_location_fun(false);
         $(this).val(item.label);
         $('#another_element').val(item.label);
-        $(this).data('valid', true);       
+        $(this).data('valid', true);
+
       }
     });
     //$('#new_location').validate();

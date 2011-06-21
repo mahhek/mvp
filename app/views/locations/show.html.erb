@@ -1,70 +1,70 @@
 <%= stylesheet_link_tag "get-list"%>
-  <div id="get-list-header">
-    <div id="lisit-txt"><%= @location.headline %><br>
-      <span class="hel-14"><%= @location.storage_type %> for <%= @location.accommodates %>&nbsp;|&nbsp;<%= "#{@location.street_name} #{@location.region}  #{@location.city}, #{@location.zipcode}, #{@location.country_code}" %></span> </div>
-  </div>
-  <div id="left-side">
-    <div class="left-gray">
-      <div id="white-btn">
-        <%= link_to_function image_tag("map-btn.png", :border=>"0"), "if($('#my_map_div').is(':hidden')){$('div#photo_div , div#my_map_div').toggle();}"  %>
-         <%= link_to_function image_tag("photo-btn.jpg", :border=>"0") , "if($('#photo_div').is(':hidden')){$('div#photo_div , div#my_map_div').toggle();}"  %>
-      </div>
-      <div id="photo_div" style="display: none;">
-        <% if @location.avatars.size > 0 %>
+<div id="get-list-header">
+  <div id="lisit-txt"><%= @location.headline %><br>
+    <span class="hel-14"><%= @location.storage_type %> for <%= @location.accommodates %>&nbsp;|&nbsp;<%= "#{@location.street_name} #{@location.region}  #{@location.city}, #{@location.zipcode}, #{@location.country_code}" %></span> </div>
+</div>
+<div id="left-side">
+  <div class="left-gray">
+    <div id="white-btn">
+      <%= link_to_function image_tag("photo-btn.jpg", :border=>"0") , "if($('#photo_div').is(':hidden')){$('#photo_div').show();$('#my_map_div').css('visibility','hidden');$('#my_map_div').css('position','absolute');}"  %>
+      <%= link_to_function image_tag("map-btn.png", :border=>"0"), "$('#photo_div').hide();$('#my_map_div').css('visibility','visible');$('#my_map_div').css('position','');"  %>
+    </div>
+    <div id="photo_div">
+      <% if @location.avatars.size > 0 %>
         <div id="space-img">
-           <%= image_tag(@location.avatars.first.photo.url(:large)) %>
+          <%= image_tag(@location.avatars.first.photo.url(:large)) %>
         </div>
 
         <div id="field-caption">
-           <%= @location.avatars.first.caption %>
+          <%= @location.avatars.first.caption %>
         </div>
-        <%end%>
-      </div>
-      <div id="my_map_div">
-      <%= @map.div(:width => 400, :height => 400, :margin => "0  auto") %>
+      <%end%>
     </div>
+    <div id="my_map_div" style="visibility:hidden;position:absolute;">
+      <%= @map.div(:width => 475, :height => 400) %>
     </div>
-
-    <div class="left-gray">
-      <div id="about-header">
-        <div id="aboout-txt"> About this Space</div>
-        <div id="a1">A+</div>
-        <div id="btn"><a href="#"><img src="/images/btn.png" alt="btn" width="44" height="41" border="0"></a></div>
-      </div>
-      <div id="space-details-txt">
-        <%=h @location.description %>
-      </div>
-
-
-      <div id="storeage-detailx" style="overflow:hidden;">
-        <div id="feature-heading">Storage </div>
-        <div class="sub-feature-heading">Holds:</div>
-        <div class="sub-feature-details"><%= @location.accommodates %></div>
-        <div class="sub-feature-heading">Security:</div>
-        <div class="sub-feature-details"><%= @location.security %></div>
-        <div class="sub-feature-heading">Other:</div>
-        <div class="sub-feature-details">
-           <% @location.features.collect(&:name).each do |feature|   %>
-            <%= feature %>
-          <br/>
-            <%end%>
-        </div>
-      </div>
-    </div>
-
   </div>
 
+  <div class="left-gray">
+    <div id="about-header">
+      <div id="aboout-txt"> About this Space</div>
+      <div id="a1">A+</div>
+      <div id="btn"><a href="#"><img src="/images/btn.png" alt="btn" width="44" height="41" border="0"></a></div>
+    </div>
+    <div id="space-details-txt">
+      <%=h @location.description %>
+    </div>
 
-  <div id="right-widgets">
-    <div class="blue-box">
-      <div id="price-x"><span class="font-24">$<%= @location.price.to_i %></span> per month</div>
 
-      <div class="date-set">
-        <div style="float:left">
+    <div id="storeage-detailx" style="overflow:hidden;">
+      <div id="feature-heading">Storage </div>
+      <div class="sub-feature-heading">Holds:</div>
+      <div class="sub-feature-details"><%= @location.accommodates %></div>
+      <div class="sub-feature-heading">Security:</div>
+      <div class="sub-feature-details"><%= @location.security %></div>
+      <div class="sub-feature-heading">Other:</div>
+      <div class="sub-feature-details">
+        <% @location.features.collect(&:name).each do |feature|   %>
+          <%= feature %>
+          <br/>
+        <%end%>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div id="right-widgets">
+  <div class="blue-box">
+    <div id="price-x"><span class="font-24">$<%= @location.price.to_i %></span> per month</div>
+
+    <div class="date-set">
+      <div style="float:left">
         Starting on
-        </div>
-        <%= text_field_tag "offer_date","" ,{:size => "15"}  %>
-              <script>
+      </div>
+      <%= text_field_tag "offer_date","" ,{:size => "15"}  %>
+      <script>
         $(document).ready(function(){
           $('#map').css("margin", "0 auto");
           Date.firstDayOfWeek = 0;
@@ -78,35 +78,35 @@
         });
       </script>
 
-        </div>
-      <div id="store-btn"><a href="#"><img src="/images/store-btn.png" alt="store now" width="71" height="34" border="0"></a></div>
+    </div>
+    <div id="store-btn"><a href="#"><img src="/images/store-btn.png" alt="store now" width="71" height="34" border="0"></a></div>
+  </div>
+
+
+  <div class="blue-box">
+    <div id="image-person">
+      <%= image_tag("missing_70.png") %>
+      <%= @location.user.first_name %> <%= "#{@location.user.last_name[0..0].capitalize}." if @location.user.last_name %>
+      <br>
+      <span class="hel-14">Response Rate: 98% </span></div>
+
+    <div id="user-details">
+      Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+      Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
     </div>
 
-
-    <div class="blue-box">
-      <div id="image-person">
-        <%= image_tag("missing_70.png") %>
-        <%= @location.user.first_name %> <%= "#{@location.user.last_name[0..0].capitalize}." if @location.user.last_name %>
-        <br>
-        <span class="hel-14">Response Rate: 98% </span></div>
-
-      <div id="user-details">
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-      </div>
-       
-      <div id="store-btn">
-        <%= link_to_function image_tag("contact-me.png", :border=>"0"), "$('#contact_me_div').toggle('slow');"  %>
-      </div>
-      <div style="float: left;width: 100%;margin-top: 10px;display: none;" id="contact_me_div">
-        <% remote_form_for "contact_me", :url => {:controller => "locations", :action => "send_contact_me_message"} , :html => {:id => "contact_me_form"}, :success => "$('#contact_me_div').toggle('slow');$('#contact_me').val('');" do %>
-          <span style="width: auto;float: left;">
-            <%= text_area_tag "contact_me" , "",:size => "26x3" %>
-          </span>
-          <div style="float: left;margin-top: 5px;">
-            <%= submit_tag "Send" %>
-          </div>
-        <% end %>
-      </div>      
+    <div id="store-btn">
+      <%= link_to_function image_tag("contact-me.png", :border=>"0"), "$('#contact_me_div').toggle('slow');"  %>
+    </div>
+    <div style="float: left;width: 100%;margin-top: 10px;display: none;" id="contact_me_div">
+      <% remote_form_for "contact_me", :url => {:controller => "locations", :action => "send_contact_me_message"} , :html => {:id => "contact_me_form"}, :success => "$('#contact_me_div').toggle('slow');$('#contact_me').val('');" do %>
+        <span style="width: auto;float: left;">
+          <%= text_area_tag "contact_me" , "",:size => "32x5" %>
+        </span>
+        <div style="float: left;margin-top: 5px;">
+          <%= submit_tag "Send" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

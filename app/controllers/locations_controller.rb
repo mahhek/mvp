@@ -1,6 +1,5 @@
 class LocationsController < ApplicationController
-  before_filter :require_user, :except => [:search_location, :save_requested_city,:new, :show ]
-  
+    
   def index
     @locations = current_user.locations 
   end
@@ -15,6 +14,8 @@ class LocationsController < ApplicationController
     conditions[:city] = params[:requested_city] unless params[:requested_city] == "Add My City!"
     conditions[:park_store] = params[:storage_menus] unless params[:storage_menus] == "Both"
     @locations = Location.find(:all, :conditions => conditions, :order => "price ASC")
+    @city = params[:requested_city]
+    @park_store = params[:park_store]
 
     @map = GMap.new("map")
     @map.control_init(:map_type => true, :small_zoom => true)
@@ -67,6 +68,9 @@ class LocationsController < ApplicationController
       flash[:notice] = "Location saved successfully!"
       redirect_to new_location_avatar_path(@location)
     else
+      @map = GMap.new("map")
+      @map.control_init(:map_type => true, :small_zoom => true)
+      @map.center_zoom_init([37.09, -95.71], 4)
       @features = Feature.all
       flash[:notice] = "Location was not saved successfully!"
       render :action => "new"

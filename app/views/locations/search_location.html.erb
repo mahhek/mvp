@@ -2,14 +2,14 @@
   <div style="margin: 10px;float: left;width: 100%;">
     <% form_tag "/locations/search_location" , {:id => "search_form"} do %>
       <span style="float: left;margin-left: 10px;">
-        <%= select_tag "requested_city",options_for_select([["Philadelphia" , "Philadelphia"],["New York" ,"New York"] , ["San Francisco", "San Francisco"], ["Add My City!","Add My City!"]]) %>
+        <%= select_tag "requested_city",options_for_select([["Philadelphia" , "Philadelphia"],["New York" ,"New York"] , ["San Francisco", "San Francisco"], ["Add My City!","Add My City!"]], @city) %>
       </span>
       <%= observe_field("requested_city", :on => :changed,
         :url => requested_city_path,
         :with => "requested_city")
     %>
       <span style="float: left;margin-left: 10px;">
-        <%= select_tag "storage_menus",options_for_select([["Parking" , "Parking"],["Storage" ,"Storage"] , ["Both", "Both"]]) %>
+        <%= select_tag "storage_menus",options_for_select([["Parking" , "Parking"],["Storage" ,"Storage"] , ["Both", "Both"]], @park_store) %>
       </span>
       <span style="float: left;margin-left: 10px;">
         <%= text_field_tag "request_date", "mm / dd / yy", :class => "calander-fields" %>
