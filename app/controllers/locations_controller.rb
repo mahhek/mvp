@@ -58,7 +58,7 @@ class LocationsController < ApplicationController
     @features = Feature.all
     @map = GMap.new("map")
     @map.control_init(:map_type => true, :small_zoom => true)
-    @map.center_zoom_init([37.09, -95.71], 5)
+    @map.center_zoom_init([37.09, -95.71], 3)
   end
 
   def create
