@@ -13,7 +13,7 @@ class LocationsController < ApplicationController
     query = "1=1"
     query = query + " AND start_date <= #{params[:request_date]}" unless params[:request_date].blank? or params[:request_date] == "mm / dd / yy"
     query = query + " AND city = '#{params[:requested_city]}' OR nearest_metro = '#{params[:requested_city]}'" unless params[:requested_city] == "Add My City!"
-    query = query + " AND park_store = #{params[:storage_menus]}" unless params[:storage_menus] == "Both"
+    query = query + " AND park_store = '#{params[:storage_menus]}'" unless params[:storage_menus] == "Both"
 
 
     @locations = Location.find(:all, :conditions => [query] , :order => "price ASC")
