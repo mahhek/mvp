@@ -17,6 +17,33 @@ class Location < ActiveRecord::Base
   belongs_to :locatable, :polymorphic => true
 
   before_save :geolocate_from_address
+  before_save :find_nearest_city
+
+  def find_nearest_city
+    self.nearest_metro = calculate_distance_and_get_city
+    puts "========================================================================="
+    puts self.nearest_metro.inspect
+    puts "========================================================================="    
+  end
+
+  def calculate_distance_and_get_city
+    if self.city != "Philadelphia" or self.city != "New York" or self.city != "San Francisco" or self.city != "Boston"
+
+      philadelphia = GoogleGeocoder.geocode('Philadelphia')
+      return "Philadelphia" if philadelphia.distance_from(self.city, :units => :miles) <= 25.to_f
+
+      new_york = GoogleGeocoder.geocode('New York')
+      return "New York" if new_york.distance_from(self.city, :units => :miles) <= 25.to_f
+
+      san_francisco = GoogleGeocoder.geocode('San Francisco')
+      return "San Francisco" if san_francisco.distance_from(self.city, :units => :miles) <= 25.to_f
+
+      boston = GoogleGeocoder.geocode('Boston')
+      return "Boston" if boston.distance_from(self.city, :units => :miles) <= 25.to_f
+      
+      return "Other"
+    end
+  end
 
   def geolocate_from_address
     
@@ -26,15 +53,6 @@ class Location < ActiveRecord::Base
       if self.address.to_s.strip.size > 0
         # find information related to address
         res = GoogleGeocoder.geocode(self.address)
-
-        #        p "===================================================================="
-        #        p res.inspect
-        #        p res.street_name.inspect
-        #        p res.street_number.inspect
-        #        p res.home.inspect
-        #        p "===================================================================="
-        #        x
-        # save related fields
         if(res)
           self.city = res.city
           self.county = res.province

@@ -21,17 +21,18 @@ body {
     float: right;
     height: 39px;
     padding-top: 28px;
-    padding-right: 10px;
-    width: 415px;
+    padding-right: 5px;
+    width: auto;
 }
 #links {
     font-size: 14px;
     color: #FFF;
     font-family: 'HelveticaLTStdFractions';
     height: 22px;
-    width: 300px;
+    width: auto;
     padding-top: 13px;
     float: left;
+    padding-right: 5px;
 }
 #nav #links a {
     float: left;

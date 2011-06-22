@@ -1,18 +1,18 @@
 <div style="float: left;width: 100%;">
-  <% remote_form_for "requested_city", :url => {:controller => "locations", :action => "save_requested_city"} , :html => {:id => "requested_city_form"}, :success => "setTimeout('hide_updated_msg()', 2500);" do %>
+  <% remote_form_for "other_requested_city", :url => {:controller => "locations", :action => "save_requested_city"} , :html => {:id => "other_requested_city_form"}, :success => "setTimeout('hide_updated_msg()', 2500);" do %>
     <span style="width: auto;float: left;">
-      <%= text_field_tag "request_city", "Please enter your zip code", :class => "calander-fields", :onclick => "if($(this).val() == 'Please enter your zip code'){$(this).val('');}", :onblur => "if($(this).val() == ''){$(this).val('Please enter your zip code');}", :style => "width:190px;" %>
+      <%= text_field_tag "other_request_city", "Please enter your zip code", :class => "calander-fields", :onclick => "if($(this).val() == 'Please enter your zip code'){$(this).val('');}", :onblur => "if($(this).val() == ''){$(this).val('Please enter your zip code');}", :style => "width:190px;" %>
     </span>
     <span style="width: auto;float: left;">
       <%= text_field_tag "email", "Please enter your email", :class => "calander-fields", :onclick => "if($(this).val() == 'Please enter your email'){$(this).val('');}", :onblur => "if($(this).val() == ''){$(this).val('Please enter your email');}", :style => "width:190px;margin-left:10px;" %>
     </span>
     <div id="small-find-button">
-      <a href="javascript:void(0);" onclick="$('#requested_city_form').submit();">
+      <a href="javascript:void(0);" onclick="$('#other_requested_city_form').submit();">
         Save
       </a>
     </div>
     <div id="small-find-button">
-      <a href="javascript:void(0);" onclick="$('#requested_city_div').hide('slow');">
+      <a href="javascript:void(0);" onclick="$('#other_requested_city_div').hide('slow');">
         Cancel
       </a>
     </div>    

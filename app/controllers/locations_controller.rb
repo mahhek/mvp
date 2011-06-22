@@ -9,13 +9,16 @@ class LocationsController < ApplicationController
   end
 
   def search_location
-    conditions = {}
-    conditions[:start_date] = "<= #{params[:request_date]}" unless params[:request_date].blank? or params[:request_date] == "mm / dd / yy"
-    conditions[:city] = params[:requested_city] unless params[:requested_city] == "Add My City!"
-    conditions[:park_store] = params[:storage_menus] unless params[:storage_menus] == "Both"
-    @locations = Location.find(:all, :conditions => conditions, :order => "price ASC")
-    @city = params[:requested_city]
-    @park_store = params[:park_store]
+    
+    query = "1=1"
+    query = query + " AND start_date <= #{params[:request_date]}" unless params[:request_date].blank? or params[:request_date] == "mm / dd / yy"
+    query = query + " AND city = '#{params[:requested_city]}' OR nearest_metro = '#{params[:requested_city]}'" unless params[:requested_city] == "Add My City!"
+    query = query + " AND park_store = #{params[:storage_menus]}" unless params[:storage_menus] == "Both"
+
+
+    @locations = Location.find(:all, :conditions => [query] , :order => "price ASC")
+    @city = params[:requested_city] unless params[:requested_city] == "Add My City!"
+    @park_store = params[:storage_menus]
 
     @map = GMap.new("map")
     @map.control_init(:map_type => true, :small_zoom => true)
@@ -38,10 +41,10 @@ class LocationsController < ApplicationController
   end
 
   def save_requested_city
-    if !params[:request_city].blank? and params[:request_city] != "Please enter your zip code"
-      RequestedCity.new(:name => params[:request_city], :email => params[:email]).save
+    if !params[:other_request_city].blank? and params[:other_request_city] != "Please enter your zip code"
+      RequestedCity.new(:name => params[:other_request_city], :email => params[:email]).save
       render :update do |page|
-        page["requested_city_div"].hide
+        page["other_requested_city_div"].hide
         page["requested_city_msg_div"].show
         page["requested_city_msg_div"].replace_html :text => "We will be in touch once we launch in your area."
       end
