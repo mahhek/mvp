@@ -5,78 +5,80 @@
 <div class="listx-bg">
   <% unless @locations.blank? %>
     <% @locations.each do | location | %>
-  <div class="listx">
-    <div class="imgx">
-    <% if location.avatars.size > 0 %>
-         <%= image_tag(location.avatars.first.photo.url(:thumb))  %>
-    <% end %>
-    </div>
-    <div class="name-list"><%= location.headline %></div>
-    <div class="manage-bg">
-      <div class="btns">
-        <%= link_to image_tag("edit-btn.png", :border => "0") , edit_location_path(location)%>
-        <%= link_to image_tag("preview-btn.png", :border => "0") , location_path(location)%>
-      </div>
-       <% if location.rent_status == "Available" %>
-        <div class="available-date">
-        <div class="availx-txt">Available on</div>
-        <div class="availx-field">
-                  <%= text_field_tag "location_#{location.id}_start_date", location.start_date, {:style=>"width:100px;", :readonly => true} %>
-                  <%= observe_field( "location_#{location.id}_start_date", :on => :changed,
-                    :url => update_start_date_path(location.id),
-                    :with => "location_#{location.id}_start_date",
-                    :success => "setTimeout('hide_updated_msg(#{location.id})', 2500);" )
-                %>
-                  <script>
-                    $(document).ready(function(){
-                      Date.firstDayOfWeek = 0;
-                      Date.format = 'yyyy-mm-dd';
-
-                      if($('#location_<%= location.id %>_start_date').val() == ""){
-                        $('#location_<%= location.id %>_start_date').datePicker({startDate:'1996-01-01'}).val(new Date().asString()).trigger('change');
-                      }else{
-                        $('#location_<%= location.id %>_start_date').datePicker({startDate:'1996-01-01'});
-                      }
-                    });
-                  </script>
+      <div class="listx">
+        <div class="imgx">
+          <% if location.avatars.size > 0 %>
+            <%= image_tag(location.avatars.first.photo.url(:thumb), :width => "115", :height => "81", :alt => "Sacpe-Photo")  %>
+          <% else %>
+            <%= image_tag("", :width => "115", :height => "81", :alt => "Sacpe-Photo")  %>
+          <% end %>
         </div>
-        <%#*<div class="btnx-calander"><img src="img/calander-2.png" width="31" height="29" alt="calander"></div>%>
-      </div>
-      <%else%>
-        <span style="float: left;color: red;">
-           Rented out!
-        </span>
-      <%end%>
+        <div class="name-list"><%= location.headline %></div>
+        <div class="manage-bg">
+          <div class="btns">
+            <%= link_to image_tag("edit-btn.png", :border => "0") , edit_location_path(location)%>
+            <%= link_to image_tag("preview-btn.png", :border => "0") , location_path(location)%>
+          </div>
+          <% if location.rent_status == "Available" %>
+            <div class="available-date">
+              <div class="availx-txt">Available on</div>
+              <div class="availx-field">
+                <%= text_field_tag "location_#{location.id}_start_date", location.start_date, {:style=>"width:100px;", :readonly => true} %>
+                <%= observe_field( "location_#{location.id}_start_date", :on => :changed,
+                  :url => update_start_date_path(location.id),
+                  :with => "location_#{location.id}_start_date",
+                  :success => "setTimeout('hide_updated_msg(#{location.id})', 2500);" )
+              %>
+                <script>
+                  $(document).ready(function(){
+                    Date.firstDayOfWeek = 0;
+                    Date.format = 'yyyy-mm-dd';
 
-      <div class="listingx">
-        <%= select_tag "location_status_#{location.id}", options_for_select([["Show Listing" , "Show Listign"],["Hide Listing" , "Hide Listign"]], location.location_status) , :style => "width:135px; border: 1px solid #AFAFAF;
+                    if($('#location_<%= location.id %>_start_date').val() == ""){
+                      $('#location_<%= location.id %>_start_date').datePicker({startDate:'1996-01-01',clickInput:true}).val(new Date().asString()).trigger('change');
+                    }else{
+                      $('#location_<%= location.id %>_start_date').datePicker({startDate:'1996-01-01',clickInput:true});
+                    }
+                  });
+                </script>
+              </div>
+      <%#*<div class="btnx-calander"><img src="img/calander-2.png" width="31" height="29" alt="calander"></div>%>
+            </div>
+          <%else%>
+            <span style="float: left;color: red;">
+              Rented out!
+            </span>
+          <%end%>
+
+          <div class="listingx">
+            <%= select_tag "location_status_#{location.id}", options_for_select([["Show Listing" , "Show Listign"],["Hide Listing" , "Hide Listign"]], location.location_status) , :style => "width:135px; border: 1px solid #AFAFAF;
     height: 26px;
     line-height: 26px;
     width: 195px;" %>
+          </div>
+          <span id="updated_location_msg_div_<%= location.id %>" style="float: left;display: none;color: darkcyan;margin: 3px;font-size:11px;">
+            Space Updated
+          </span>
+          <%= observe_field( "location_status_#{location.id}", :on => :changed,
+            :url => update_location_status_path(location.id),
+            :with => "location_status_#{location.id}",
+            :success => "setTimeout('hide_updated_msg(#{location.id})', 2500);" )
+        %>
+          <script type="text/javascript">
+            function hide_updated_msg(location_id){
+              jQuery('#updated_location_msg_div_'+location_id).animate({ opacity: 'hide' }, "slow");
+            }
+          </script>
+        </div>
       </div>
-       <span id="updated_location_msg_div_<%= location.id %>" style="float: left;display: none;color: darkcyan;margin: 3px;font-size:11px;">
-                Space Updated
-        </span>
-              <%= observe_field( "location_status_#{location.id}", :on => :changed,
-                :url => update_location_status_path(location.id),
-                :with => "location_status_#{location.id}",
-                :success => "setTimeout('hide_updated_msg(#{location.id})', 2500);" )
-            %>
-              <script type="text/javascript">
-                function hide_updated_msg(location_id){
-                  jQuery('#updated_location_msg_div_'+location_id).animate({ opacity: 'hide' }, "slow");
-                }
-              </script>
-    </div>
-  </div>
-  <%end%>
+    <%end%>
   <%else%>
-   You do not have any space to manage yet, please <%= link_to "Create new space", new_location_path %>
+    You do not have any space to manage yet, please <%= link_to "Create new space", new_location_path %>
   <%end%>
 </div>
 
 <div class="btn-bar">
   <a href="/locations/new">
-  <img src="/images/add-more-btn.png" width="116" height="45" alt="add more" border="0">
+    <img src="/images/add-more-btn.png" width="116" height="45" alt="add more" border="0">
   </a>
 </div>

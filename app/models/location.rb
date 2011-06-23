@@ -3,6 +3,7 @@ include Geokit::Geocoders
 class Location < ActiveRecord::Base
   has_and_belongs_to_many :features
   has_many :avatars, :dependent => :destroy
+  has_many :payments, :dependent => :destroy
   belongs_to :user
 
   validates_presence_of :address, :phone
@@ -14,8 +15,8 @@ class Location < ActiveRecord::Base
   def update_park_store
     self.park_store = self.storage_type == "Parking Space" ? "Parking" : "Storage"
   end
-  belongs_to :locatable, :polymorphic => true
 
+  belongs_to :locatable, :polymorphic => true
   before_save :geolocate_from_address
   before_save :find_nearest_city
 

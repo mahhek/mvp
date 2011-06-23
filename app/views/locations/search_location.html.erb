@@ -1,79 +1,85 @@
-<div style="background-color: lavender;border: 1px solid black;width: 100%;float: left;">
-  <div style="margin: 10px;float: left;width: 100%;">
-    <% form_tag "/locations/search_location" , {:id => "search_form"} do %>
-      <span style="float: left;margin-left: 10px;">
-        <%= select_tag "requested_city",options_for_select([["Philadelphia" , "Philadelphia"],["New York" ,"New York"] , ["San Francisco", "San Francisco"],["Boston", "Boston"], ["Add My City!","Add My City!"]], @city) %>
+<%= stylesheet_link_tag "search-list"%>
+
+<div id="get-list-header">
+  <% form_tag "/locations/search_location" , {:id => "search_form"} do %>
+    <div id="search-list">
+      <span style="float: left;">
+        Sort by:
       </span>
+      <%= select_tag "requested_city",options_for_select([["Philadelphia" , "Philadelphia"],["New York" ,"New York"] , ["San Francisco", "San Francisco"],["Boston", "Boston"], ["Add My City!","Add My City!"]], @city), :class => "listx-selectx" %>
       <%= observe_field("requested_city", :on => :changed,
         :url => requested_city_path,
         :with => "requested_city")
     %>
-      <span style="float: left;margin-left: 10px;">
-        <%= select_tag "storage_menus",options_for_select([["Parking" , "Parking"],["Storage" ,"Storage"] , ["Both", "Both"]], @park_store) %>
-      </span>
-      <span style="float: left;margin-left: 10px;">
-        <%= text_field_tag "request_date", "mm / dd / yy", :class => "calander-fields" %>
-      </span>
-      <span style="float: left;margin-left: 10px;margin-top: 5px;">
-        <a href="javascript:void(0);" onclick="$('#search_form').submit();">Find</a>
-      </span>
-      <script>
+
+      <%= select_tag "storage_menus",options_for_select([["Parking" , "Parking"],["Storage" ,"Storage"] , ["Both", "Both"]], @park_store), :class => "listx-selectx", :id => "search_storage_menus"  %>
+
+      <%= text_field_tag "request_date", "mm / dd / yy", :class => "calander-fields" %>
+      <script type="text/javascript">
         $(document).ready(function(){
           Date.firstDayOfWeek = 0;
           Date.format = 'mm / dd / yy';
           $('#request_date').datePicker({startDate:'01-01-1996',clickInput:true})
         });
       </script>
-    <% end %>
-    <div id="requested_city_div" style="float: left;margin-left: 10px;">
-    </div>
-    <div id="requested_city_msg_div" style="float: left;color: darkcyan;margin-left: 10px;">
-    </div>
-    <script type="text/javascript">
-      function hide_updated_msg(){
-        jQuery('#requested_city_msg_div').animate({ opacity: 'hide' }, "slow");
-      }
-    </script>
-  </div>
-</div>
-<div style="background-color: lavender;border: 1px solid black;width: 65%;float: left;margin-top: 10px;">
-  <% unless @locations.blank? %>
-    <% @locations.each do | location | %>
-      <div style="float: left;width: 100%;border-bottom: 1px solid silver;">
-        <div style="width: 100%;float: left;margin: 10px;">
-          <div style="float: left;width: 150px;">
-            <% if location.avatars.size > 0 %>
-              <%= image_tag(location.avatars.first.photo.url(:small)) %>
-            <% end %>
-          </div>
-          <div style="float: left;width: 365px;margin-left: 10px;">
-            <span style="float: left;width: 100%;font-size: 25px;margin-top: 5px;">
-              <span style="float: left;font-size: 25px;margin-top: 5px;">
-                <%= link_to location.headline, location_path(location) %>
-              </span>
-              <span style="float: right;font-size: 25px;margin-top: 5px;">
-                $<%= location.price.to_i %>
-              </span>
-            </span>
-            <span style="float: left;width: 100%;margin-top: 15px;">
-              <%= "#{location.street_name} #{location.region}  #{location.city}, #{location.zipcode}, #{location.country_code}" %>
-            </span>
-            <span style="float: left;width: 100%;margin-top: 15px;">
-              <%= location.storage_type %> for <%= location.accommodates %>
-            </span>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  <% else %>
-    <div style="float: left;width: 100%;margin: 20px;">
-      No Record Found! please <%= link_to "Create new space", new_location_path %>
+      <span style="float: left;margin-left: 10px;">
+        <a href="javascript:void(0);" onclick="$('#search_form').submit();">Find</a>
+      </span>
     </div>
   <% end %>
 </div>
-<% unless @map.blank? %>
-  <div id="map_div" style="float: left;width: 34%;margin: 0 auto;margin-top: 10px;margin-left: 5px;">
-    <%= @map.div(:width => 290, :height => 300) %>
-  </div>
-<%end%>
+<div id="requested_city_msg_div" class="extra_city_div" style="height: 30px;padding-top: 5px;">
+</div>
+<div id="other_requested_city_div" class="extra_city_div" >
+</div>
+<script type="text/javascript">
+  function hide_updated_msg(){
+    jQuery('#requested_city_msg_div').animate({ opacity: 'hide' }, "slow");
+  }
+</script>
 
+
+<div class="result123">
+  <% unless @locations.blank? %>
+    <% @locations.each do | location | %>
+      <div class="resultx">
+        <a href="#"></a>
+        <div class="result-img">
+          <a href="#">
+            <% if location.avatars.size > 0 %>
+              <%= image_tag(location.avatars.first.photo.url(:small), :border => "0", :height => "86", :width => "106", :alt => "space") %>
+            <% end %>
+          </a>
+        </div>
+        <div class="resultx-detail">
+          <div class="resultx-heading"><%= link_to location.headline, location_path(location) %></div>
+          <div class="resultx-details"><%= "#{location.street_name} #{location.region}  #{location.city}, #{location.zipcode}, #{location.country_code}" %><br/>
+            <%= location.storage_type %> for <%= location.accommodates %></div>
+          <div class="aplus">
+            <div class="marks">A+</div>
+            <div class="icon-small"><img height="31" width="34" alt="" src="/images/small-icon.png"/></div>
+          </div>
+        </div>
+        <div class="pricex">$<%= location.price.to_i %></div>
+      </div>
+    <% end  %>
+  <% else %>
+    <div class="extra_city_div" style="height: 30px;padding-top: 5px;">
+      No Record Found! please <%= link_to "Create new space", new_location_path %>
+    </div>
+  <% end %>
+
+  <div id="page-navigator">
+    <div id="p-button"><a href="#">Previous</a></div>
+    <div id="bg-page-select">
+      <a class="active" href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">-</a> <a href="#">-</a> <a href="#">-</a> <a href="#">99</a></div>
+    <div id="p-button"><a href="#">Next</a></div>
+  </div>
+
+</div>
+
+<div id="right-map">
+  <div id="map-display">
+    <%= @map.div(:width => 270, :height => 300) %>
+  </div>
+</div>

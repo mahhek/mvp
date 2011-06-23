@@ -100,7 +100,7 @@ body {
     float: left;
     padding-top: 10px;
 }
-#requested_city {
+.requested_city {
     height: 38px;
     width: 292px;
     border: 1px solid #afafaf;
@@ -168,6 +168,7 @@ body {
     padding-right: 5px;
     padding-left: 5px;
     float: left;
+    margin-left: 5px;
 }
 #calander-icon {
     float: left;
@@ -178,7 +179,7 @@ body {
 #space-field {
     float: right;
     height: 28px;
-    padding-left: 30px;
+    padding-left: 28px;
     width: 200px;
 }
 #storage_menus {

@@ -1,4 +1,5 @@
-<% form_for @user do |f| %>
+<% form_for @user, :html => {:multipart => true, :name => "user_edit_form"} do |f| %>
+
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -11,42 +12,81 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <div class="field-label">
-      <%= f.label :username %>
-    </div>
-    <div class="field-field">
-      <%= f.text_field :username %>
-    </div>
+
+
+  <div id="get-list-header">Can we get to know you?</div>
+
+  <div id="left-photo">
+    <% unless @user.photo_file_name.nil? %>
+      <div id="photo">
+        <%= image_tag(@user.photo.url(:medium) )%>
+      </div>
+    <% else %>
+      <%= f.file_field :photo, :size => "16" %>
+      <div id="upload-button">
+        <a href="#">
+          <img border="0" width="152" height="35" alt="upload photo" src="/images/upload-photo-button.png"/>
+        </a>
+      </div>
+    <% end %>
   </div>
-  <div class="field">
-    <div class="field-label">
-      <%= f.label :email %>
+
+  <div id="gray-box">
+
+    <div class="bg-fields">
+      <div class="txt">Name:</div>
+      <div class="field-x">
+        <%= f.text_field :first_name, :class => "name" %>
+        <%= f.text_field :last_name, :class => "name" %>
+      </div>
     </div>
-    <div class="field-field">
-      <%= f.text_field :email %>
+
+    <div class="bg-fields">
+      <div class="txt">Email:</div>
+      <div class="field-x">
+        <%= f.text_field :email, :class => "large-fields" %>
+      </div>
     </div>
-  </div>
-  <div class="field">
-    <div class="field-label">
-      <%= f.label :password %>
+
+    <div class="bg-fields">
+      <div class="txt">Zip Code:</div>
+      <div class="field-x">
+        <%= f.text_field :zip_code, :class => "large-fields" %>
+      </div>
     </div>
-    <div class="field-field">
-      <%= f.password_field :password %>
+
+    <div class="bg-fields">
+      <div class="txt">Phone:</div>
+      <div class="field-x">
+        <%= f.text_field :phone_number, :class => "large-fields" %>
+      </div>
+    </div>
+
+    <div class="bg-fields">
+      <div class="txt">Occupation:</div>
+      <div class="field-x">
+        <%= f.text_field :occupation, :class => "large-fields" %>
+      </div>
+    </div>
+
+    <div class="bg-fields">
+      <div class="txt">Schools Attended:</div>
+      <div class="field-x">
+        <%= f.text_field :school_attended, :class => "large-fields" %>
+      </div>
+    </div>
+
+
+    <div id="details"><br/>
+      Anything you want to share with folks?<br/><br/>
+      <%= f.text_area :share, :class => "details-person" %>
+      <br/><br/>
+      <a href="javascript:void(0);">
+        <img border="0" align="right" width="71" height="38" alt="save-button" src="/images/save-button.png" onclick="user_edit_form.submit();"/>
+      </a>
     </div>
   </div>
 
-  <div class="field">
-    <div class="field-label">
-      <%= f.label :password_confirmation %>
-    </div>
-    <div class="field-field">
-      <%= f.password_field :password_confirmation %>
-    </div>
-  </div>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>
 

@@ -1,0 +1,33 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  location_id: 1
+  user_id: 1
+  name: MyString
+  email: MyString
+  cc_number: MyString
+  billing_address: MyString
+  city: MyString
+  state: MyString
+  zip_code: MyString
+  expire_day: MyString
+  expire_month: MyString
+  security_code: MyString
+  phone_number: MyString
+  hear_about_us: MyString
+
+two:
+  location_id: 1
+  user_id: 1
+  name: MyString
+  email: MyString
+  cc_number: MyString
+  billing_address: MyString
+  city: MyString
+  state: MyString
+  zip_code: MyString
+  expire_day: MyString
+  expire_month: MyString
+  security_code: MyString
+  phone_number: MyString
+  hear_about_us: MyString

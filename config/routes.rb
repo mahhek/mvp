@@ -6,6 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   map.update_start_date "/location/update/start_date/:id", :controller => "locations", :action => "update_start_date"
   map.resources :locations do|location|
     location.resources :avatars
+    location.resources :payments
   end
 
   map.user_create "/user/create", :controller => 'users', :action => 'create'
@@ -17,7 +18,7 @@ ActionController::Routing::Routes.draw do |map|
   map.new_create '/user/create', :controller => 'users', :action => 'new_create'
   map.homepage '/homepage', :controller => "welcome", :action => "homepage"
   map.requested_city '/new/requested_city', :controller => "welcome", :action => "new_requested_city"
-
+  
   map.activate_account '/activate/:activation_code', :controller => 'users', :action => 'activate'
   map.send_activation 'send_activation(/:user_id)' , :controller => 'users', :action => 'send_activation'
   map.forgot_password 'forgot_password', :controller => 'user_sessions', :action => 'forgot_password'

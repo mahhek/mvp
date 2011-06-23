@@ -28,7 +28,7 @@
             <%= link_to "Register", :controller => "welcome", :action => "signup_and_signin", :id => "signup" , :style => "border-radius: none;" %>
             <%= link_to "Sign in", :controller => "welcome", :action => "signup_and_signin", :id => "signin"  %>
           <%else%>
-            <%= link_to "Hello #{current_user.first_name}", "#" %>
+            <%= link_to "Hello #{current_user.first_name}", edit_user_path(current_user) %>
             <%= link_to "Logout", user_session_path(current_user), :method => :delete %>
           <% end %>
           <a href="/welcome/tell_more">Tell Me More</a>

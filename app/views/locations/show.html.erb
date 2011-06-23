@@ -1,7 +1,12 @@
 <%= stylesheet_link_tag "get-list"%>
 <div id="get-list-header">
   <div id="lisit-txt"><%= @location.headline %><br>
-    <span class="hel-14"><%= @location.storage_type %> for <%= @location.accommodates %>&nbsp;|&nbsp;<%= "#{@location.street_name} #{@location.region}  #{@location.city}, #{@location.zipcode}, #{@location.country_code}" %></span> </div>
+    <span class="hel-14">
+      <%= @location.storage_type %> for <%= @location.accommodates %>
+      &nbsp;|&nbsp;
+      <%= "#{@location.street_name} #{@location.region}  #{@location.city}, #{@location.zipcode}, #{@location.country_code}" %>
+    </span>
+  </div>
 </div>
 <div id="left-side">
   <div class="left-gray">
@@ -29,7 +34,11 @@
     <div id="about-header">
       <div id="aboout-txt"> About this Space</div>
       <div id="a1">A+</div>
-      <div id="btn"><a href="#"><img src="/images/btn.png" alt="btn" width="44" height="41" border="0"></a></div>
+      <div id="btn">
+        <a href="#">
+          <img src="/images/btn.png" alt="btn" width="44" height="41" border="0">
+        </a>
+      </div>
     </div>
     <div id="space-details-txt">
       <%=h @location.description %>
@@ -71,21 +80,28 @@
           Date.format = 'yyyy-mm-dd';
 
           if($('#offer_date').val() == ""){
-            $('#offer_date').datePicker({startDate:'1996-01-01'}).val(new Date().asString()).trigger('change');
+            $('#offer_date').datePicker({startDate:'1996-01-01',clickInput:true}).val(new Date().asString()).trigger('change');
           }else{
-            $('#offer_date').datePicker({startDate:'1996-01-01'});
+            $('#offer_date').datePicker({startDate:'1996-01-01',clickInput:true});
           }
         });
       </script>
 
     </div>
-    <div id="store-btn"><a href="#"><img src="/images/store-btn.png" alt="store now" width="71" height="34" border="0"></a></div>
+    <div id="store-btn">
+      <%= link_to(image_tag("store-btn.png", :alt => "Store now", :width => "71", :height => "34", :border => "0"), new_location_payment_path(@location)) %>
+    </div>
   </div>
 
 
   <div class="blue-box">
+
     <div id="image-person">
-      <%= image_tag("missing_70.png") %>
+      <% unless @location.user.photo_file_name.nil? %>
+        <%= image_tag(@location.user.photo.url(:thumb), :width => "66", :height => "56", :alt => "Seller-Image" )%>
+      <% else %>
+        <%= image_tag("missing_70.png") %>
+      <% end %>
       <%= @location.user.first_name %> <%= "#{@location.user.last_name[0..0].capitalize}." if @location.user.last_name %>
       <br>
       <span class="hel-14">Response Rate: 98% </span></div>

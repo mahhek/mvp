@@ -3,7 +3,7 @@
     <div id="main-text">Storage and parking with real people just like you.</div>
     <div id="country-field">
       <div id="select-country">
-        <%= select_tag "requested_city",options_for_select([["Philadelphia" , "Philadelphia"],["New York" ,"New York"] , ["San Francisco", "San Francisco"],["Boston", "Boston"],  ["Add My City!","Add My City!"]]) %>
+        <%= select_tag "requested_city",options_for_select([["Philadelphia" , "Philadelphia"],["New York" ,"New York"] , ["San Francisco", "San Francisco"],["Boston", "Boston"],  ["Add My City!","Add My City!"]]), :class => :requested_city %>
       </div>
       <%= observe_field("requested_city", :on => :changed,
         :url => requested_city_path,
@@ -18,7 +18,7 @@
         $(document).ready(function(){
           Date.firstDayOfWeek = 0;
           Date.format = 'mm / dd / yy';
-          $('#request_date').datePicker({startDate:'01-01-1996'})
+          $('#request_date').datePicker({startDate:'01-01-1996',clickInput:true})
         });
       </script>
       <div>
@@ -47,7 +47,8 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $('.slideshow').cycle({
-      fx: 'fade' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+      fx: 'fade',
+      random:true
     });
   });
 </script>

@@ -22,6 +22,7 @@ class WelcomeController < ApplicationController
         page[:other_requested_city_div].show
         page[:other_requested_city_div].replace_html :partial => "requested_city"
       else
+        page[:other_requested_city_div].hide
         page[:other_requested_city_div].replace_html ""
       end
     end

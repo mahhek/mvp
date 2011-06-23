@@ -142,9 +142,9 @@
           Date.format = 'yyyy-mm-dd';
 
           if($('#location_start_date').val() == ""){
-            $('#location_start_date').datePicker({startDate:'1996-01-01'}).val(new Date().asString()).trigger('change');
+            $('#location_start_date').datePicker({startDate:'1996-01-01',clickInput:true}).val(new Date().asString()).trigger('change');
           }else{
-            $('#location_start_date').datePicker({startDate:'1996-01-01'});
+            $('#location_start_date').datePicker({startDate:'1996-01-01',clickInput:true});
           }
         });
       </script>

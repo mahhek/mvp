@@ -1,0 +1,167 @@
+<%= stylesheet_link_tag "r-payment"%>
+<div id="get-list-header">Reservation Payment</div>
+
+<div class="gray-bg">
+  <div class="number-bg">
+    <div class="numberx">1</div>
+    <div class="headingx">What's Next?</div>
+  </div>
+  <div class="r-payment-details">
+    <div id="next-detailx">You are about to request a trusted storage or parking space. Fill your billing details below to submit this request to your seller. you will not be charged unless the seller accepts  your request with in 24 hours.</div>
+  </div>
+</div>
+
+<div class="gray-bg">
+  <div class="number-bg">
+    <div class="numberx">2</div>
+    <div class="headingx">About Your Space</div>
+  </div>
+  <div class="r-payment-details">
+    <div class="result-img">
+      <a href="#">
+        <% if @location.avatars.size > 0 %>
+          <%= image_tag(@location.avatars.first.photo.url(:small), :border => "0", :height => "86", :width => "106" )%>
+        <% end %>
+      </a>
+    </div>
+    <div class="resultx-detail">
+      <div class="resultx-heading"><%= @location.headline %></div>
+      <div class="resultx-details"><%= "#{@location.street_name} #{@location.region}  #{@location.city}, #{@location.zipcode}, #{@location.country_code}" %><br>
+        <%= @location.storage_type %> for <%= @location.accommodates %></div>
+      <div class="aplus">
+        <div class="marks">Seller will help you unload<br/>
+          Consider bringing a friend</div>
+        <div class="icon-small">
+          <a href="#">
+            <img border="0" height="31" width="34" alt="" src="/images/small-icon.png" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="gray-bg">
+  <div class="number-bg">
+    <div class="numberx">3</div>
+    <div class="headingx">Review Your Charges</div>
+  </div>
+  <div class="r-payment-details">
+    <div id="form-price">
+      <div class="white-bg">
+        <div class="n-price">Starting On:</div>
+        <div class="p-price"><%= @location.start_date.strftime("%b %d %y") %></div>
+      </div>
+
+      <div class="white-bg2">
+        <div class="n-price">Monthly Rate:</div>
+        <div class="p-price">$<%= @location.price %></div>
+      </div>
+
+      <div class="white-bg">
+        <div class="n-price">Subtotal:</div>
+        <% sub_total = @location.price + 0 %>
+        <div class="p-price">$<%= sub_total %>  </div>
+      </div>
+
+      <div class="white-bg2">
+        <div class="n-price">Service Fee:</div>
+        <% service_fee = sub_total * Commission.first.buyer %>
+        <div class="p-price">$<%= service_fee %></div>
+      </div>
+
+      <div class="white-bg">
+        <div class="n-price">Total:</div>
+        <% total = sub_total + service_fee %>
+        <div class="p-price">$<%= total %></div>
+      </div>
+    </div>
+    <div id="monthly-charges-txt">This will be your monthly Charge.</div>
+  </div>
+</div>
+
+<div class="gray-bg">
+  <div class="number-bg">
+    <div class="numberx">4</div>
+    <div class="headingx">Important Information</div>
+  </div>
+  <div class="r-payment-details">
+
+    <div id="form-price">
+
+      <div class="white-bglarge">
+        <div class="n-pricelarge">Cancellation:</div>
+        <div class="p-pricelarge">Cancel by March 31 2010 5PM EST</div>
+      </div>
+
+      <div class="white-bg2large">
+        <div class="n-pricelarge">Move Out Notice:</div>
+        <div class="p-pricelarge">7 days before move out</div>
+      </div>
+
+      <div class="white-bglarge">
+        <div class="n-pricelarge">Owner's Rules:</div>
+        <div class="p-pricelarge">Click here for owner's message</div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+<div class="gray-bg">
+  <div class="number-bg">
+    <div class="numberx">5</div>
+    <div class="headingx">Payment</div>
+  </div>
+  <% form_for([@location,@payment], :html => { :name => "payment_form"} ) do |f| %>
+    <%= f.hidden_field :user_id, :value => current_user.id if current_user%>
+    <%= f.hidden_field :amount, :value => total  %>
+    <div class="r-payment-details">
+      <div id="billing-bg">
+        <%= f.text_field :name, :class => "b-address"  %>
+        <%= f.text_field :email, :class => "b-address"  %>
+        <br/><br/>
+        Billing Address:<br/>
+        <%= f.text_field :billing_address, :class => "b-address"  %>
+        <%= f.text_field :city, :class => "b-address-m" %>
+        <%= f.text_field :state, :class => "b-address-s" %>
+        <%= f.text_field :zip_code, :class => "b-address-xs" %>
+        <br/><br/>
+        <%= f.text_field :phone_number, :class => "b-address" %>
+        <%= f.text_field :hear_about_us, :class => "b-address" %>
+        <br/><br/>
+        <a href="javascript:void(0);">
+          <img border="0" height="40" width="184" alt="Reserve your space" src="/images/reserve-your-space-button.png" onclick="payment_form.submit();"/>
+        </a>
+        <br/>
+        <span class="hel-14">You will not be charged until the owner accepts your offer. </span></div>
+
+
+      <div id="right-card">
+        <img height="22" width="189" alt="Credits Cards" src="/images/cards.png" /><br/>
+        <%= f.text_field :cc_number, :class => "b-address" %>
+        <br/>
+        <br/>
+
+        Expires on: <br/>
+
+        <%= month_select_for(:payment, :expire_month) %>
+        &nbsp;
+
+        <%= year_select_for(:payment, :expire_year) %>
+        &nbsp;
+
+        <%= f.text_field :security_code, :class => "b-address-m",:style => "margin-top:5px;" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#payment_expire_month').addClass("b-address-s")
+    $('#payment_expire_year').addClass("b-address-xs")
+  });
+</script>

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110621214453) do
+ActiveRecord::Schema.define(:version => 20110623152000) do
 
   create_table "avatars", :force => true do |t|
     t.string   "caption"
@@ -18,6 +18,13 @@ ActiveRecord::Schema.define(:version => 20110621214453) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "commissions", :force => true do |t|
+    t.float    "buyer"
+    t.float    "seller"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -68,6 +75,26 @@ ActiveRecord::Schema.define(:version => 20110621214453) do
     t.string   "nearest_metro"
   end
 
+  create_table "payments", :force => true do |t|
+    t.integer  "location_id"
+    t.integer  "user_id"
+    t.float    "amount"
+    t.string   "name"
+    t.string   "email"
+    t.string   "cc_number"
+    t.string   "billing_address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip_code"
+    t.string   "expire_month"
+    t.string   "expire_year"
+    t.string   "security_code"
+    t.string   "phone_number"
+    t.string   "hear_about_us"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "requested_cities", :force => true do |t|
     t.string   "name"
     t.integer  "user_id"
@@ -107,6 +134,14 @@ ActiveRecord::Schema.define(:version => 20110621214453) do
     t.string   "last_login_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "zip_code"
+    t.string   "phone_number"
+    t.string   "occupation"
+    t.string   "school_attended"
+    t.string   "share"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.string   "photo_file_size"
   end
 
 end

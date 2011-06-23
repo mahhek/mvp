@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  buyer: 1.5
+  seller: 1.5
+
+two:
+  buyer: 1.5
+  seller: 1.5

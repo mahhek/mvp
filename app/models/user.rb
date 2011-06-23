@@ -8,8 +8,14 @@ class User < ActiveRecord::Base
 
   end
 
+
   has_and_belongs_to_many :roles
   has_many :locations, :order => "created_at DESC"
+  has_many :payments, :dependent => :destroy
+  has_attached_file :photo, :styles => { :medium => "212x182#", :thumb => '100x100#', :tiny => "30x30#" },
+    :storage => :s3,
+    :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
+    :path => "/:style/:id/:filename"
 
   def role?(role)
     return !!self.roles.find_by_name(role.to_s.camelize)
