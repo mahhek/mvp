@@ -55,25 +55,25 @@
 
       <div class="white-bg2">
         <div class="n-price">Monthly Rate:</div>
-        <div class="p-price">$<%= @location.price %></div>
+        <div class="p-price">$<%= number_with_precision(@location.price.to_f, :precision => 2) %></div>
       </div>
 
       <div class="white-bg">
         <div class="n-price">Subtotal:</div>
         <% sub_total = @location.price + 0 %>
-        <div class="p-price">$<%= sub_total %>  </div>
+        <div class="p-price">$<%= number_with_precision(sub_total.to_f, :precision => 2) %>  </div>
       </div>
 
       <div class="white-bg2">
         <div class="n-price">Service Fee:</div>
         <% service_fee = sub_total * Commission.first.buyer %>
-        <div class="p-price">$<%= service_fee %></div>
+        <div class="p-price">$<%= number_with_precision(service_fee.to_f, :precision => 2) %> %</div>
       </div>
 
       <div class="white-bg">
         <div class="n-price">Total:</div>
         <% total = sub_total + service_fee %>
-        <div class="p-price">$<%= total %></div>
+        <div class="p-price" style="font-weight: bold;">$<%= number_with_precision(total.to_f, :precision => 2) %></div>
       </div>
     </div>
     <div id="monthly-charges-txt">This will be your monthly Charge.</div>

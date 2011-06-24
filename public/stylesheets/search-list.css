@@ -70,7 +70,7 @@
 }
 #right-map {
     padding-right: 50px;
-    height: 215px;
+    height: auto;
     width: 224px;
     float: right;
     padding-top: 25px;

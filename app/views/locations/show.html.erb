@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag "get-list"%>
 <div id="get-list-header">
-  <div id="lisit-txt"><%= @location.headline %><br>
+  <div id="lisit-txt"><%= @location.headline %><br/>
     <span class="hel-14">
       <%= @location.storage_type %> for <%= @location.accommodates %>
       &nbsp;|&nbsp;
@@ -69,7 +69,7 @@
     <div id="price-x"><span class="font-24">$<%= @location.price.to_i %></span> per month</div>
 
     <div class="date-set">
-      <div style="float:left">
+      <div style="float:left;margin-right: 5px;">
         Starting on
       </div>
       <%= text_field_tag "offer_date","" ,{:size => "15"}  %>
@@ -103,12 +103,11 @@
         <%= image_tag("missing_70.png") %>
       <% end %>
       <%= @location.user.first_name %> <%= "#{@location.user.last_name[0..0].capitalize}." if @location.user.last_name %>
-      <br>
+      <br/>
       <span class="hel-14">Response Rate: 98% </span></div>
 
     <div id="user-details">
-      Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-      Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+      <%= @location.user.share %>
     </div>
 
     <div id="store-btn">

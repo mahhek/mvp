@@ -26,7 +26,7 @@ class UserSessionsController < ApplicationController
       if @user_session.save
         flash[:notice] = "Login successful !"
         render :update do |page|
-          page << "window.location='/homepage'"
+          page << "window.location='/'"
         end
       else
         render :update do |page|

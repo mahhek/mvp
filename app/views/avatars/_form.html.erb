@@ -1,62 +1,62 @@
 <%= stylesheet_link_tag "add-image"%>
 
-  <div id="get-list-header">
-    <div class="white-button">
-      <%= link_to "Details", edit_location_path(@location) %>
-    </div>
-    <div class="white-button">
-      <%= link_to "Photos", "#" %>
-    </div>
-    <div class="white-button">
-      <%= link_to "Preview", location_path(@location) %>
-    </div>
-    <div id="select-lisiting">
-      <%= select_tag "location_status", options_for_select([["Show Listing" , "Show Listign"],["Hide Listing" , "Hide Listign"]]) , :style => "width:250px;" %>
-    </div>
+<div id="get-list-header">
+  <div class="white-button">
+    <%= link_to "Details", edit_location_path(@location) %>
   </div>
+  <div class="white-button">
+    <%= link_to "Photos", "#" %>
+  </div>
+  <div class="white-button">
+    <%= link_to "Preview", location_path(@location) %>
+  </div>
+  <div id="select-lisiting" style="display: none;">
+    <%= select_tag "location_status", options_for_select([["Show Listing" , "Show Listign"],["Hide Listing" , "Hide Listign"]]) , :style => "width:250px;" %>
+  </div>
+</div>
 
-  <div id="lisit-name"><%= @avatar.location.headline %></div>
+<div id="lisit-name"><%= @avatar.location.headline %></div>
 
-  <div id="show-thumbnail">
+<div id="show-thumbnail">
+  <% unless @avatar.new_record? %>
+    <div id="thumbnail">
+      <%= image_tag(@avatar.photo.url(:thumb) )%>
+    </div>
+    <div id="thumbnail-txt">Your listing thumbnail</div>
+  <%end%>
+</div>
+<div id="thumnail-details">
+  <span class="familar-photo">Photos</span>
+  <br/>
+  <br/>
+  <span class="gray-14">gif / jpeg / png acceptable</span>
+  <br/>
+  <br/>
+  <% if @avatar.new_record? %>
+    <%= f.file_field :photo %>
+    <br/>
+    <br/>
+    <%= f.text_field :caption, :value => 'Give this photo a caption' %>
+  <%else%>
+    <br/>
+    <br/>
+    <%= image_tag(@avatar.photo.url(:large) )%>
+    <br/>
     <% unless @avatar.new_record? %>
-      <div id="thumbnail">
-        <%= image_tag(@avatar.photo.url(:thumb) )%>
-      </div>
-      <div id="thumbnail-txt">Your listing thumbnail</div>
-    <%end%>
-  </div>
-  <div id="thumnail-details">
-    <span class="familar-photo">Photos</span>
+      <br/>
+      <%= @avatar.caption %>
+    <% end %>
     <br/>
     <br/>
-    <span class="gray-14">gif / jpeg / png acceptable</span>
-    <br/>
-    <br/>
-    <% if @avatar.new_record? %>
-      <%= f.file_field :photo %>
-      <br/>
-      <br/>
-      <%= f.text_field :caption, :value => 'Give this photo a caption' %>
-    <%else%>
-      <br/>
-      <br/>
-      <%= image_tag(@avatar.photo.url(:large) )%>
-      <br/>
-      <% unless @avatar.new_record? %>
-        <br/>
-        <%= @avatar.caption %>
-      <% end %>
-      <br/>
-      <br/>
-      <%= link_to "Delete photo & caption", location_avatar_path(@location,@avatar), :method => :delete, :confirm => "Are you sure?" %>
-    <%end%>
-    <br/>
-    <br/>
-    <br/>
-    <% if @avatar.new_record? %>
-      <a href="javascript:void(0);">
-        <img src="/images/save.png" alt="save all" width="68" height="35" border="0" onclick="space_form.submit();"/>
-      </a>
-    <%end%>
-  </div>
+    <%= link_to "Delete photo & caption", location_avatar_path(@location,@avatar), :method => :delete, :confirm => "Are you sure?" %>
+  <%end%>
+  <br/>
+  <br/>
+  <br/>
+  <% if @avatar.new_record? %>
+    <a href="javascript:void(0);">
+      <img src="/images/save.png" alt="save all" width="68" height="35" border="0" onclick="space_form.submit();"/>
+    </a>
+  <%end%>
+</div>
 

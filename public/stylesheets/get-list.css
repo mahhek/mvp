@@ -27,6 +27,8 @@
     color: #666;
     line-height: 8px;
     text-shadow: 0 1px 0px rgba(255,255,255,1.0);
+    padding-top: 12px;
+    float: left;
 }
 .hel-11 {
     font-family: HelveticaLTStdFractions;
@@ -380,7 +382,7 @@
     font-family: HelveticaLTStdFractions;
     float: left;
     height: 30px;
-    width: 245px;
+    width: 250px;
     font-size: 14px;
     color: #1d1d1f;
     line-height: 30px;

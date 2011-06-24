@@ -10,7 +10,7 @@ class AvatarsController < ApplicationController
   def create    
     @avatar = @location.avatars.build(params[:avatar])
     if @avatar.save
-      @location.update_attribute("location_status", params[:location_status])
+#      @location.update_attribute("location_status", params[:location_status])
       return redirect_to edit_location_avatar_path(@location,@avatar)
     else
       flash[:notice] = "unable to save photo!"

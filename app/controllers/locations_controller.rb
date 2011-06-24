@@ -12,7 +12,7 @@ class LocationsController < ApplicationController
     
     query = "1=1"
     query = query + " AND start_date <= #{params[:request_date]}" unless params[:request_date].blank? or params[:request_date] == "mm / dd / yy"
-    query = query + " AND city = '#{params[:requested_city]}' OR nearest_metro = '#{params[:requested_city]}'" unless params[:requested_city] == "Add My City!"
+    query = query + " AND ( city = '#{params[:requested_city]}' OR nearest_metro = '#{params[:requested_city]}' ) " unless params[:requested_city] == "Add My City!"
     query = query + " AND park_store = '#{params[:storage_menus]}'" unless params[:storage_menus] == "Both"
 
 
@@ -29,8 +29,12 @@ class LocationsController < ApplicationController
         [sorted_latitudes.first, sorted_longitudes.first],
         [sorted_latitudes.last, sorted_longitudes.last]])
 
-    if @locations.size <= 1
+    if @locations.size == 1
       @map.center_zoom_init([sorted_latitudes.first, sorted_longitudes.first], 15)
+    end
+
+    if @locations.size == 0
+      @map.center_zoom_init([40.71435, -74.00597], 12)
     end
 
 
