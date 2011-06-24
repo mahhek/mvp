@@ -26,11 +26,19 @@ class UserSessionsController < ApplicationController
       if @user_session.save
         flash[:notice] = "Login successful !"
         render :update do |page|
-          page << "window.location='/'"
+          if session[:return_to]
+            if session[:return_to] == "/locations"
+              session[:return_to] = "/locations/new"
+            end
+            page << "window.location='#{session[:return_to]}'"
+            session[:return_to] = nil
+          else
+            page << "window.location='/'"
+          end
         end
       else
         render :update do |page|
-#          page["signup-heading"].hide
+          #          page["signup-heading"].hide
           page["signup-heading"].replace_html :partial => "welcome/errors", :locals => {:object => @user_session}
         end
       end

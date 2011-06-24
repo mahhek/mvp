@@ -1,4 +1,6 @@
 class LocationsController < ApplicationController
+
+  before_filter :require_user, :only => [:create]
     
   def index
     @locations = current_user.locations 

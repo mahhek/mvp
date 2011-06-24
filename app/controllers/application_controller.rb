@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
     unless current_user
       store_location
       flash[:error] = "You must be logged in to access this page"
-      redirect_to "/"
+      redirect_to "/welcome/signup_and_signin"
       return false
     end
   end
@@ -56,13 +56,13 @@ class ApplicationController < ActionController::Base
     if current_user
       store_location
       flash[:error] = "You must be logged out to access this page"
-      redirect_to account_url
+      redirect_to "/"
       return false
     end
   end
 
   def store_location
-    session[:return_to] = request.request_uri unless request.xhr?
+    session[:return_to] = request.request_uri 
   end
 
   def redirect_back_or_default(default)
