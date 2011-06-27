@@ -8,7 +8,7 @@ class Notifier < ActionMailer::Base
   end
 
   def activation_instructions(user)
-    from          "GoneRenting <noreply@gonerenting.com>"
+    from          "Storably <noreply@storably.com>"
 
     @account_activation_url = activate_account_url(user.perishable_token)
 
@@ -22,7 +22,7 @@ class Notifier < ActionMailer::Base
   end
   
   def activation_confirmation(user)
-    from          "GoneRenting <noreply@gonerenting.com>"
+    from          "Storably <noreply@storably.com>"
     subject       "Activation Confirmation"
     recipients    user.email
     sent_on       Time.now
@@ -33,10 +33,11 @@ class Notifier < ActionMailer::Base
   def forgot_password(user)
 
     subject       "Password Reset Instructions"
-    from          "GoneRenting <noreply@gonerenting.com>"
+    from          "Storably <noreply@storably.com>"
     recipients    user.email
     sent_on       Time.now
-    body          :reset_password_link => reset_password_url(user.perishable_token)
+    body          :reset_password_link => "http://#{SITE_URL}/reset_password/#{user.perishable_token}"
+      
   end
 
 end

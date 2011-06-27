@@ -64,7 +64,7 @@ class UsersController < ApplicationController
     @user.active = true
     if @user.update_attributes(params[:user].merge({:active => true}))
       flash[:notice] = "Successfully reset password."
-      redirect_to @user
+      redirect_to edit_user_path(@user)
     else
       flash[:notice] = "There was a problem resetting your password."
       render :action => :reset_password

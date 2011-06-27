@@ -33,7 +33,7 @@ class UserSessionsController < ApplicationController
             page << "window.location='#{session[:return_to]}'"
             session[:return_to] = nil
           else
-            page << "window.location='/'"
+            page << "window.location='/locations'"
           end
         end
       else
@@ -76,6 +76,7 @@ class UserSessionsController < ApplicationController
     if current_user
       redirect_to edit_account_url
     else
+      flash[:notice] = nil
       @user_session = UserSession.new
       @user = User.new
     end
@@ -91,7 +92,7 @@ class UserSessionsController < ApplicationController
         user.send_forgot_password!
         flash[:notice] = "A link to reset your password has been mailed to you."
       else
-        flash[:alert] = "Email #{params[:email]} wasn't found.  Perhaps you used a different one?  Or never registered or something?"
+        flash[:notice] = "Email #{params[:email]} wasn't found.  Perhaps you used a different one?  Or never registered or something?"
         render :action => :forgot_password
       end
     end

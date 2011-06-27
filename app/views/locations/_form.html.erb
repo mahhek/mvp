@@ -94,14 +94,10 @@
 
     <% @features.each do |feature| %>
 
-
-
       <div class="<%= cycle("radios-btn","radios-btn2") %>">
         <%= check_box_tag("features[]", feature.id, @location.features.include?(feature)) %>
         <%= feature.name %>
       </div>
-
-
 
     <% end %>
     <span class="radio-light-txt">This helps your storage listing really stand out</span>
