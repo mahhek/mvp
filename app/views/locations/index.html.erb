@@ -8,7 +8,7 @@
       <div class="listx">
         <div class="imgx">
           <% if location.avatars.size > 0 %>
-            <%= image_tag(location.avatars.first.photo.url(:thumb), :width => "115", :height => "81", :alt => "Sacpe-Photo")  %>
+            <%= image_tag(location.avatars.first.photo.url(:thumb), :width => "115", :height => "81", :alt => "Space-Photo")  %>
           <% else %>
             <%= image_tag("", :width => "115", :height => "81", :alt => "Sacpe-Photo")  %>
           <% end %>
@@ -51,7 +51,7 @@
           <%end%>
 
           <div class="listingx">
-            <%= select_tag "location_status_#{location.id}", options_for_select([["Show Listing" , "Show Listign"],["Hide Listing" , "Hide Listign"]], location.location_status) , :style => "width:135px; border: 1px solid #AFAFAF;
+            <%= select_tag "location_status_#{location.id}", options_for_select([["Show Listing" , "Show Listing"],["Hide Listing" , "Hide Listing"]], location.location_status) , :style => "width:135px; border: 1px solid #AFAFAF;
     height: 26px;
     line-height: 26px;
     width: 195px;" %>

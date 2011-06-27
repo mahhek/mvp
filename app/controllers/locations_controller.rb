@@ -12,13 +12,14 @@ class LocationsController < ApplicationController
 
   def search_location
     
-    query = "1=1"
-    query = query + " AND start_date <= #{params[:request_date]}" unless params[:request_date].blank? or params[:request_date] == "mm / dd / yy"
-    query = query + " AND ( city = '#{params[:requested_city]}' OR nearest_metro = '#{params[:requested_city]}' ) " unless params[:requested_city] == "Add My City!"
-    query = query + " AND park_store = '#{params[:storage_menus]}'" unless params[:storage_menus] == "Both"
+#    query = "1=1"
+#    query = query + " AND start_date <= #{params[:request_date]}" unless params[:request_date].blank? or params[:request_date] == "mm / dd / yy"
+#    query = query + " AND ( city = '#{params[:requested_city]}' OR nearest_metro = '#{params[:requested_city]}' ) " unless params[:requested_city] == "Add My City!"
+#    query = query + " AND park_store = '#{params[:storage_menus]}'" unless params[:storage_menus] == "Both"
+#    query = query + " AND location_status = 'Show Listing'"
 
 
-    @locations = Location.find(:all, :conditions => [query] , :order => "price ASC")
+    @locations = Location.paginate(:all, :conditions => [] ,:page => params[:page], :per_page => 3, :order => "price ASC")
     @city = params[:requested_city] unless params[:requested_city] == "Add My City!"
     @park_store = params[:storage_menus]
 

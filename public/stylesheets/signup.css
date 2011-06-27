@@ -1,169 +1,179 @@
 #signup-wrapper {
-	float: left;
-	width: 816px;
-	padding-right: 34px;
-	padding-left: 34px;
+    float: left;
+    width: 816px;
+    padding-right: 34px;
+    padding-left: 34px;
 }
 #signup-color {
-	float: left;
-	height: 38px;
-	width: 816px;
-	background-color: #73c13c;
+    float: left;
+    height: 38px;
+    width: 816px;
+    background-color: #73c13c;
 }
 #signup-heading {
-	font-family: 'FamiliarProBold';
-	float: left;
-	height: 38px;
-	width: 816px;
-	text-align: center;
-	font-size: 18px;
-	color: #FFF;
-	line-height: 38px;
-	background-image: url(/images/shade.png);
-	background-repeat: no-repeat;
+    font-family: 'FamiliarProBold';
+    float: left;
+    height: 38px;
+    width: 816px;
+    text-align: center;
+    font-size: 18px;
+    color: #FFF;
+    line-height: 38px;
+    background-image: url(/images/shade.png);
+    background-repeat: no-repeat;
 }
 .fields-wrapper {
-	float: left;
-	height: 390px;
-	width: 361px;
-	padding-top: 35px;
-	padding-left: 20px;
-	background-image: url(/images/signup-content-bg.png);
-	background-repeat: no-repeat;
-	background-position: right bottom;
+    float: left;
+    height: 390px;
+    width: 361px;
+    padding-top: 35px;
+    padding-left: 20px;
+    background-image: url(/images/signup-content-bg.png);
+    background-repeat: no-repeat;
+    background-position: right bottom;
 }
 .fields-wrapper2 {
-	float: left;
-	height: 390px;
-	width: 361px;
-	padding-top: 35px;
-	padding-left: 53px;
-	background-image: url(/images/signup-content-bg.png);
-	background-repeat: no-repeat;
-	background-position: right bottom;
+    float: left;
+    height: 390px;
+    width: 361px;
+    padding-top: 35px;
+    padding-left: 53px;
+    background-image: url(/images/signup-content-bg.png);
+    background-repeat: no-repeat;
+    background-position: right bottom;
 }
 .sign-in-heading {
-	font-family: 'FamiliarProBold';
-	width: 341px;
-	padding-left: 20px;
-	padding-top: 10px;
-	height: 33px;
-	font-size: 22px;
-	color: #593325;
-	line-height: 33px;
+    font-family: 'FamiliarProBold';
+    width: 341px;
+    padding-left: 20px;
+    padding-top: 10px;
+    height: 33px;
+    font-size: 22px;
+    color: #593325;
+    line-height: 33px;
 }
 .sign-in-heading2 {
-	font-family: 'FamiliarProBold';
-	width: 341px;
-	padding-left: 20px;
-	padding-top: 10px;
-	height: 50px;
-	font-size: 22px;
-	color: #593325;
-	line-height: 33px;
+    font-family: 'FamiliarProBold';
+    width: 341px;
+    padding-left: 20px;
+    padding-top: 10px;
+    height: 50px;
+    font-size: 22px;
+    color: #593325;
+    line-height: 33px;
 }
 #facebook-login {
-	font-family: 'HelveticaLTStdFractions';
-	float: left;
-	width: 341px;
-	padding-left: 20px;
-	padding-top: 38px;
-	height: 22px;
-	font-size: 17px;
-	color: #1d1d1f;
-	line-height: 22px;
+    font-family: 'HelveticaLTStdFractions';
+    float: left;
+    width: 341px;
+    padding-left: 20px;
+    padding-top: 38px;
+    height: 22px;
+    font-size: 17px;
+    color: #1d1d1f;
+    line-height: 22px;
 }
 #fb-txt {
-	float: left;
-	height: 22px;
-	width: 140px;
+    float: left;
+    height: 22px;
+    width: 140px;
 }
 #fb-btn {
-	float: left;
-	height: 22px;
-	width: 154px;
+    float: left;
+    height: 22px;
+    width: 154px;
 }
 #user-txt {
-	font-family: Helvetica;
-	color: #1d1d1f;
-	float: left;
-	height: 45px;
-	width: 341px;
-	padding-top: 40px;
-	padding-left: 20px;
-	font-size: 17px;
+    font-family: Helvetica;
+    color: #1d1d1f;
+    float: left;
+    height: 45px;
+    width: 341px;
+    padding-top: 40px;
+    padding-left: 20px;
+    font-size: 17px;
 }
 .fieldx-bg {
-	float: left;
-	height: 44px;
-	width: 320px;
-	padding-left: 19px;
-	background-image: url(/images/fieldx-bg.png);
-	background-repeat: no-repeat;
-	background-position: right bottom;
-	padding-top: 8px;
+    float: left;
+    height: 44px;
+    width: 320px;
+    padding-left: 19px;
+    background-image: url(/images/fieldx-bg.png);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    padding-top: 8px;
+}
+.fieldx-bg2 {
+    float: left;
+    height: 44px;
+    width: 320px;
+    padding-left: 19px;
+    background-image: url(/images/fieldx-bg.png);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    padding-top: 12px;
 }
 .fieldx-txt {
-	font-family: Helvetica;
-	float: left;
-	height: 44px;
-	width: 85px;
-	line-height: 44px;
-	color: #616265;
-	padding-left: 13px;
-	font-size: 14px;
+    font-family: Helvetica;
+    float: left;
+    height: 44px;
+    width: 85px;
+    line-height: 44px;
+    color: #616265;
+    padding-left: 13px;
+    font-size: 14px;
 }
 .fieldx-field {
-	float: left;
-	width: 206px;
-	padding-left: 10px;
-	height: 34px;
-	padding-top: 5px;
+    float: left;
+    width: 206px;
+    padding-left: 10px;
+    height: 34px;
+    padding-top: 5px;
 }
 .fieldx {
-	font-family: Helvetica;
-	color: #616265;
-	height: 31px;
-	width: 204px;
-	border: 1px solid #FFF;
-	font-size: 14px;
-	line-height: 31px;
+    font-family: Helvetica;
+    color: #616265;
+    height: 31px;
+    width: 204px;
+    border: 1px solid #FFF;
+    font-size: 14px;
+    line-height: 31px;
 }
 .signme-bg {
-	float: left;
-	padding-left: 22px;
-	width: 316px;
-	padding-top: 20px;
-	height: 42px;
+    float: left;
+    padding-left: 22px;
+    width: 316px;
+    padding-top: 20px;
+    height: 42px;
 }
 .signme-bg2 {
-	float: left;
-	padding-left: 22px;
-	width: 316px;
-	padding-top: 10px;
-	height: 42px;
+    float: left;
+    padding-left: 22px;
+    width: 316px;
+    padding-top: 10px;
+    height: 42px;
 }
 #forgot-pass {
-	font-family: 'HelveticaLTStdFractions';
-	float: left;
-	width: 150px;
-	font-size: 12px;
-	font-style: italic;
-	line-height: 42px;
-	height: 42px;
+    font-family: 'HelveticaLTStdFractions';
+    float: left;
+    width: 150px;
+    font-size: 12px;
+    font-style: italic;
+    line-height: 42px;
+    height: 42px;
 }
 .signup-btn {
-	float: right;
-	height: 42px;
-	width: 104px;
+    float: right;
+    height: 42px;
+    width: 104px;
 }
 #display-name {
-	font-family: Helvetica;
-	color: #616265;
-	font-size: 12px;
-	width: 200px;
-	padding-left: 128px;
-	height: 20px;
-	float: left;
-	line-height: 15px;
+    font-family: Helvetica;
+    color: #616265;
+    font-size: 12px;
+    width: 200px;
+    padding-left: 128px;
+    height: 20px;
+    float: left;
+    line-height: 15px;
 }

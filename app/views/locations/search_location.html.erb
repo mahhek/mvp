@@ -1,7 +1,7 @@
 <%= stylesheet_link_tag "search-list"%>
 
 <div id="get-list-header">
-  <% form_tag "/locations/search_location" , {:id => "search_form"} do %>
+  <% form_tag search_location_path , {:id => "search_form"} do %>
     <div id="search-list">
       <span style="float: left;">
         Sort by:
@@ -70,10 +70,7 @@
   <% end %>
 
   <div id="page-navigator">
-    <div id="p-button"><a href="#">Previous</a></div>
-    <div id="bg-page-select">
-      <a class="active" href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">-</a> <a href="#">-</a> <a href="#">-</a> <a href="#">99</a></div>
-    <div id="p-button"><a href="#">Next</a></div>
+    <%= will_paginate(@locations, :params => params,   :inner_window => 2 ,:outer_window => 0  , :renderer => PaginationListLinkRenderer )%>
   </div>
 
 </div>

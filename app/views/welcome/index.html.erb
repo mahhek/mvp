@@ -1,5 +1,5 @@
 <div id="left-container">
-  <% form_tag "/locations/search_location" , {:id => "search_form"} do %>
+  <% form_tag search_location_path , {:id => "search_form"} do %>
     <div id="main-text">Storage and parking with real people just like you.</div>
     <div id="country-field">
       <div id="select-country">
@@ -78,6 +78,7 @@
         <div id="price-bar">
           <span class="brown-text">$<%= space.price.to_i %>:</span>
           <%= space.headline %>
+          <br/>
           <span class="brown-text">
             <%= space.city.nil? ? "" : space.city %>
           </span>

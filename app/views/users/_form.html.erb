@@ -1,34 +1,31 @@
 <% form_for @user, :html => {:multipart => true, :name => "user_edit_form"} do |f| %>
 
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+  <div id="get-list-header">Can we get to know you?</div>
 
+  <% if @user.errors.any? %>
+    <div id="error_explanation" style="float: left; margin-top: 10px;width: 100%;">
       <ul>
         <% @user.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+          <li style="list-style: none;"><%= msg %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
 
-
-  <div id="get-list-header">Can we get to know you?</div>
-
   <div id="left-photo">
     <% unless @user.photo_file_name.nil? %>
       <div id="photo">
         <%= image_tag(@user.photo.url(:medium) )%>
       </div>
-    <% else %>
-      <%= f.file_field :photo, :size => "16" %>
       <div id="upload-button">
-        <a href="#">
-          <img border="0" width="152" height="35" alt="upload photo" src="/images/upload-photo-button.png"/>
-        </a>
+        <%= f.file_field :photo, :size => "13" %>
+        <br/>
+        <br/>
+        <img border="0" height="35" width="152" src="/images/upload-photo-button.png" alt="upload photo" onclick="user_edit_form.submit();" />
       </div>
     <% end %>
+
   </div>
 
   <div id="gray-box">
@@ -36,43 +33,43 @@
     <div class="bg-fields">
       <div class="txt">Name:</div>
       <div class="field-x">
-        <%= f.text_field :first_name, :class => "name" %>
-        <%= f.text_field :last_name, :class => "name" %>
+        <%= f.text_field :first_name, :value => @user.first_name.nil? ? "First Name" : @user.first_name, :class => "name", :onclick => "hideShowValue(this,'First Name','hide');", :onblur => "hideShowValue(this,'First Name','show');" %>
+        <%= f.text_field :last_name, :value => @user.last_name.nil? ? "Last Name" : @user.last_name, :class => "name", :onclick => "hideShowValue(this,'Last Name','hide');", :onblur => "hideShowValue(this,'Last Name','show');" %>
       </div>
     </div>
 
     <div class="bg-fields">
       <div class="txt">Email:</div>
       <div class="field-x">
-        <%= f.text_field :email, :class => "large-fields" %>
+        <%= f.text_field :email, :value => @user.email.nil? ? "abc@xyz.com" : @user.email, :class => "large-fields", :onclick => "hideShowValue(this,'abc@xyz.com','hide');", :onblur => "hideShowValue(this,'abc@xyz.com','show');" %>
       </div>
     </div>
 
     <div class="bg-fields">
       <div class="txt">Zip Code:</div>
       <div class="field-x">
-        <%= f.text_field :zip_code, :class => "large-fields" %>
+        <%= f.text_field :zip_code, :value => @user.zip_code.nil? ? "19146" : @user.zip_code, :class => "large-fields", :onclick => "hideShowValue(this,'19146','hide');", :onblur => "hideShowValue(this,'19146','show');" %>
       </div>
     </div>
 
     <div class="bg-fields">
       <div class="txt">Phone:</div>
       <div class="field-x">
-        <%= f.text_field :phone_number, :class => "large-fields" %>
+        <%= f.text_field :phone_number, :value => @user.phone_number.nil? ? "(555) 123-4567" : @user.phone_number, :class => "large-fields", :onclick => "hideShowValue(this,'(555) 123-4567','hide');", :onblur => "hideShowValue(this,'(555) 123-4567','show');" %>
       </div>
     </div>
 
     <div class="bg-fields">
       <div class="txt">Occupation:</div>
       <div class="field-x">
-        <%= f.text_field :occupation, :class => "large-fields" %>
+        <%= f.text_field :occupation, :value => @user.occupation.nil? ? "Entrepreneur" : @user.occupation, :class => "large-fields", :onclick => "hideShowValue(this,'Entrepreneur','hide');", :onblur => "hideShowValue(this,'Entrepreneur','show');" %>
       </div>
     </div>
 
     <div class="bg-fields">
       <div class="txt">Schools Attended:</div>
       <div class="field-x">
-        <%= f.text_field :school_attended, :class => "large-fields" %>
+        <%= f.text_field :school_attended, :value => @user.school_attended.nil? ? "Texas, Wharton" : @user.school_attended, :class => "large-fields", :onclick => "hideShowValue(this,'Texas, Wharton','hide');", :onblur => "hideShowValue(this,'Texas, Wharton','show');" %>
       </div>
     </div>
 

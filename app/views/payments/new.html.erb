@@ -1,6 +1,18 @@
 <%= stylesheet_link_tag "r-payment"%>
 <div id="get-list-header">Reservation Payment</div>
 
+<div style="width: 100%;float: left;">
+  <% if @payment.errors.any? %>
+    <div id="errorExplanation">
+      <ul>
+        <% @payment.errors.full_messages.each do |msg| %>
+          <li style="list-style: none;"><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>
+
 <div class="gray-bg">
   <div class="number-bg">
     <div class="numberx">1</div>
@@ -26,7 +38,7 @@
     </div>
     <div class="resultx-detail">
       <div class="resultx-heading"><%= @location.headline %></div>
-      <div class="resultx-details"><%= "#{@location.street_name} #{@location.region}  #{@location.city}, #{@location.zipcode}, #{@location.country_code}" %><br>
+      <div class="resultx-details"><%= "#{@location.street_name} #{@location.city} #{@location.region}, #{@location.zipcode}, #{@location.country_code}" %><br>
         <%= @location.storage_type %> for <%= @location.accommodates %></div>
       <div class="aplus">
         <div class="marks">Seller will help you unload<br/>
@@ -50,7 +62,7 @@
     <div id="form-price">
       <div class="white-bg">
         <div class="n-price">Starting On:</div>
-        <div class="p-price"><%= @location.start_date.strftime("%b %d %y") %></div>
+        <div class="p-price"><%= @location.start_date.strftime("%B %d, %Y") %></div>
       </div>
 
       <div class="white-bg2">
@@ -67,7 +79,7 @@
       <div class="white-bg2">
         <div class="n-price">Service Fee:</div>
         <% service_fee = sub_total * Commission.first.buyer %>
-        <div class="p-price">$<%= number_with_precision(service_fee.to_f, :precision => 2) %> %</div>
+        <div class="p-price">$<%= number_with_precision(service_fee.to_f, :precision => 2) %> (8%) </div>
       </div>
 
       <div class="white-bg">
@@ -91,7 +103,7 @@
 
       <div class="white-bglarge">
         <div class="n-pricelarge">Cancellation:</div>
-        <div class="p-pricelarge">Cancel by March 31 2010 5PM EST</div>
+        <div class="p-pricelarge">Cancel by <%= (@location.start_date - 7.days).strftime("%B %d, %Y") %></div>
       </div>
 
       <div class="white-bg2large">
@@ -120,17 +132,17 @@
     <%= f.hidden_field :amount, :value => total  %>
     <div class="r-payment-details">
       <div id="billing-bg">
-        <%= f.text_field :name, :class => "b-address"  %>
-        <%= f.text_field :email, :class => "b-address"  %>
+        <%= f.text_field :name, :value => "Name", :class => "b-address", :onclick => "hideShowValue(this,'Name','hide');", :onblur => "hideShowValue(this,'Name','show');"  %>
+        <%= f.text_field :email, :value => "hello@example.com", :class => "b-address", :onclick => "hideShowValue(this,'hello@example.com','hide');", :onblur => "hideShowValue(this,'hello@example.com','show');"  %>
         <br/><br/>
         Billing Address:<br/>
-        <%= f.text_field :billing_address, :class => "b-address"  %>
-        <%= f.text_field :city, :class => "b-address-m" %>
-        <%= f.text_field :state, :class => "b-address-s" %>
-        <%= f.text_field :zip_code, :class => "b-address-xs" %>
+        <%= f.text_field :billing_address, :value => "Billing street address", :class => "b-address", :onclick => "hideShowValue(this,'Billing street address','hide');", :onblur => "hideShowValue(this,'Billing street address','show');"  %>
+        <%= f.text_field :city, :value => "City", :class => "b-address-m", :onclick => "hideShowValue(this,'City','hide');", :onblur => "hideShowValue(this,'City','show');" %>
+        <%= f.text_field :state, :value => "State", :class => "b-address-s", :onclick => "hideShowValue(this,'State','hide');", :onblur => "hideShowValue(this,'State','show');" %>
+        <%= f.text_field :zip_code, :value => "Zip code", :class => "b-address-xs", :onclick => "hideShowValue(this,'Zip code','hide');", :onblur => "hideShowValue(this,'Zip code','show');" %>
         <br/><br/>
-        <%= f.text_field :phone_number, :class => "b-address" %>
-        <%= f.text_field :hear_about_us, :class => "b-address" %>
+        <%= f.text_field :phone_number, :value => "Phone Number", :class => "b-address", :onclick => "hideShowValue(this,'Phone Number','hide');", :onblur => "hideShowValue(this,'Phone Number','show');" %>
+        <%= f.text_field :hear_about_us, :value => "How did you hear about us?", :class => "b-address", :onclick => "hideShowValue(this,'How did you hear about us?','hide');", :onblur => "hideShowValue(this,'How did you hear about us?','show');" %>
         <br/><br/>
         <a href="javascript:void(0);">
           <img border="0" height="40" width="184" alt="Reserve your space" src="/images/reserve-your-space-button.png" onclick="payment_form.submit();"/>
@@ -141,7 +153,7 @@
 
       <div id="right-card">
         <img height="22" width="189" alt="Credits Cards" src="/images/cards.png" /><br/>
-        <%= f.text_field :cc_number, :class => "b-address" %>
+        <%= f.text_field :cc_number, :value => "Credit Card Number", :class => "b-address", :onclick => "hideShowValue(this,'Credit Card Number','hide');", :onblur => "hideShowValue(this,'Credit Card Number','show');" %>
         <br/>
         <br/>
 
@@ -153,7 +165,7 @@
         <%= year_select_for(:payment, :expire_year) %>
         &nbsp;
 
-        <%= f.text_field :security_code, :class => "b-address-m",:style => "margin-top:5px;" %>
+        <%= f.text_field :security_code, :value => "Security Code", :class => "b-address-m", :onclick => "hideShowValue(this,'Security Code','hide');", :onblur => "hideShowValue(this,'Security Code','show');",:style => "margin-top:5px;" %>
       </div>
     </div>
   <% end %>
@@ -163,5 +175,14 @@
   $(document).ready(function() {
     $('#payment_expire_month').addClass("b-address-s")
     $('#payment_expire_year').addClass("b-address-xs")
+  });
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(document).keyup(function(event) {
+      if (event.keyCode == 13) {
+        $('.new_payment').submit();
+      }
+    })
   });
 </script>

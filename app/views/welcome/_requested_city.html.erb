@@ -1,13 +1,13 @@
 <div style="float: left;width: 100%;">
   <% remote_form_for "other_requested_city", :url => {:controller => "locations", :action => "save_requested_city"} , :html => {:id => "other_requested_city_form"}, :success => "setTimeout('hide_updated_msg()', 2500);" do %>
-    <span style="width: auto;float: left;margin-top: 10px;">
+    <span style="width: auto;float: left;margin-top: 10px; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; background-color: #e2e1dd; padding: 5px; line-height: 16px; font-family: 'HelveticaLTStdFractions'; font-size: 14px; margin-left: 5px;">
       Give use your zip and e-mail; and you'll be the first to know when we come to your city.
     </span>
     <span style="width: auto;float: left;margin-top: 10px;">
-      <%= text_field_tag "other_request_city", "Please enter your zip code", :class => "calander-fields", :onclick => "if($(this).val() == 'Please enter your zip code'){$(this).val('');}", :onblur => "if($(this).val() == ''){$(this).val('Please enter your zip code');}", :style => "width:190px;" %>
+      <%= text_field_tag "other_request_city", "Please enter your zip code", :class => "calander-fields", :onclick => "hideShowValue(this,'Please enter your zip code','hide');", :onblur => "hideShowValue(this,'Please enter your zip code','show');" , :style => "width:190px;" %>
     </span>
     <span style="width: auto;float: left;margin-top: 10px;">
-      <%= text_field_tag "email", "Please enter your email", :class => "calander-fields", :onclick => "if($(this).val() == 'Please enter your email'){$(this).val('');}", :onblur => "if($(this).val() == ''){$(this).val('Please enter your email');}", :style => "width:190px;margin-left:5px;" %>
+      <%= text_field_tag "email", "Please enter your email", :class => "calander-fields", :onclick => "hideShowValue(this,'Please enter your email','hide');", :onblur => "hideShowValue(this,'Please enter your email','show');" , :style => "width:190px;margin-left:5px;" %>
     </span>
     <div id="small-find-button">
       <a href="javascript:void(0);" onclick="$('#other_requested_city_form').submit();">
@@ -21,3 +21,4 @@
     </div>
   <% end %>
 </div>
+

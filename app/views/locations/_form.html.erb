@@ -91,26 +91,20 @@
 
   <div class="white-box2">
     <div class="box-feat">Features:</div>
-    <% double_count = 0 %>
+
     <% @features.each do |feature| %>
 
-      <% if (double_count % 2) != 0 %>
-        <div class="radio-btn-wrapper">
-        <% end %>
-
-        <div class="<%= cycle("radios-btn","radios-btn2") %>">
-          <%= check_box_tag("features[]", feature.id, @location.features.include?(feature)) %>
-          <%= feature.name %>
-        </div>
 
 
-        <% if (double_count % 2) != 0 %>
-        </div>
-      <% end %>
+      <div class="<%= cycle("radios-btn","radios-btn2") %>">
+        <%= check_box_tag("features[]", feature.id, @location.features.include?(feature)) %>
+        <%= feature.name %>
+      </div>
 
-      <% double_count = double_count + 1 %>
+
 
     <% end %>
+    <span class="radio-light-txt">This helps your storage listing really stand out</span>
   </div>
 
   <div id="next-stage"></div>
@@ -152,7 +146,7 @@
     </div>
 
     <div class="xfields">Monthly Price:<br/>
-      $ <%= f.text_field :price , :id => "calander1" %>.00
+      $ <%= f.text_field :price , :id => "calander1", :style => "font-size:18px;" %>.00
     </div>
 
   </div>
@@ -294,3 +288,4 @@
     //$('#new_location').validate();
   });
 </script>
+

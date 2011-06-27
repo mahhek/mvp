@@ -11,7 +11,7 @@
     <%= link_to "Preview", location_path(@location) %>
   </div>
   <div id="select-lisiting" style="display: none;">
-    <%= select_tag "location_status", options_for_select([["Show Listing" , "Show Listign"],["Hide Listing" , "Hide Listign"]]) , :style => "width:250px;" %>
+    <%= select_tag "location_status", options_for_select([["Show Listing" , "Show Listing"],["Hide Listing" , "Hide Listing"]]) , :style => "width:250px;" %>
   </div>
 </div>
 
@@ -36,7 +36,7 @@
     <%= f.file_field :photo %>
     <br/>
     <br/>
-    <%= f.text_field :caption, :value => 'Give this photo a caption' %>
+    <%= f.text_field :caption, :value => 'Give this photo a caption', :onclick => "hideShowValue(this,'Give this photo a caption','hide');", :onblur => "hideShowValue(this,'Give this photo a caption','show');" %>
   <%else%>
     <br/>
     <br/>
@@ -55,8 +55,23 @@
   <br/>
   <% if @avatar.new_record? %>
     <a href="javascript:void(0);">
-      <img src="/images/save.png" alt="save all" width="68" height="35" border="0" onclick="space_form.submit();"/>
+      <img src="/images/save.png" alt="save all" width="68" height="35" border="0" onclick="if($('#avatar_photo').val() != ''){$('.new_avatar').submit();}else{alert('Please select some picture.');return false;}"/>
     </a>
   <%end%>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(document).keyup(function(event) {
+      if (event.keyCode == 13) {
+        if($('#avatar_photo').val() != ""){
+          $('.new_avatar').submit();
+        }else{
+          alert('Please select some picture.');
+          return false;
+        }
+      }
+    })
+  });
+</script>
 

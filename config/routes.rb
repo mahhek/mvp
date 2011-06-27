@@ -4,10 +4,13 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.update_location_status "/location/update/status/:id", :controller => "locations", :action => "update_location_status"
   map.update_start_date "/location/update/start_date/:id", :controller => "locations", :action => "update_start_date"
-  map.resources :locations do|location|
+  
+  map.resources :locations do |location|
     location.resources :avatars
     location.resources :payments
   end
+  map.search_location "/spaces/search_location", :controller => 'locations', :action => 'search_location'
+
 
   map.user_create "/user/create", :controller => 'users', :action => 'create'
   map.user_session_create "/login/create", :controller => 'user_sessions', :action => 'create'

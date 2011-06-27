@@ -4,7 +4,7 @@
     <span class="hel-14">
       <%= @location.storage_type %> for <%= @location.accommodates %>
       &nbsp;|&nbsp;
-      <%= "#{@location.street_name} #{@location.region}  #{@location.city}, #{@location.zipcode}, #{@location.country_code}" %>
+      <%= "#{@location.street_name} #{@location.city} #{@location.region}, #{@location.zipcode}, #{@location.country_code}" %>
     </span>
   </div>
 </div>
@@ -17,7 +17,7 @@
     <div id="photo_div">
       <% if @location.avatars.size > 0 %>
         <div id="space-img">
-          <%= image_tag(@location.avatars.first.photo.url(:large)) %>
+          <%= image_tag(@location.avatars.first.photo.url(:large), :height => "286") %>
         </div>
 
         <div id="field-caption">
@@ -98,7 +98,7 @@
 
     <div id="image-person">
       <% unless @location.user.photo_file_name.nil? %>
-        <%= image_tag(@location.user.photo.url(:thumb), :width => "66", :height => "56", :alt => "Seller-Image" )%>
+        <%= image_tag(@location.user.photo.url(:thumb), :height => "56", :alt => "Seller-Image" )%>
       <% else %>
         <%= image_tag("missing_70.png") %>
       <% end %>
@@ -107,7 +107,7 @@
       <span class="hel-14">Response Rate: 98% </span></div>
 
     <div id="user-details">
-      <%= @location.user.share %>
+      <%= @location.user.occupation %> <%= @location.user.school_attended %> <%= @location.user.share %>
     </div>
 
     <div id="store-btn">

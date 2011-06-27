@@ -8,6 +8,13 @@ class User < ActiveRecord::Base
 
   end
 
+  validate :field_values, :on => :update
+
+  def field_values
+    errors.add_to_base('Please provide correct Zip code.') if self.zip_code == "19146"
+    errors.add_to_base('Please provide correct Phone Number.') if self.phone_number == "(555) 123-4567"    
+  end
+
 
   has_and_belongs_to_many :roles
   has_many :locations, :order => "created_at DESC"
@@ -16,6 +23,7 @@ class User < ActiveRecord::Base
     :storage => :s3,
     :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
     :path => "/:style/:id/:filename"
+  # has_attached_file :photo, :styles => { :'300' => "300x300#", :'150' => '150x150#', :'100' => "100x100#", :'70' => "70x70#", :'50' => "50x50#", :'30' => "30x30#" }, :default_url => '/images/profile/missing_:style.png'
 
   def role?(role)
     return !!self.roles.find_by_name(role.to_s.camelize)

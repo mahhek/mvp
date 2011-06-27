@@ -8,16 +8,16 @@
     </div>
 
     <div id="user-txt">Your Username &amp; Password:</div>
-    <%#= session[:return_to] %>
+  <%#= session[:return_to] %>
 
-    <div class="fieldx-bg">
+    <div class="fieldx-bg2">
       <div class="fieldx-txt">Email</div>
       <div class="fieldx-field">
         <%= f.text_field :email, :class=>"fieldx" %>
       </div>
     </div>
 
-    <div class="fieldx-bg">
+    <div class="fieldx-bg2">
       <div class="fieldx-txt">Password</div>
       <div class="fieldx-field">
         <%= f.password_field :password, :class=>"fieldx" %>
@@ -35,4 +35,12 @@
   <%end%>
 </div>
 
-
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(document).keyup(function(event) {
+      if (event.keyCode == 13) {
+        $('#login_form').submit();
+      }
+    })
+  });
+</script>

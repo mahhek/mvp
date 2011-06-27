@@ -1,3 +1,12 @@
 <% form_for @location , :html => {:name => "space_form"} do|f| %>
   <%= render :partial => "form", :locals => {:f => f} %>
 <% end %>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(document).keyup(function(event) {
+      if (event.keyCode == 13) {
+        $('.new_location').submit();
+      }
+    })
+  });
+</script>
