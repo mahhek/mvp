@@ -19,7 +19,7 @@ class LocationsController < ApplicationController
     query = query + " AND location_status = 'Show Listing'"
     
 
-    @locations = Location.paginate(:all, :conditions => [] ,:page => params[:page], :per_page => 3, :order => "price ASC")
+    @locations = Location.paginate(:all, :conditions => [query] ,:page => params[:page], :per_page => 3, :order => "price ASC")
     @city = params[:requested_city] unless params[:requested_city] == "Add My City!"
     @park_store = params[:storage_menus]
 
