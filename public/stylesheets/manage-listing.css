@@ -1,125 +1,125 @@
 #get-list-header {
-	width: 860px;
-	padding-right: 12px;
-	padding-left: 12px;
-	float: left;
-	background-image: url(/images/gradient-bar.png);
-	background-repeat: repeat-x;
-	height: 53px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+    width: 860px;
+    padding-right: 12px;
+    padding-left: 12px;
+    float: left;
+    background-image: url(/images/gradient-bar.png);
+    background-repeat: repeat-x;
+    height: 53px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 #manage-listing {
-	font-family: FamiliarProBold;
-	float: left;
-	height: 53px;
-	line-height: 53px;
-	color: #593325;
-	font-size: 20px;
+    font-family: FamiliarProBold;
+    float: left;
+    height: 53px;
+    line-height: 53px;
+    color: #593325;
+    font-size: 20px;
 }
 .listx-bg {
-	width: 860px;
-	padding-right: 12px;
-	padding-left: 12px;
-	float: left;
-	padding-top: 15px;
+    width: 860px;
+    padding-right: 12px;
+    padding-left: 12px;
+    float: left;
+    padding-top: 15px;
 }
 .listx {
-	float: left;
-	width: 808px;
-	background-color: #f1f1f1;
-	border: 1px solid #FFF;
-	padding-top: 13px;
-	padding-right: 25px;
-	padding-bottom: 13px;
-	padding-left: 25px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	-webkit-box-shadow: 0px 0px 5px rgba(77,78,83,0.4);
-	-moz-box-shadow: 0px 0px 5px rgba(77,78,83,0.4);
-	box-shadow: 0px 0px 5px rgba(77,78,83,0.4);
-	margin-top: 20px;
+    float: left;
+    width: 808px;
+    background-color: #f1f1f1;
+    border: 1px solid #FFF;
+    padding-top: 13px;
+    padding-right: 25px;
+    padding-bottom: 13px;
+    padding-left: 25px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 5px rgba(77,78,83,0.4);
+    -moz-box-shadow: 0px 0px 5px rgba(77,78,83,0.4);
+    box-shadow: 0px 0px 5px rgba(77,78,83,0.4);
+    margin-top: 20px;
 }
 .imgx {
-	float: left;
-	border: 2px solid #FFF;
+    float: left;
+    border: 2px solid #FFF;
 }
 .name-list {
-	font-family: FamiliarProBold;
-	float: left;
-	height: 25px;
-	width: 600px;
-	padding-left: 20px;
-	font-size: 18px;
-	color: #1d1d1f;
+    font-family: FamiliarProBold;
+    float: left;
+    height: 25px;
+    width: 600px;
+    padding-left: 20px;
+    font-size: 18px;
+    color: #1d1d1f;
 }
 .manage-bg {
-	float: left;
-	width: 650px;
-	padding-top: 25px;
-	padding-left: 20px;
-	height: 35px;
+    float: left;
+    width: 650px;
+    padding-top: 25px;
+    padding-left: 20px;
+    height: 35px;
 }
 .btns {
-	float: left;
-	width: 170px;
-	height: 35px;
+    float: left;
+    width: 170px;
+    height: 35px;
 }
 .available-date {
-	font-family: HelveticaLTStdFractions;
-	float: left;
-	height: 35px;
-	width: 270px;
-	font-size: 14px;
-	line-height: 35px;
-	color: #1d1d1f;
+    font-family: HelveticaLTStdFractions;
+    float: left;
+    height: 35px;
+    width: 270px;
+    font-size: 14px;
+    line-height: 35px;
+    color: #1d1d1f;
 }
 .availx-txt {
-	float: left;
-	height: 35px;
-	width: 85px;
+    float: left;
+    height: 35px;
+    width: 85px;
 }
 .availx-field {
-	font-family: HelveticaLTStdFractions;
-	float: left;
-	height: 35px;
-	width: 160px;
-	font-size: 14px;
+    font-family: HelveticaLTStdFractions;
+    float: left;
+    height: 35px;
+    width: 160px;
+    font-size: 14px;
 }
 .time-x {
-	height: 26px;
-	width: 100px;
-	border: 1px solid #afafaf;
-	margin-top: 4px;
-	padding-right: 5px;
-	padding-left: 5px;
-	color: #593325;
+    height: 26px;
+    width: 100px;
+    border: 1px solid #afafaf;
+    margin-top: 4px;
+    padding-right: 5px;
+    padding-left: 5px;
+    color: #593325;
 }
 .btnx-calander {
-	float: left;
-	height: 29px;
-	width: 31px;
-	padding-top: 4px;
+    float: left;
+    height: 29px;
+    width: 31px;
+    padding-top: 4px;
 }
 .listingx {
-	height: 28px;
-	width: 200px;
-	padding-top: 4px;
-	float: left;
+    height: 28px;
+    width: 200px;
+    padding-top: 4px;
+    float: left;
 }
 .listx-select {
-	height: 26px;
-	width: 195px;
-	border: 1px solid #afafaf;
-	line-height: 26px;
+    height: 26px;
+    width: 195px;
+    border: 1px solid #afafaf;
+    line-height: 26px;
 }
 .btn-bar {
-	width: 860px;
-	float: left;
-	text-align: center;
-	padding-top: 20px;
-	height: 50px;
-	padding-left: 10px;
+    width: 860px;
+    float: left;
+    text-align: center;
+    padding-top: 20px;
+    height: 50px;
+    padding-left: 10px;
 }
