@@ -377,11 +377,44 @@ body {
     border: 1px solid #CCC;
 }
 .pagination li.next {
-
+    margin-left: 5px;
+    background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0.46, #F1F1F1), color-stop(0.87, #FCFCFC) );
+    background-image: -moz-linear-gradient(center bottom,rgb(241,241,241) 46%,rgb(252,252,252) 87%);
+    padding-left: 4px;
+    padding-right: 4px;
+    text-decoration: none;
+    font-family: FamiliarProBold;
+    font-size: 12px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    color: #CCC;
+    height: 22px;
+    line-height: 22px;
+    border: 1px solid #CCC;
 }
+
+
+
 .pagination li.previous {
-
+    background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0.46, #F1F1F1), color-stop(0.87, #FCFCFC) );
+    background-image: -moz-linear-gradient(center bottom,rgb(241,241,241) 46%,rgb(252,252,252) 87%);
+    padding-left: 4px;
+    padding-right: 4px;
+    text-decoration: none;
+    font-family: FamiliarProBold;
+    font-size: 12px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    color: #CCC;
+    height: 22px;
+    line-height: 22px;
+    border: 1px solid #CCC;
 }
+
+
+
 .pagination li.current {
     border: 1px solid #a8a8a8;
     float: left;
