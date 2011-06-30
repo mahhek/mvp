@@ -41,13 +41,21 @@
       <div class="resultx-details"><%= "#{@location.street_name} #{@location.city} #{@location.region}, #{@location.zipcode}, #{@location.country_code}" %><br>
         <%= @location.storage_type %> for <%= @location.accommodates %></div>
       <div class="aplus">
-        <div class="marks">Seller will help you unload<br/>
-          Consider bringing a friend</div>
-        <div class="icon-small">
-          <a href="#">
-            <img border="0" height="31" width="34" alt="" src="/images/small-icon.png" />
-          </a>
+        <% cond = @location.features.include?(Feature.find_by_name("Will help unload car/truck")) %>
+        <div class="marks">
+          <% if cond %>
+            Seller will help you unload
+          <% else %>
+            Consider bringing a friend
+          <% end %>
         </div>
+        <% if cond %>
+          <div class="icon-small">
+            <a href="#">
+              <img border="0" height="31" width="34" alt="" src="/images/small-icon.png" />
+            </a>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

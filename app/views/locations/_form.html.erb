@@ -25,7 +25,7 @@
     <div id="where-space-txt">Where is your space?<br/>
       <span class="hel-14-gray">Don't worry this information will only be shared with the renters you accept.</span></div>
 
-    <div class="field-address">Your Street Address*:<br/>
+    <div class="field-address">Your Street Address:*<br/>
       <%= f.text_field :address, :class => "field-l"%>
     </div>
 
@@ -44,7 +44,7 @@
       <%= f.text_field :apartment, :class => "field-l"%>
     </div>
 
-    <div class="field-address">Phone Number*:<br/>
+    <div class="field-address">Phone Number:*<br/>
       <%= f.text_field :phone, :class => "field-l"%>
     </div>
 
@@ -109,7 +109,7 @@
   <div class="white-box">
     <div class="box-feat">Give your space a name.</div>
 
-    <div class="xfields">Headline*:<br/>
+    <div class="xfields">Headline:*<br/>
       <%= f.text_field :headline, :class => "select-menux2" %>
       <br/>
       <span class="hel-11">
@@ -122,7 +122,7 @@
       </span>
     </div>
 
-    <div class="xfields">Description*:<br/>
+    <div class="xfields">Description:*<br/>
       <%= f.text_area :description, :size => "35x5" %>
     </div>
 
@@ -133,16 +133,16 @@
           Date.format = 'yyyy-mm-dd';
 
           if($('#location_start_date').val() == ""){
-            $('#location_start_date').datePicker({startDate:'1996-01-01',clickInput:true}).val(new Date().asString()).trigger('change');
+            $('#location_start_date').datePicker({clickInput:true}).val(new Date().asString()).trigger('change');
           }else{
-            $('#location_start_date').datePicker({startDate:'1996-01-01',clickInput:true});
+            $('#location_start_date').datePicker({clickInput:true});
           }
         });
       </script>
       <%= f.text_field :start_date , :size => "40" %>
     </div>
 
-    <div class="xfields">Monthly Price*:<br/>
+    <div class="xfields">Monthly Price:*<br/>
       <span style="float: left;">
         $ 
       </span>

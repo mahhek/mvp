@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110628143348) do
+ActiveRecord::Schema.define(:version => 20110630220504) do
 
   create_table "avatars", :force => true do |t|
     t.string   "caption"
@@ -142,6 +142,7 @@ ActiveRecord::Schema.define(:version => 20110628143348) do
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.string   "photo_file_size"
+    t.string   "city"
   end
 
 end

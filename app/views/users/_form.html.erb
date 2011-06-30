@@ -46,6 +46,13 @@
     </div>
 
     <div class="bg-fields">
+      <div class="txt">City:</div>
+      <div class="field-x">
+        <%= f.text_field :city, :value => @user.city.nil? ? "City" : @user.city, :class => "large-fields", :onclick => "hideShowValue(this,'City','hide');", :onblur => "hideShowValue(this,'City','show');" %>
+      </div>
+    </div>
+
+    <div class="bg-fields">
       <div class="txt">Zip Code:</div>
       <div class="field-x">
         <%= f.text_field :zip_code, :value => @user.zip_code.nil? ? "19146" : @user.zip_code, :class => "large-fields", :onclick => "hideShowValue(this,'19146','hide');", :onblur => "hideShowValue(this,'19146','show');" %>

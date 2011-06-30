@@ -59,7 +59,9 @@
             <%= location.storage_type %> for <%= location.accommodates %></div>
           <div class="aplus">
             <div class="marks">A+</div>
-            <div class="icon-small"><img height="31" width="34" alt="" src="/images/small-icon.png"/></div>
+            <% if location.features.include?(Feature.find_by_name("Will help unload car/truck")) %>
+              <div class="icon-small"><img height="31" width="34" alt="" src="/images/small-icon.png"/></div>
+            <% end %>
           </div>
         </div>
         <div class="pricex">$<%= location.price.to_i %></div>

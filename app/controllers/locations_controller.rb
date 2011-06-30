@@ -37,7 +37,16 @@ class LocationsController < ApplicationController
     end
 
     if @locations.size == 0
-      @map.center_zoom_init([40.71435, -74.00597], 12)
+      case params[:requested_city]
+      when "Philadelphia"
+        @map.center_zoom_init([39.95233, -75.16379], 12)        
+      when "New York"
+        @map.center_zoom_init([40.71435, -74.00597], 12)        
+      when "San Francisco"
+        @map.center_zoom_init([37.77493, -122.41942], 12)        
+      when "Boston"
+        @map.center_zoom_init([42.35843, -71.05977], 12)
+      end
     end
 
 

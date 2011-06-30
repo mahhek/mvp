@@ -34,11 +34,13 @@
     <div id="about-header">
       <div id="aboout-txt"> About this Space</div>
       <div id="a1">A+</div>
-      <div id="btn">
-        <a href="#">
-          <img src="/images/btn.png" alt="btn" width="44" height="41" border="0">
-        </a>
-      </div>
+      <% if @location.features.include?(Feature.find_by_name("Will help unload car/truck")) %>
+        <div id="btn">
+          <a href="#">
+            <img src="/images/btn.png" alt="btn" width="44" height="41" border="0"/>
+          </a>
+        </div>
+      <% end %>
     </div>
     <div id="space-details-txt">
       <%=h @location.description %>

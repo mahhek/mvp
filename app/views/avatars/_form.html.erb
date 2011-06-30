@@ -61,17 +61,13 @@
 </div>
 
 <script type="text/javascript">
-  $(document).ready(function() {
-    $(document).keyup(function(event) {
-      if (event.keyCode == 13) {
-        if($('#avatar_photo').val() != ""){
-          $('.new_avatar').submit();
-        }else{
-          alert('Please select some picture.');
-          return false;
-        }
-      }
-    })
-  });
+  function checkPhoto(){
+    if($('#avatar_photo').val() != ""){
+      return true;
+    }else{
+      alert('Please select some picture.');
+      return false;
+    }
+  }  
 </script>
 
