@@ -28,7 +28,7 @@
             <%= link_to "Register", :controller => "welcome", :action => "signup_and_signin", :id => "signup" , :style => "border-radius: none;" %>
             <%= link_to "Sign in", :controller => "welcome", :action => "signup_and_signin", :id => "signin"  %>
           <%else%>
-            <%= link_to "Hello #{current_user.first_name}", "javascript:void(0);" %>
+            <span><%= "Hello #{current_user.first_name}"  %></span>
             <%= link_to "Dashboard", locations_path  %>
             <%= link_to "Logout", user_session_path(current_user), :method => :delete %>
           <% end %>
@@ -47,7 +47,7 @@
     </div>
 
     <div id="footer">
-      <a href="#">About</a> |  <a href="http://storably.tumblr.com/">Blog</a> |  <a href="#">Affiliates</a> |  <a href="#">Legal</a></div>
+      <a href="#">About</a> |  <a href="http://storably.tumblr.com/">Blog</a> |  <a href="#">Legal</a></div>
     <div id="copywrite"><%= link_to "© Storably.com", "http://storably.tumblr.com/", :target => "_blank" %></div>
 
 

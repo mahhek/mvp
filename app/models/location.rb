@@ -6,7 +6,7 @@ class Location < ActiveRecord::Base
   has_many :payments, :dependent => :destroy
   belongs_to :user
 
-  validates_presence_of :address, :phone, :headline, :description, :price
+  validates_presence_of :address, :phone, :headline, :description, :price, :message => ""
   validates_format_of :phone, :allow_blank => true,
     :with => /^(1\s*[-\/\.]?)?(\((\d{3})\)|(\d{3}))\s*[-\/\.]?\s*(\d{3})\s*[-\/\.]?\s*(\d{4})\s*(([xX]|[eE][xX][tT])\.?\s*(\d+))*/
   
@@ -22,9 +22,6 @@ class Location < ActiveRecord::Base
 
   def find_nearest_city
     self.nearest_metro = calculate_distance_and_get_city
-    puts "========================================================================="
-    puts self.nearest_metro.inspect
-    puts "========================================================================="    
   end
 
   def calculate_distance_and_get_city

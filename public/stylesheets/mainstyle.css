@@ -47,6 +47,19 @@ body {
     color: #06C;
     line-height: 14px;
 }
+#nav #links span {
+    float: left;
+    display: block;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: #FFF;
+    height: 14px;
+    text-decoration: none;
+    color: black;
+    line-height: 14px;
+}
 #nav #links a:hover {
     color: #03C;
 }

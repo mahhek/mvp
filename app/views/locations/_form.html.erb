@@ -10,11 +10,11 @@
 <div style="width: 100%;float: left;">
   <% if @location.errors.any? %>
     <div id="errorExplanation">
-      <h2><%= pluralize(@location.errors.count, "error") %> prohibited this space from being saved:</h2>
+      <h2>Oops! Looks like you need to include the following:</h2>
       <ul>
-        <% @location.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
+        <li style="list-style: square;float: left;">
+          Required fields(and the display names): <%= @location.errors.full_messages.to_sentence  %>
+        </li>
       </ul>
     </div>
   <% end %>
@@ -109,7 +109,7 @@
   <div class="white-box">
     <div class="box-feat">Give your space a name.</div>
 
-    <div class="xfields">Headline:<br/>
+    <div class="xfields">Headline*:<br/>
       <%= f.text_field :headline, :class => "select-menux2" %>
       <br/>
       <span class="hel-11">
@@ -122,7 +122,7 @@
       </span>
     </div>
 
-    <div class="xfields">Description:<br/>
+    <div class="xfields">Description*:<br/>
       <%= f.text_area :description, :size => "35x5" %>
     </div>
 
@@ -142,8 +142,16 @@
       <%= f.text_field :start_date , :size => "40" %>
     </div>
 
-    <div class="xfields">Monthly Price:<br/>
-      $ <%= f.text_field :price , :id => "calander1", :style => "font-size:18px;" %>.00
+    <div class="xfields">Monthly Price*:<br/>
+      <span style="float: left;">
+        $ 
+      </span>
+      <span style="float: left;">
+        <%= f.text_field :price , :id => "calander1", :style => "font-size:18px;" %>
+      </span>
+      <span style="float: left;">
+        .00
+      </span>
     </div>
 
   </div>

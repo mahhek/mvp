@@ -3,12 +3,3 @@
     <%= render :partial => "form", :locals => {:f => f} %>
   </div>
 <% end %>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $(document).keyup(function(event) {
-      if (event.keyCode == 13) {
-        $('.edit_location').submit();
-      }
-    })
-  });
-</script>

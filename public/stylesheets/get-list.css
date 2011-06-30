@@ -136,7 +136,7 @@
 }
 .white-box2 {
     float: left;
-    width: 331px;
+    width: 350px;
     background-color: #FFF;
     padding-top: 15px;
     padding-right: 21px;
@@ -154,7 +154,7 @@
 .box-feat {
     font-family: FamiliarProBold;
     float: left;
-    width: 331px;
+    width: 340px;
     padding-bottom: 10px;
     font-size: 18px;
     color: #593325;
@@ -197,7 +197,7 @@
     font-family: 'HelveticaLTStdFractions';
     line-height: 25px;
     float: left;
-    width: 152px;
+    width: 165px;
     font-size: 14px;
     color: #1d1d1f;
     padding-bottom: 2px;
@@ -219,7 +219,7 @@
     padding-left: 2px;
     display: block;
     line-height: 12px;
-    float: left;
+    float: right;
     width: 160px;
 }
 .xfields {
@@ -432,7 +432,6 @@
     line-height: 18px;
     color: #525252;
     text-align: justify;
-    background-color: #FFF;
     padding: 8px;
     margin-top: 20px;
     overflow-y: auto;

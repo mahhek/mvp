@@ -11,7 +11,6 @@ class User < ActiveRecord::Base
   validate :field_values, :on => :update
 
   def field_values
-    errors.add_to_base('Please provide correct Zip code.') if self.zip_code == "19146"
     errors.add_to_base('Please provide correct Phone Number.') if self.phone_number == "(555) 123-4567"    
   end
 
@@ -68,3 +67,81 @@ class User < ActiveRecord::Base
     Notifier.deliver_password_reset_instructions(self)
   end
 end
+
+#Please find answers in blue.
+#
+#On Wed, Jun 29, 2011 at 5:58 PM, Apu Gupta <apu@storably.com> wrote:
+#
+#    Mahhek,
+#
+#    The following are bugs vs. changes:
+#
+#    Bugs:
+#    Page 1: Missing Comma
+#
+#    FIXED
+#
+#    Page 4: Pressing enter should not advance to add photos
+#
+#    FIXED
+#
+#    Page 4: Dollar sign & .00 alignment changes upon display of error message (designer issue?)
+#
+#    FIXED
+#
+#    Page 5: Text placement issue (designer issue?)
+#
+#    FIXED
+#
+#    Page 6: Photo uploading issue - this is a bug
+#
+#    FIXED
+#
+#    Page 7: "Give us your zip code" - simple spelling mistake, bug
+#
+#    FIXED
+#
+#    Page 8: Zip code error appears even though zip code has been entered
+#
+#    FIXED
+#
+#    Page 8: When uploading photo, no photo displays
+#
+#    FIXED
+#
+#    Page 9: New York map comes up on a search for Boston
+#
+#    With all due respect, this is not a bug, remember, when we implement this, if there was not any result found after search then there wasn't any map for displaying, then Josh said me in email that please show NY map if you didn't find any, Then I implement that without any confirmation of time. So If you want me to do this for each value of drop down then increase my hours 2 to 3.5 ( This includes page number 11's logic as it didn't implement yet ). Thanks.
+#
+#    Page 10: Designer issue
+#
+#    YES, its designer's issue, please ask him to provide me green and red alert fields. He might forgot.
+#
+#    Page 11: I thought this logic had already been implemented, if not, tell me.
+#
+#    Changes:
+#    Page 1: Delete "Response Rate" - this cannot take more than 5 minutes
+#
+#   FIXED
+#
+#    Page 1: Placing profile information on a blue background instead of white box - designer issue with you feeding the data - 30 mins
+#
+#   FIXED  (without designer#'s input)
+#
+#    Page 2: Delete "Affiliates" link - 5 minutes
+#
+#   FIXED
+#
+#    Page 3 & 8: Error message handling - you have done this before and now it needs to be applied here - 1 hour
+#
+#   FIXED  ( Need Red alert div from designer)
+#
+#    Page 4: Place "*" next to required fields - 5 mins
+#
+#   FIXED
+#
+#    Page 7: Change "Hello Lucas" text to black and remove link - 5 mins
+#
+#   FIXED
+#
+

@@ -6,14 +6,14 @@
 }
 #signup-color {
     float: left;
-    height: 38px;
+    min-height: 38px;
     width: 816px;
     background-color: #73c13c;
 }
 #signup-heading {
     font-family: 'FamiliarProBold';
     float: left;
-    height: 38px;
+    min-height: 38px;
     width: 816px;
     text-align: center;
     font-size: 18px;
