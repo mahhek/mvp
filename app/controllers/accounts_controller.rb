@@ -19,19 +19,22 @@ class AccountsController < ApplicationController
   end
 
   def withdraw_amount
+    if @user.recent_balance.to_f > 0.0
+      @transaction = Transaction.new
+      @transaction.confirmation_number = confirmation_number
+      @transaction.price = @user.recent_balance
+      @transaction.withdrawer = @user.id
+      @transaction.withdrawal_amount = @user.recent_balance
+      @transaction.save
 
-    @transaction = Transaction.new
-    @transaction.confirmation_number = confirmation_number   
-    @transaction.price = @user.recent_balance
-    @transaction.withdrawer = @user.id
-    @transaction.withdrawal_amount = @user.recent_balance
-    @transaction.save
+      @user.update_attribute("recent_balance", @user.recent_balance - @user.recent_balance )
 
-    @user.update_attribute("recent_balance", @user.recent_balance - @user.recent_balance )
-
-    flash[:notice] = "Amount withdrawal successfully!"
-    redirect_to account_path(@user)
-    
+      flash[:notice] = "Amount withdrawal successfully!"
+      redirect_to account_path(@user)
+    else
+      flash[:notice] = "No Amount to withdraw!"
+      redirect_to account_path(@user)
+    end
   end
 
 
