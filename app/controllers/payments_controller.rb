@@ -37,14 +37,17 @@ class PaymentsController < ApplicationController
     @transaction.price = @payment.amount
     @transaction.buyer_fee = calculate_fee(@payment.amount, @location.park_store, "Buyer")
     @transaction.seller_fee = calculate_fee(@payment.amount, @location.park_store, "Seller")
-    @transaction.buyer_total = @payment.amount + @transaction.buyer_fee
-    @transaction.seller_total = @payment.amount - @transaction.seller_fee
-    @transaction.storably_total = @transaction.buyer_fee + @transaction.seller_fee
-    @transaction.save
+    @transaction.buyer_total = @payment.amount.to_f + @transaction.buyer_fee.to_f
+    @transaction.seller_total = @payment.amount.to_f - @transaction.seller_fee.to_f
+    @transaction.storably_total = @transaction.buyer_fee.to_f + @transaction.seller_fee.to_f
+    @transaction.save!
 
     user = User.find_by_id(@transaction.creator_id)
     if user
-      user.update_attribute("recent_balance", user.recent_balance + @transaction.seller_total )
+      puts "=========="
+      puts user.recent_balance.inspect
+      puts @transaction.seller_total.inspect
+      user.update_attribute("recent_balance", user.recent_balance.to_f + @transaction.seller_total.to_f )
     end
 
   end

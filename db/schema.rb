@@ -196,9 +196,9 @@ ActiveRecord::Schema.define(:version => 20110703232559) do
     t.string   "photo_content_type"
     t.string   "photo_file_size"
     t.string   "city"
-    t.float    "recent_balance",      :default => 0.0
     t.integer  "renter_id"
     t.date     "rent_date"
+    t.float    "recent_balance",      :default => 0.0
   end
 
 end
