@@ -309,6 +309,21 @@ body {
     font-size: 16px;
     color: #593325;
 }
+.erro_messages{
+    width: 865px;
+    float: left;
+    background-color: #D24824;
+    margin-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom:10px;
+    color: white;
+    font-family: arial,helvitica;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+}
 #featuer-boxes {
     width: 870px;
     float: left;

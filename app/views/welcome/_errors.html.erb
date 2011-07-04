@@ -1,6 +1,6 @@
 <% unless object.nil? %>
   <% if object.errors.any? %>
-    <div id="error_explanation" style="padding: 1px;">
+    <div id="error_explanation" style="padding: 1px;" class="erro_messages">
       <ul>
         <% object.errors.full_messages.each do |msg| %>
           <li style="list-style: none;"><%= msg %></li>

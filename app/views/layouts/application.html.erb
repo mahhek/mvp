@@ -25,11 +25,12 @@
         <div id="links">
 
           <% unless current_user %>
-            <%= link_to "Register", :controller => "welcome", :action => "signup_and_signin", :id => "signup" , :style => "border-radius: none;" %>
+            <%= link_to "Register", { :controller => "welcome", :action => "signup_and_signin", :id => "signup"} , :style => "border-radius: none;" %>
             <%= link_to "Sign in", :controller => "welcome", :action => "signup_and_signin", :id => "signin"  %>
           <%else%>
             <span><%= "Hello #{current_user.first_name}"  %></span>
             <%= link_to "Dashboard", locations_path  %>
+            <%= link_to "Account Information", account_path(current_user)  %>
             <%= link_to "Logout", user_session_path(current_user), :method => :delete %>
           <% end %>
           <a href="/welcome/tell_more">Tell Me More</a>
@@ -43,6 +44,11 @@
 
 
     <div id="wrapper">
+      <div id="signup-color">
+        <div id="signup-heading">
+          <%= render :partial => "layouts/flash_messages" %>
+        </div>
+      </div>
       <%= yield %>
     </div>
 

@@ -24,19 +24,40 @@ class ApplicationController < ActionController::Base
     return @current_user if defined?(@current_user)
     @current_user = current_user_session && current_user_session.user
   end
+  def confirmation_number
+    UUIDTools::UUID.timestamp_create().to_s
+  end
+  def calculate_fee(amount, storage_type, person)
+    case storage_type
+    when "Parking"
+      case person
+      when "Buyer"
+        return number_with_precision(( amount * FeeStructure.first.park_buyer ) / 100, :precision => 2)
+      when "Seller"
+        return number_with_precision(( amount * FeeStructure.first.park_seller ) / 100 , :precision => 2)
+      end
+    when "Storage"
+      case person
+      when "Buyer"
+        return number_with_precision(( amount * FeeStructure.first.store_buyer ) / 100 , :precision => 2)
+      when "Seller"
+        return number_with_precision(( amount * FeeStructure.first.store_seller ) / 100 , :precision => 2)
+      end
+    end
+  end  
 
   def admin_required
     unless current_user
       store_location
       unless session[:return_to] == "/"
-        flash[:error] = "You must be logged in to access this page"
+        flash[:notice] = "You must be logged in to access this page"
       end
       redirect_to login_path
       return false
     end
 
     unless current_user.has_role?("Admin")
-      flash[:error] = "You don't have permission to access this page."
+      flash[:notice] = "You don't have permission to access this page."
       redirect_to root_path
     end
   end
@@ -45,7 +66,7 @@ class ApplicationController < ActionController::Base
     logger.debug "ApplicationController::require_user"
     unless current_user
       store_location
-      flash[:error] = "You must be logged in to access this page"
+      flash[:notice] = "You must be logged in to access this page"
       redirect_to "/welcome/signup_and_signin"
       return false
     end
@@ -55,7 +76,7 @@ class ApplicationController < ActionController::Base
     logger.debug "ApplicationController::require_no_user"
     if current_user
       store_location
-      flash[:error] = "You must be logged out to access this page"
+      flash[:notice] = "You must be logged out to access this page"
       redirect_to "/"
       return false
     end

@@ -7,9 +7,9 @@
   <div id="video-player">How it works <a href="#"><img border="0" align="absmiddle" height="37" width="56" alt="how it works" src="/images/video-player.png" /></a></div>
 </div>
 
-<div style="width: 100%;float: left;">
+<div>
   <% if @location.errors.any? %>
-    <div id="errorExplanation">
+    <div id="errorExplanation" class="erro_messages">
       <h2>Oops! Looks like you need to include the following:</h2>
       <ul>
         <li style="list-style: square;float: left;">

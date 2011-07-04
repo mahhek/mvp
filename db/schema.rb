@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110630220504) do
+ActiveRecord::Schema.define(:version => 20110703232559) do
 
   create_table "avatars", :force => true do |t|
     t.string   "caption"
@@ -18,6 +18,18 @@ ActiveRecord::Schema.define(:version => 20110630220504) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "balance_histories", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "confirmation_number"
+    t.date     "payment_date"
+    t.float    "recent_balance"
+    t.float    "seller_total"
+    t.float    "withdrawal_amount"
+    t.float    "balance"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -38,6 +50,15 @@ ActiveRecord::Schema.define(:version => 20110630220504) do
   create_table "features_locations", :id => false, :force => true do |t|
     t.integer "feature_id"
     t.integer "location_id"
+  end
+
+  create_table "fee_structures", :force => true do |t|
+    t.float    "park_buyer"
+    t.float    "park_seller"
+    t.float    "store_buyer"
+    t.float    "store_seller"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "locations", :force => true do |t|
@@ -95,6 +116,18 @@ ActiveRecord::Schema.define(:version => 20110630220504) do
     t.datetime "updated_at"
   end
 
+  create_table "rental_histories", :force => true do |t|
+    t.integer  "location_id"
+    t.integer  "creator_id"
+    t.integer  "renter_id"
+    t.date     "rent_date"
+    t.date     "end_date"
+    t.date     "payment_date"
+    t.float    "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "requested_cities", :force => true do |t|
     t.string   "name"
     t.integer  "user_id"
@@ -112,6 +145,26 @@ ActiveRecord::Schema.define(:version => 20110630220504) do
   create_table "roles_users", :id => false, :force => true do |t|
     t.integer "role_id"
     t.integer "user_id"
+  end
+
+  create_table "transactions", :force => true do |t|
+    t.string   "confirmation_number"
+    t.integer  "location_id"
+    t.float    "price"
+    t.string   "list_type"
+    t.float    "buyer_fee"
+    t.float    "seller_fee"
+    t.float    "buyer_total"
+    t.float    "seller_total"
+    t.float    "storably_total"
+    t.date     "rent_date"
+    t.date     "payment_date"
+    t.integer  "creator_id"
+    t.integer  "renter_id"
+    t.integer  "withdrawer"
+    t.float    "withdrawal_amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
@@ -143,6 +196,9 @@ ActiveRecord::Schema.define(:version => 20110630220504) do
     t.string   "photo_content_type"
     t.string   "photo_file_size"
     t.string   "city"
+    t.float    "recent_balance",      :default => 0.0
+    t.integer  "renter_id"
+    t.date     "rent_date"
   end
 
 end

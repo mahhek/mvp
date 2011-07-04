@@ -1,0 +1,35 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  confirmation_number: MyString
+  location_id: 1
+  price: 1.5
+  list_type: MyString
+  buyer_fee: 1.5
+  seller_fee: 
+  buyer_total: 1.5
+  seller_total: 1.5
+  storably_total: 1.5
+  rent_date: 2011-07-02
+  payment_date: 1.5
+  creator_id: 1
+  renter_id: 1
+  withdrawer: 1
+  withdrawal_amount: 1.5
+
+two:
+  confirmation_number: MyString
+  location_id: 1
+  price: 1.5
+  list_type: MyString
+  buyer_fee: 1.5
+  seller_fee: 
+  buyer_total: 1.5
+  seller_total: 1.5
+  storably_total: 1.5
+  rent_date: 2011-07-02
+  payment_date: 1.5
+  creator_id: 1
+  renter_id: 1
+  withdrawer: 1
+  withdrawal_amount: 1.5

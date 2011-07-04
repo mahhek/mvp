@@ -7,17 +7,16 @@ class User < ActiveRecord::Base
     c.validates_length_of_password_field_options = password_length_constraints.merge :within => 6..24
 
   end
+  attr_accessor :password_confirmation
 
-  validate :field_values, :on => :update
+  
 
-  def field_values
-    errors.add_to_base('Please provide correct Phone Number.') if self.phone_number == "(555) 123-4567"    
-  end
-
+  
 
   has_and_belongs_to_many :roles
   has_many :locations, :order => "created_at DESC"
   has_many :payments, :dependent => :destroy
+  
   has_attached_file :photo, :styles => { :medium => "212x182#", :thumb => '100x100#', :tiny => "30x30#" },
     :storage => :s3,
     :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
@@ -26,6 +25,10 @@ class User < ActiveRecord::Base
 
   def role?(role)
     return !!self.roles.find_by_name(role.to_s.camelize)
+  end
+
+  def transactions
+    Transaction.all :conditions => ["creator_id =? or renter_id=? or withdrawer=?",self.id,self.id,self.id]
   end
 
   def active?

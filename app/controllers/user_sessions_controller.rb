@@ -24,7 +24,7 @@ class UserSessionsController < ApplicationController
     if request.xhr?
       @user_session = UserSession.new(params[:user_session])
       if @user_session.save
-        flash[:notice] = "Login successful !"
+#        flash[:notice] = "Login successful !"
         render :update do |page|
           if session[:return_to]
             if session[:return_to] == "/locations"
@@ -38,8 +38,8 @@ class UserSessionsController < ApplicationController
         end
       else
         render :update do |page|
-          #          page["signup-heading"].hide
-          page["signup-heading"].replace_html :partial => "welcome/errors", :locals => {:object => @user_session}
+          page["signup-color"].hide
+          page["errors_div"].replace_html :partial => "welcome/errors", :locals => {:object => @user_session}
         end
       end
     else
@@ -100,7 +100,7 @@ class UserSessionsController < ApplicationController
 
   def destroy
     current_user_session.destroy
-    flash[:notice] = "Logout successful!"
+#    flash[:notice] = "Logout successful!"
     redirect_to root_url
   end
 end

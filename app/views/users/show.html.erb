@@ -1,12 +1,49 @@
-<p>
-  <b>Username:</b>
-  <%= @user.username %>
-</p>
+<div id="get-list-header">Can we get to know you?</div>
 
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
+<div id="left-photo">
+  <% unless @user.photo_file_name.nil? %>
+    <div id="photo">
+      <%= image_tag(@user.photo.url(:medium) )%>
+    </div>
+  <% end %>
+</div>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', homepage_path %>
+<div id="gray-box">
+  <h1>
+    Profile For
+  </h1>
+  <div class="bg-fields">
+    <div class="txt"></div>
+    <div class="field-x">
+      <%= "#{@user.first_name} #{@user.last_name[0..0].capitalize if @user.last_name}." %>
+    </div>
+  </div>
+
+  <div class="bg-fields">
+    <div class="txt">City:</div>
+    <div class="field-x">
+      <%= @user.city %>
+    </div>
+  </div>
+
+  <div class="bg-fields">
+    <div class="txt">Occupation:</div>
+    <div class="field-x">
+      <%= @user.occupation %>
+    </div>
+  </div>
+
+  <div class="bg-fields">
+    <div class="txt">Schools Attended:</div>
+    <div class="field-x">
+      <%= @user.school_attended %>
+    </div>
+  </div>
+
+
+  <div id="details"><br/>
+    Anything you want to share with folks?<br/><br/>
+    <%= @user.share %>
+    <br/><br/>
+  </div>
+</div>

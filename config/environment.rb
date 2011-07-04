@@ -38,7 +38,7 @@ Rails::Initializer.run do |config|
   config.gem "paperclip"
   config.gem "aws-s3", :lib => "aws/s3"
   config.gem "geokit"
-  
+  config.gem 'uuidtools'
 
 
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.

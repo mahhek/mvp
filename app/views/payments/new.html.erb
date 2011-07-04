@@ -3,7 +3,7 @@
 
 <div style="width: 100%;float: left;">
   <% if @payment.errors.any? %>
-    <div id="errorExplanation">
+    <div id="errorExplanation" class="erro_messages">
       <ul>
         <% @payment.errors.full_messages.each do |msg| %>
           <li style="list-style: none;"><%= msg %></li>

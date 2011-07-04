@@ -5,6 +5,7 @@ class Location < ActiveRecord::Base
   has_many :avatars, :dependent => :destroy
   has_many :payments, :dependent => :destroy
   belongs_to :user
+  
 
   validates_presence_of :address, :phone, :headline, :description, :price, :message => ""
   validates_format_of :phone, :allow_blank => true,
@@ -19,6 +20,12 @@ class Location < ActiveRecord::Base
   belongs_to :locatable, :polymorphic => true
   before_save :geolocate_from_address
   before_save :find_nearest_city
+
+  def creator_id
+    self.user_id.to_i
+  end
+
+
 
   def find_nearest_city
     self.nearest_metro = calculate_distance_and_get_city

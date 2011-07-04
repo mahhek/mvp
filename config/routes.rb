@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   # The priority is based upon order of creation: first created -> highest priority.
   map.resource :user_session,:collection => [:create => :get]
-  map.resources :users
+  map.resources :users, :collection  => {:update_password => :post }
   map.update_location_status "/location/update/status/:id", :controller => "locations", :action => "update_location_status"
   map.update_start_date "/location/update/start_date/:id", :controller => "locations", :action => "update_start_date"
   
@@ -10,6 +10,9 @@ ActionController::Routing::Routes.draw do |map|
     location.resources :payments
   end
   map.search_location "/spaces/search_location", :controller => 'locations', :action => 'search_location'
+
+  map.resources :accounts
+  map.amount_withdraw "/account/:id/withdraw", :controller => "accounts", :action => "withdraw_amount"
 
 
   map.user_create "/user/create", :controller => 'users', :action => 'create'

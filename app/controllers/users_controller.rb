@@ -11,8 +11,8 @@ class UsersController < ApplicationController
       end
     else
       render :update do |page|
-        #        page["signup-heading"].hide
-        page["signup-heading"].replace_html :partial => "welcome/errors", :locals => {:object => @user}
+        page["signup-color"].hide
+        page["errors_div"].replace_html :partial => "welcome/errors", :locals => {:object => @user}
       end
     end
   end
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
 
 
   def show
-    @user = current_user
+    @user = User.find_by_id(params[:id])
   end
 
   def edit
@@ -52,6 +52,7 @@ class UsersController < ApplicationController
     end
   end
 
+  
   def reset_password
     if @user = User.find_using_perishable_token(params[:reset_password_code], 1.week)
     else

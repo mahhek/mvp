@@ -104,7 +104,7 @@
       <% else %>
         <%= image_tag("missing_70.png") %>
       <% end %>
-      <%= @location.user.first_name %> <%= "#{@location.user.last_name[0..0].capitalize}." if @location.user.last_name %>
+      <%= link_to "#{@location.user.first_name} #{@location.user.last_name[0..0].capitalize if @location.user.last_name}.", user_path(@location.user)  %>
       <br/>
       <span class="hel-14"></span></div>
 

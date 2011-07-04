@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  park_buyer: 1.5
+  park_seller: 1.5
+  store_buyer: 1.5
+  store_seller: 1.5
+
+two:
+  park_buyer: 1.5
+  park_seller: 1.5
+  store_buyer: 1.5
+  store_seller: 1.5

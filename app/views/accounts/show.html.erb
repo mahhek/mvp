@@ -1,0 +1,120 @@
+<div style="float: left;width: 20%;">
+  <div id="left-photo">
+    <% unless @user.photo_file_name.nil? %>
+      <div id="photo">
+        <%= image_tag(@user.photo.url(:thumb) )%>
+      </div>
+    <% end %>
+    <br/>
+    Hi <%= @user.first_name %>
+    <br/>
+    <%= link_to "Edit Profile", edit_user_path(@user)  %>
+  </div>
+  <br/>
+  <%= link_to "Messages", "#"  %><br/>
+  <%= link_to "Manage Your Spaces", locations_path  %><br/>
+  <%= link_to "Your Customers", "#"  %><br/>
+  <%= link_to "Places You Rent", "#"  %><br/>
+  <%= link_to "Your Account", account_path(@user)  %><br/>
+  <%= link_to "Your Profile", user_path(@user)  %><br/>
+
+</div>
+<div style="float: left;width: 75%;margin-left: 15px;">
+  <h1> Change Password </h1>
+  <% form_tag :controller =>"accounts", :action =>"update_password" do %>
+    <%= hidden_field_tag "id",  @user.id  %>
+
+    <% if @user.errors.any? %>
+      <div id="error_explanation" style="float: left; margin-top: 10px;width: 100%;">
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li style="list-style: none;"><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div id="gray-box">
+
+      <div class="bg-fields">
+        <div class="txt">New Password</div>
+        <div class="field-x">
+          <%= password_field_tag :password %>
+        </div>
+      </div>
+
+      <div class="bg-fields">
+        <div class="txt">Confirmation Password</div>
+        <div class="field-x">
+          <%= password_field_tag :password_confirmation %>
+        </div>
+      </div>
+
+      <div id="details">
+        <%= submit_tag "Change Password" %>
+      </div>
+    </div>
+
+
+  <% end %>
+
+  <hr/>
+
+  <h1> Get Paid </h1>
+  Available Balance: $<%= @user.recent_balance %>
+  <br/>
+  <%= link_to "Withdraw Funds", amount_withdraw_path(@user) %>
+
+  <hr/>
+
+  <h1> Transaction History </h1>
+  <table width="100%" style="text-align: center;">
+    <tr>
+      <th>
+        Date
+      </th>
+      <th>
+        Amount
+      </th>
+      <th>
+        From / To
+      </th>
+      <th>
+        Listing
+      </th>
+      <th>
+        Type
+      </th>
+    </tr>
+    <% @user.transactions.each do |transaction| %>
+      <tr>
+        <td>
+          <%= transaction.created_at.strftime("%B %d, %Y") %>
+        </td>
+
+        <td>
+          <%= number_with_precision(transaction.price, :precision => 2) %>
+        </td>
+
+        <td>
+          <% unless transaction.withdrawer.nil? %>
+            "Bank Account"
+          <%else%>
+            <%= transaction.renter %> / <%= transaction.seller %>
+          <%end%>
+        </td>
+
+        <td>
+          <%= transaction.location.headline if transaction.location %>
+        </td>
+        <td>
+          <%= transaction.withdrawer.nil? ? (@user.id == transaction.renter_id) ? "Payment" : "Deposit"  : "Withdrawal" %>
+        </td>
+      </tr>
+    <% end %>
+
+  </table>
+
+</div>
+
+

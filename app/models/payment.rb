@@ -3,10 +3,12 @@ class Payment < ActiveRecord::Base
   belongs_to :location
 
   validates_presence_of :name, :email, :cc_number, :billing_address, :city, :state, :zip_code, :security_code, :phone_number
-  validates_format_of :phone_number, :allow_blank => true,
-    :with => /^(1\s*[-\/\.]?)?(\((\d{3})\)|(\d{3}))\s*[-\/\.]?\s*(\d{3})\s*[-\/\.]?\s*(\d{4})\s*(([xX]|[eE][xX][tT])\.?\s*(\d+))*/
-	validates_format_of :email, :with => /^[\w\.=-]+@[\w\.-]+\.[\w]{2,3}$/
-  validate :field_values
+  #  validates_format_of :phone_number, :allow_blank => true,
+  #    :with => /^(1\s*[-\/\.]?)?(\((\d{3})\)|(\d{3}))\s*[-\/\.]?\s*(\d{3})\s*[-\/\.]?\s*(\d{4})\s*(([xX]|[eE][xX][tT])\.?\s*(\d+))*/
+  #	validates_format_of :email, :with => /^[\w\.=-]+@[\w\.-]+\.[\w]{2,3}$/
+  #  validate :field_values
+
+  
 
   def field_values
     errors.add_to_base('Please provide correct Name.') if self.name == "Name"
