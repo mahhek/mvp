@@ -4,7 +4,7 @@
     <span class="hel-14">
       <%= @location.storage_type %> for <%= @location.accommodates %>
       &nbsp;|&nbsp;
-      <%= "#{@location.street_name} #{@location.city}, #{@location.region}, #{@location.zipcode}, #{@location.country_code}" %>
+      <%= "#{@location.street_name} #{@location.city}, #{@location.region}, #{@location.zipcode}" %>
     </span>
   </div>
 </div>
@@ -48,7 +48,7 @@
 
 
     <div id="storeage-detailx" style="overflow:hidden;">
-      <div id="feature-heading">Storage </div>
+      <div id="feature-heading"> <%= @location.park_store %></div>
       <div class="sub-feature-heading">Holds:</div>
       <div class="sub-feature-details"><%= @location.accommodates %></div>
       <div class="sub-feature-heading">Security:</div>
@@ -109,12 +109,12 @@
       <span class="hel-14"></span></div>
 
     <div id="user-details">
-      <ul>
+      <ul style="padding: 0px;margin: 0px;">
         <li style="float: left;width: 100%;list-style: square;">
           Occupation: <%= @location.user.occupation %>
         </li>
         <li style="float: left;width: 100%;list-style: square;">
-          College: <%= @location.user.school_attended %>
+          Schools: <%= @location.user.school_attended %>
         </li>
         <li style="float: left;width: 100%;list-style: square;">
           More about me: <%= @location.user.share %>

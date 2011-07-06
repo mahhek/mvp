@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     @current_user = current_user_session && current_user_session.user
   end
   def confirmation_number
-    UUIDTools::UUID.timestamp_create().to_s
+    Base64.encode64(UUIDTools::UUID.random_create)[0..8]
   end
   def calculate_fee(amount, storage_type, person)
     case storage_type

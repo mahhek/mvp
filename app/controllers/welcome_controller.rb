@@ -1,6 +1,5 @@
 class WelcomeController < ApplicationController
   def index
-    flash[:notice] = nil
     unless current_user
       @user_session = UserSession.new
       @user = User.new      

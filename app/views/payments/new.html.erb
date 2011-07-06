@@ -19,7 +19,10 @@
     <div class="headingx">What's Next?</div>
   </div>
   <div class="r-payment-details">
-    <div id="next-detailx">You are about to request a trusted storage or parking space. Fill your billing details below to submit this request to your seller. you will not be charged unless the seller accepts  your request with in 24 hours.</div>
+    <div id="next-detailx">You are about to request a trusted storage or parking space.
+      Fill your billing details below to submit this request to your seller.
+      You will not be charged unless the seller accepts  your request within 24 hours.
+    </div>
   </div>
 </div>
 
@@ -87,7 +90,7 @@
       <div class="white-bg2">
         <div class="n-price">Service Fee:</div>
         <% service_fee = sub_total * Commission.first.buyer %>
-        <div class="p-price">$<%= number_with_precision(service_fee.to_f, :precision => 2) %> (8%) </div>
+        <div class="p-price">$<%= number_with_precision(service_fee.to_f, :precision => 2) %></div>
       </div>
 
       <div class="white-bg">
@@ -96,7 +99,7 @@
         <div class="p-price" style="font-weight: bold;">$<%= number_with_precision(total.to_f, :precision => 2) %></div>
       </div>
     </div>
-    <div id="monthly-charges-txt">This will be your monthly Charge.</div>
+    <div id="monthly-charges-txt">This will be your monthly charge.</div>
   </div>
 </div>
 

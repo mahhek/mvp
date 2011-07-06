@@ -1,9 +1,9 @@
 <% unless object.nil? %>
   <% if object.errors.any? %>
-    <div id="error_explanation" style="padding: 1px;" class="erro_messages">
+    <div id="error_explanation" class="erro_messages">
       <ul>
         <% object.errors.full_messages.each do |msg| %>
-          <li style="list-style: none;"><%= msg %></li>
+          <li style="list-style: none;"><%= msg == "You did not provide any details for authentication." ? "Oops! It looks like you didn't fill out the form completely." : msg %></li>
         <% end %>
       </ul>
     </div>

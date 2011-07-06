@@ -39,7 +39,9 @@
   $(document).ready(function() {
     $(document).keyup(function(event) {
       if (event.keyCode == 13) {
-        $('#login_form').submit();
+        if($('#user_session_email').val() != "" && $('#user_session_password').val() != "" ){
+          $('#login_form').submit();
+        }
       }
     })
   });

@@ -83,6 +83,7 @@ class LocationsController < ApplicationController
   def create
     @location = Location.new(params[:location])
     @location.feature_ids = params[:features]
+    @location.location_status = "Show Listing"
     if @location.save
       flash[:notice] = "Location saved successfully!"
       redirect_to new_location_avatar_path(@location)

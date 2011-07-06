@@ -3,8 +3,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     @user.roles << Role.find_by_name("User")
-    if @user.save
-      @user.activate!
+    @user.activate!
+    if @user.save      
       @user.update_attribute("recent_balance", 0.to_f)
       flash[:notice] = "Your account has been created!"
       render :update do |page|

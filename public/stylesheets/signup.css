@@ -4,24 +4,7 @@
     padding-right: 34px;
     padding-left: 34px;
 }
-#signup-color {
-    float: left;
-    min-height: 38px;
-    width: 816px;
-    background-color: #73c13c;
-}
-#signup-heading {
-    font-family: 'FamiliarProBold';
-    float: left;
-    min-height: 38px;
-    width: 816px;
-    text-align: center;
-    font-size: 18px;
-    color: #FFF;
-    line-height: 38px;
-    background-image: url(/images/shade.png);
-    background-repeat: no-repeat;
-}
+
 .fields-wrapper {
     float: left;
     height: 390px;
@@ -147,12 +130,18 @@
     height: 42px;
 }
 .signme-bg2 {
+
     float: left;
+
     padding-left: 22px;
+
     width: 316px;
-    padding-top: 10px;
+
+    padding-top: 20px;
+
     height: 42px;
-}
+
+} 
 #forgot-pass {
     font-family: 'HelveticaLTStdFractions';
     float: left;

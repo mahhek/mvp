@@ -44,11 +44,13 @@
 
 
     <div id="wrapper">
-      <div id="signup-color">
-        <div id="signup-heading">
-          <%= render :partial => "layouts/flash_messages" %>
+      <% if notice or alert %>
+        <div id="signup-color">
+          <div id="signup-heading">
+            <%= render :partial => "layouts/flash_messages" %>
+          </div>
         </div>
-      </div>
+      <% end %>
       <%= yield %>
     </div>
 

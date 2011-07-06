@@ -5,9 +5,8 @@ class UserSession < Authlogic::Session::Base
 	def generic_error
     RAILS_DEFAULT_LOGGER.debug "checking errors ..."
 		clear = false
-		errors.each do |attr,message|
-      puts "================================================================="
-			puts "Error: #{attr.inspect}: #{message}"
+    
+		errors.each do |attr,message|      
 			if ( (attr == 'email' and message == 'is not valid') or 
             (attr == 'email' and message == 'cannot be blank') or
             (attr == 'email' and message == 'does not exist') or
@@ -22,6 +21,11 @@ class UserSession < Authlogic::Session::Base
 			errors.clear
 			errors.add_to_base("Oops! please check your email address or password.")
 		end
+
+    puts "================================================================"
+    p errors.full_messages.inspect
+
+
 	end
 
 

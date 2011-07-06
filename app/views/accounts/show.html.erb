@@ -61,7 +61,7 @@
   <hr/>
 
   <h1> Get Paid </h1>
-  Available Balance: $<%= @user.recent_balance %>
+  Available Balance: $<%= number_with_precision(@user.recent_balance, :precision => 2) %>
   <br/>
   <%= link_to "Withdraw Funds", amount_withdraw_path(@user) %>
 
@@ -77,10 +77,10 @@
         Amount
       </th>
       <th>
-        From / To
+        Listing
       </th>
       <th>
-        Listing
+        Confirmation Number
       </th>
       <th>
         Type
@@ -93,19 +93,19 @@
         </td>
 
         <td>
-          <%= number_with_precision(transaction.withdrawer.nil? ? transaction.price : transaction.withdrawal_amount, :precision => 2) %>
+          <%= number_with_precision(transaction.withdrawer.nil? ? (@user.id == transaction.renter_id) ? transaction.buyer_total : transaction.seller_total  : transaction.withdrawal_amount, :precision => 2) %>
         </td>
 
         <td>
           <% unless transaction.withdrawer.nil? %>
             "Bank Account"
           <%else%>
-            <%= transaction.renter %> / <%= transaction.seller %>
+            <%= link_to transaction.location.headline, location_path(transaction.location) if transaction.location %>
           <%end%>
         </td>
 
         <td>
-          <%= transaction.location.headline if transaction.location %>
+          <%= transaction.confirmation_number %>
         </td>
         <td>
           <%= transaction.withdrawer.nil? ? (@user.id == transaction.renter_id) ? "Payment" : "Deposit"  : "Withdrawal" %>

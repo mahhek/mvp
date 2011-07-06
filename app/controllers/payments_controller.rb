@@ -12,7 +12,7 @@ class PaymentsController < ApplicationController
     @payment = @location.payments.build(params[:payment])
     if @payment.save
       create_rent_out_transaction
-      flash[:notice] = "Request has been sent to the seller."
+      flash[:notice] = "Your reservation request has been sent to the seller."
       return redirect_to location_path(@location)
     else
       return render :action =>"new"
