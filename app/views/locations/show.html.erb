@@ -91,19 +91,25 @@
           });
         </script>
       </div>
-      <% if current_user != @location.user %>
-        <% if current_user.have_not_requested?(@location.id) %>
+      <% if current_user %>
+        <% if current_user != @location.user %>
+          <% if current_user.have_not_requested?(@location.id) %>
+            <div id="store-btn">
+              <%= image_tag("store-btn.png", :alt => "Store now", :width => "71", :height => "34", :border => "0", :onclick => "$('#location_request_from').submit();") %>
+            </div>
+          <% else %>
+            <div id="store-btn">
+              You have already requested.
+            </div>
+          <% end %>
+        <%else%>
           <div id="store-btn">
-            <%= image_tag("store-btn.png", :alt => "Store now", :width => "71", :height => "34", :border => "0", :onclick => "$('#location_request_from').submit();") %>
-          </div>
-        <% else %>
-          <div id="store-btn">
-            You have already requested.
+            You are owner.
           </div>
         <% end %>
       <%else%>
         <div id="store-btn">
-          You are owner.
+          <%= image_tag("store-btn.png", :alt => "Store now", :width => "71", :height => "34", :border => "0", :onclick => "$('#location_request_from').submit();") %>
         </div>
       <% end %>
 
@@ -143,7 +149,7 @@
     <div style="float: left;width: 100%;margin-top: 10px;display: none;" id="contact_me_div">
       <% remote_form_for @message, :url => send_contact_owner_path , :html => {:id => "contact_me_form"}, :success => "$('#contact_me_div').toggle('slow');$('#contact_me').val('');" do |f| %>
         <%= f.hidden_field :receiver_id, :value => @location.user_id %>
-        <%= f.hidden_field :sender_id, :value => current_user.id %>
+        <%= f.hidden_field :sender_id, :value => current_user.nil? ? "2" : current_user.id %>
         <%= f.hidden_field :message_type, :value => "Inquiry" %>
 
 
