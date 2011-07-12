@@ -114,7 +114,7 @@
 
       <div class="white-bglarge">
         <div class="n-pricelarge">Cancellation:</div>
-        <div class="p-pricelarge">Cancel by <%= (@location.renter_date - 7.days).strftime("%B %d, %Y") %></div>
+        <div class="p-pricelarge">Cancel by <%= (@location.renter_date - 7.days).strftime("%B %d, %Y") if @location.renter_date %></div>
       </div>
 
       <div class="white-bg2large">
