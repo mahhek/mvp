@@ -62,11 +62,11 @@ class User < ActiveRecord::Base
   end
 
   def transactions_as_renter
-    Transaction.all :conditions => [" renter_id=? and reserve_status=?",self.id,false], :order => "created_at Desc"
+    Transaction.all :conditions => [" renter_id=? ",self.id], :order => "created_at Desc"
   end
 
   def transactions_as_seller
-    Transaction.all :conditions => [" creator_id=? and reserve_status=?",self.id,false], :order => "created_at Desc"
+    Transaction.all :conditions => [" creator_id=? ",self.id], :order => "created_at Desc"
   end
 
   def active?
