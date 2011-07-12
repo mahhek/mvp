@@ -1,0 +1,50 @@
+<%= render :partial => "left_panel" %>
+<div style="float: left;width: 75%;border-left: 1px solid black;padding-left: 10px;">
+  <h1>Your messages</h1>
+  <hr></hr>
+  <% unless @messages.blank? %>
+    <table width="100%" style="text-align: center;" cellpadding="5" cellspacing="5">
+      <tr>
+        <th>
+          From
+        </th>
+        <th>
+          Message
+        </th>
+        <th>
+          Date
+        </th>
+        <th>
+          Delete
+        </th>
+      </tr>
+      <% @messages.each do |message| %>
+        <tr style="font-weight: <%= message.is_read ? "normal" : "bold"  %>;">
+          <td>
+            <%= message.from.first_name %>
+          </td>
+
+          <td style="text-align: left;">
+            <%= link_to h(message.message_type == "Inquiry" ? message.body[0..54] : message.subject), view_message_path(current_user, message), :style => "text-decoration:none;" %>
+          </td>
+
+          <td>
+            <%= message.created_at.strftime("%B/%d/%Y") %>
+          </td>
+
+          <td>
+            <%= link_to "Delete", message_delete_path(@user,message.id), :confirm => "Are you sure you want to delete this message?", :style => "text-decoration:none;" %>
+          </td>
+        </tr>
+      <% end %>
+
+    </table>
+
+  <% else %>
+    <div style="font-weight: bold;font-style: italic;">
+      Your Inbox is empty at the moment.
+    </div>
+  <% end %>
+
+</div>
+

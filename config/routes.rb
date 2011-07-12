@@ -9,9 +9,28 @@ ActionController::Routing::Routes.draw do |map|
     location.resources :avatars
     location.resources :payments
   end
+  
+  map.reserve_location "/location/reserve/:location_id", :controller => 'payments', :action => 'new'
   map.search_location "/spaces/search_location", :controller => 'locations', :action => 'search_location'
 
   map.resources :accounts
+  map.what_are_you_renting "accounts/:id/places/you/rent", :controller => "accounts", :action => "what_are_you_renting"
+  map.your_customers "accounts/:id/your/customers", :controller => "accounts", :action => "your_customers"
+  map.your_messages "accounts/:id/your/messages", :controller => "accounts", :action => "your_messages"
+  map.message_delete "accounts/:id/messages/:message_id/destroy", :controller => "accounts", :action => "delete_message"
+  map.view_message "account/:id/your/:message_id/message", :controller => "accounts", :action => "view_message"
+  map.post_a_reply "account/message/reply", :controller => "accounts", :action => "post_a_reply"
+  map.dashboard "account/:id/dashboard", :controller => "accounts", :action => "dashboard"
+
+  map.contact_owner "accounts/:id/contact/:location_id/owner", :controller => "accounts", :action => "contact_owner"
+  map.end_rental "accounts/:id/end/:location_id/rental", :controller => "accounts", :action => "end_rental"
+
+  map.contact_renter "accounts/:id/contact/:location_id/renter", :controller => "accounts", :action => "contact_renter"
+  map.send_contact_renter "accounts/contact/renter/send", :controller => "accounts", :action => "send_contact_renter"
+  
+  map.send_contact_owner "accounts/contact/owner/send", :controller => "accounts", :action => "send_contact_owner"
+  map.send_end_rental "accounts/end/rental/send", :controller => "accounts", :action => "send_end_rental"
+
   map.amount_withdraw "/account/:id/withdraw", :controller => "accounts", :action => "withdraw_amount"
 
 

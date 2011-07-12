@@ -1,0 +1,31 @@
+<%= render :partial => "left_panel" %>
+<div style="float: left;width: 75%;border-left: 1px solid black;padding-left: 10px;">
+  <h1>Inquiry about your space</h1>
+  <hr></hr>
+
+  <% form_for @message, :url => post_a_reply_path do |f| %>
+
+    <%= f.hidden_field :receiver_id, :value => @message.sender_id %>
+    <%= f.hidden_field :sender_id, :value => @message.receiver_id %>
+    <%= f.hidden_field :message_type, :value => "Inquiry" %>
+    <div style="width: 100%;float: left;margin-left: 10px;font-weight: bold;">
+      On <%= @message.created_at.strftime("%B/%d/%Y") %>, <%= @message.from.first_name %> wrote:
+    </div>
+    <div style="width: 100%;float: left;margin: 10px;">
+      <%= text_area_tag  "original_body", @message.message_type == "Inquiry" ? @message.body : @message.subject, :style => "width:595px;height:120px;", :disabled => true%>
+    </div>
+    <div style="width: 100%;float: left;margin-left: 10px;font-weight: bold;">
+      Send a reply to <%= @message.from.first_name %>:
+    </div>
+    <div style="width: 100%;float: left;margin: 10px;">
+      <%= text_area_tag "message[body]", nil , :style => "width:595px;height:120px;" %>
+    </div>
+
+    <div style="width: 100%;float: right;text-align: right;margin: 10px;">
+      <%= link_to "Back", your_messages_path(current_user) %>&nbsp;&nbsp;<%= f.submit "Post a Reply" %>
+    </div>
+
+  <% end %>
+
+</div>
+

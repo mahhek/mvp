@@ -73,7 +73,7 @@
     <div id="form-price">
       <div class="white-bg">
         <div class="n-price">Starting On:</div>
-        <div class="p-price"><%= @location.start_date.strftime("%B %d, %Y") %></div>
+        <div class="p-price"><%= @location.renter_date.strftime("%B %d, %Y") %></div>
       </div>
 
       <div class="white-bg2">
@@ -114,7 +114,7 @@
 
       <div class="white-bglarge">
         <div class="n-pricelarge">Cancellation:</div>
-        <div class="p-pricelarge">Cancel by <%= (@location.start_date - 7.days).strftime("%B %d, %Y") %></div>
+        <div class="p-pricelarge">Cancel by <%= (@location.renter_date - 7.days).strftime("%B %d, %Y") %></div>
       </div>
 
       <div class="white-bg2large">

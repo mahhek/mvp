@@ -1,0 +1,31 @@
+<h1>
+  Contact Owner
+</h1>
+
+<div style="width: 100%;float: left;">
+  <% remote_form_for @message, :url => send_contact_owner_path do |f| %>
+
+    <%= f.hidden_field :receiver_id, :value => @user.id %>
+    <%= f.hidden_field :sender_id, :value => current_user.id %>
+    <%= f.hidden_field :message_type, :value => "Inquiry" %>
+    <%= f.text_area  :body, :value => nil , :style => "width:595px;height:120px;", :onkeyup => "return personalMessageCheck('#message_body');" %>
+
+    <div id="buttons_div" style="width:100%;float:left;margin-top: 20px;">
+      <%= f.submit "Send",:id => "upload_button",
+        :class => "tiny_button",
+        :style => "width:80px;color:#333; background: url('') repeat-x scroll 0 0 transparent;",
+        :onclick =>"return submitCheck('#message_body');" %>
+      <%= f.submit "Cancel", :class => "tiny_button",
+        :style => "width:80px;",
+        :onclick => "$.modal.close();return false;" %>
+    </div>
+
+    <div style="width:100%;float:left;margin-top: 10px;display:none;" id="uploader_div">
+      <span class="tiny_button" style="width: 100px;">
+        Sending
+        <div style="background-image: url('/images/small_uploader.gif');background-repeat: no-repeat;float: right;height: 12px;margin-top: 5px;width: 30px;"></div>
+      </span>
+    </div>
+
+  <% end %>
+</div>

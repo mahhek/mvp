@@ -126,6 +126,12 @@
       <%= f.text_area :description, :size => "35x5" %>
     </div>
 
+    <div class="xfields">Number of spaces:*<br/>
+      <span style="float: left;">
+        <%= f.text_field :quantity  , :style => "width:50px;font-size:18px;" %>
+      </span>
+    </div>
+
     <div class="xfields">Available Starting:<br/>
       <script>
         $(document).ready(function(){
@@ -144,7 +150,7 @@
 
     <div class="xfields">Monthly Price:*<br/>
       <span style="float: left;">
-        $ 
+        $
       </span>
       <span style="float: left;">
         <%= f.text_field :price , :id => "calander1", :style => "font-size:18px;" %>
@@ -265,7 +271,7 @@
       },
       minLength: 2,
       change: function (event, ui) {
-        if (ui.item) {          
+        if (ui.item) {
           $('#another_element').val(ui.item.source.label);
         }
         else {
@@ -274,7 +280,7 @@
             $('#another_element').val('');
           }
         }
-        $(this).data('valid', false);        
+        $(this).data('valid', false);
       }
     }).live('blur', function (e) {
       if ($('.ui-autocomplete li:visible').length > 0) {

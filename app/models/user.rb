@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
   has_many :locations, :order => "created_at DESC"
   has_many :payments, :dependent => :destroy
   
+  
   has_attached_file :photo, :styles => { :medium => "212x182#", :thumb => '100x100#', :tiny => "30x30#" },
     :storage => :s3,
     :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
@@ -38,9 +39,34 @@ class User < ActiveRecord::Base
     return !!self.roles.find_by_name(role.to_s.camelize)
   end
 
+  def messages    
+    Message.find(:all, :conditions => ["receiver_id = ?", self.id.to_i] )
+  end
+
+  def rented_locations
+    renter_transactions = Transaction.find(:all,:conditions => ["renter_id = ? ", self.id.to_i])
+    renter_transactions.collect { |transaction| transaction.location }   
+  end
+
+  def have_not_requested?(location_id)
+    Transaction.find_by_location_id_and_renter_id(location_id,self.id)
+  end
+
+  def unread_messages
+    Message.find(:all, :conditions => ["receiver_id = ? and is_read=?", self.id.to_i, false] )
+  end
+
   def transactions
-    Transaction.all :conditions => ["creator_id =? or renter_id=? or withdrawer=?",self.id,self.id,self.id],
+    Transaction.all :conditions => ["( creator_id =? or renter_id=? or withdrawer=? ) and reserve_status=?",self.id,self.id,self.id,true],
       :order => "created_at Desc"
+  end
+
+  def transactions_as_renter
+    Transaction.all :conditions => [" renter_id=? and reserve_status=?",self.id,false], :order => "created_at Desc"
+  end
+
+  def transactions_as_seller
+    Transaction.all :conditions => [" creator_id=? and reserve_status=?",self.id,false], :order => "created_at Desc"
   end
 
   def active?

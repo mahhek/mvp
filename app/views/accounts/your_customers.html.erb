@@ -1,0 +1,34 @@
+<%= render :partial => "left_panel" %>
+<div style="float: left;width: 75%;border-left: 1px solid black;padding-left: 10px;">
+  <h1> Who is renting from you?</h1>
+  <hr></hr>
+  <% unless @seller_transactions.blank? %>
+    <div style="width: 100%;float: left;margin: 10px;">
+      <% @seller_transactions.each do |seller_transaction|  %>
+        <% location = seller_transaction.location %>
+        <div style="width: 100%;float: left;margin: 5px;">
+          <span style="width: 150px;float: left;height: 100px;">
+            <% if location.avatars.size > 0 %>
+              <%= image_tag(location.avatars.first.photo.url(:small), :border => "0", :height => "86", :width => "106", :alt => "space") %>
+            <% end %>
+          </span>
+          <span style="width: 250px;float: left;height: 100px;">
+            <%= link_to location.headline, location_path(location) %><br/>
+            <% renter = location.renter(seller_transaction.renter_id) %>
+            Owner By: <%= link_to "#{renter.first_name} #{renter.last_name[0..0].capitalize if renter.last_name}.", user_path(renter)  %><br/>
+            Rented On: <%= location.renter_date.strftime("%B %d, %Y") if location.renter_date %><br/>
+            Monthly Price: $<%= number_with_precision(location.price.to_f, :precision => 2) %><br/>
+          </span>
+          <span style="width: 250px;float: left;height: 100px;">
+            <%= link_to_remote "Contact Renter", :url => contact_renter_path(:id => renter.id, :location_id => location.id) %>
+            &nbsp;
+            <%= link_to_remote "End Rental", :url => end_rental_path(:id => renter.id, :location_id => location.id) %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    You do not have any space which is rented out.
+  <% end %>
+</div>
+

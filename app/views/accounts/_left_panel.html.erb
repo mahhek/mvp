@@ -1,0 +1,20 @@
+<div style="float: left;width: 20%;">
+  <div id="left-photo">
+    <% unless @user.photo_file_name.nil? %>
+      <div id="photo">
+        <%= image_tag(@user.photo.url(:thumb) )%>
+      </div>
+    <% end %>
+    <br/>
+    Hi <%= @user.first_name %>
+    <br/>
+    <%= link_to "Edit Profile", edit_user_path(@user)  %>
+  </div>
+  <br/>
+  <%= link_to "Messages", your_messages_path(current_user)  %><br/>
+  <%= link_to "Manage Your Spaces", locations_path  %><br/>
+  <%= link_to "Your Customers", your_customers_path(current_user)  %><br/>
+  <%= link_to "Places You Rent", what_are_you_renting_path(current_user)  %><br/>
+  <%= link_to "Your Account", account_path(@user)  %><br/>
+  <%= link_to "Your Profile", user_path(@user)  %><br/>
+</div>

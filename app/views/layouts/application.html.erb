@@ -13,6 +13,7 @@
     <%= javascript_include_tag  "jquery.counter-1.0.min"%>
     <%= javascript_include_tag  "jrails" %>
     <%= javascript_include_tag "date", "jquery.datePicker", "jquery.cycle.all.min" %>
+    <%= javascript_include_tag "jquery.simplemodal-1.3.5.js" %>
     <%= GMap.header(:with_vml => false, :host => request.host).html_safe %>
     <%= raw @map.to_html if @map%>
   </head>
@@ -30,7 +31,7 @@
           <%else%>
             <span><%= "Hello #{current_user.first_name}"  %></span>
             <%= link_to "Dashboard", locations_path  %>
-            <%= link_to "Account Information", account_path(current_user)  %>
+            <%= link_to "Account Information", dashboard_path(current_user)  %>
             <%= link_to "Logout", user_session_path(current_user), :method => :delete %>
           <% end %>
           <a href="/welcome/tell_more">Tell Me More</a>

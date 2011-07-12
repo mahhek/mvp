@@ -10,7 +10,10 @@ class Location < ActiveRecord::Base
   validates_presence_of :address, :phone, :headline, :description, :price, :message => ""
   validates_format_of :phone, :allow_blank => true,
     :with => /^(1\s*[-\/\.]?)?(\((\d{3})\)|(\d{3}))\s*[-\/\.]?\s*(\d{3})\s*[-\/\.]?\s*(\d{4})\s*(([xX]|[eE][xX][tT])\.?\s*(\d+))*/
-  
+  validates_presence_of :quantity
+  validates_numericality_of :quantity, :only_integer => true, :message => "can only be whole number."
+  validates_inclusion_of :quantity, :in => 1..1000, :message => "should be between 1 to 1000."
+
   before_save :update_park_store
 
   def update_park_store
@@ -25,7 +28,13 @@ class Location < ActiveRecord::Base
     self.user_id.to_i
   end
 
+  def owner
+    self.user
+  end
 
+  def renter(renter_id)
+    User.find_by_id(renter_id)
+  end
 
   def find_nearest_city
     self.nearest_metro = calculate_distance_and_get_city

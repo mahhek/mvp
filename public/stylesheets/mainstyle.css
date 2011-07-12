@@ -465,4 +465,131 @@ body {
 
         rgb(207,207,207) 99%);
 
-} 
+}
+
+
+
+/**********************************************************************/
+/* Simple Modal */
+/**********************************************************************/
+
+.simplemodal-overlay {
+    background-color: #000;
+}
+
+.simplemodal-container {
+    background: rgba(0,0,0,0.5);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.simplemodal-wrap {
+}
+
+.simplemodal-data {
+    background-color: #eee;
+    padding: 20px;
+    border-radius: 4px;
+    width: 600px;
+    float: left;
+}
+
+#simplemodal-container a.modalCloseImg {
+    background:url(/images/modal-x.png) no-repeat; /* adjust url as required */
+    cursor: hand;
+    width:25px;
+    height:29px;
+    display:inline;
+    z-index:3200;
+    position:absolute;
+    top:0;
+    right:0;
+    cursor:pointer;
+}
+
+
+
+
+.tiny_button, a.tiny_button:visited {
+    display: inline-block;
+    background: url(/images/simple_button.png) repeat-x;
+    width: auto;
+    padding:6px 0;
+    text-align:center;
+    border:1px solid #608925;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+    font-weight: normal;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    color:#FFF;
+    text-decoration: none;
+    opacity:.85;
+    margin-right: 12px;
+}
+
+.tiny_button:hover {
+    border-color:#49671d;
+}
+
+.tiny_button:active {
+    background-position:  0 -200px;
+    padding:6px 0;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.8);
+}
+
+
+
+.tiny_button_secondary, a.tiny_button_secondary:visited {
+    display: inline-block;
+    background: url(/images/simple_button_gray.png) repeat-x;
+    width: 100px;
+    padding:6px 0;
+    text-align:center;
+    border:1px solid #575757;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+    font-weight: normal;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    color:#FFF;
+    text-decoration: none;
+    opacity:.85;
+    margin-right: 12px;
+}
+
+.tiny_button_secondary:hover {
+    border-color:#424242;
+}
+
+.tiny_button_secondary:active {
+    background-position:  0 -200px;
+    padding:6px 0;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.8);
+}
+
+
+
+
+
+.tiny_button_disabled, a.tiny_button_disabled:visited, a.tiny_button_disabled:hover {
+    display: inline-block;
+    background: url(/images/simple_button_gray.png) repeat-x;
+    width: 100px;
+    padding:6px 0;
+    text-align:center;
+    border:1px solid #575757;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+    font-weight: normal;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    color:#AAA;
+    text-decoration: none;
+    opacity:.85;
+    margin-right: 12px;
+    cursor: default;
+}
+
+
+

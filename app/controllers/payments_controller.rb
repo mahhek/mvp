@@ -5,6 +5,7 @@ class PaymentsController < ApplicationController
   before_filter :require_user, :only => [:new,:create]
   
   def new
+    @location.update_attribute(:renter_date, params[:renter_date] )
     @payment = @location.payments.build
   end
 

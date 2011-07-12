@@ -1,25 +1,5 @@
-<div style="float: left;width: 20%;">
-  <div id="left-photo">
-    <% unless @user.photo_file_name.nil? %>
-      <div id="photo">
-        <%= image_tag(@user.photo.url(:thumb) )%>
-      </div>
-    <% end %>
-    <br/>
-    Hi <%= @user.first_name %>
-    <br/>
-    <%= link_to "Edit Profile", edit_user_path(@user)  %>
-  </div>
-  <br/>
-  <%= link_to "Messages", "#"  %><br/>
-  <%= link_to "Manage Your Spaces", locations_path  %><br/>
-  <%= link_to "Your Customers", "#"  %><br/>
-  <%= link_to "Places You Rent", "#"  %><br/>
-  <%= link_to "Your Account", account_path(@user)  %><br/>
-  <%= link_to "Your Profile", user_path(@user)  %><br/>
-
-</div>
-<div style="float: left;width: 75%;margin-left: 15px;">
+<%= render :partial => "left_panel" %>
+<div style="float: left;width: 75%;border-left: 1px solid black;padding-left: 10px;">
   <h1> Change Password </h1>
   <% form_tag :controller =>"accounts", :action =>"update_password" do %>
     <%= hidden_field_tag "id",  @user.id  %>

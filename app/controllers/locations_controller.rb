@@ -13,7 +13,7 @@ class LocationsController < ApplicationController
   def search_location
     
     query = "1=1"
-    query = query + " AND start_date <= #{params[:request_date]}" unless params[:request_date].blank? or params[:request_date] == "mm / dd / yy"
+    query = query + " AND start_date <= '#{params[:request_date]}'" unless params[:request_date].blank? or params[:request_date] == "mm / dd / yy"
     query = query + " AND ( city = '#{params[:requested_city]}' OR nearest_metro = '#{params[:requested_city]}' ) " unless params[:requested_city] == "Add My City!"
     query = query + " AND park_store = '#{params[:storage_menus]}'" unless params[:storage_menus] == "Both"
     query = query + " AND location_status = 'Show Listing'"
@@ -84,6 +84,7 @@ class LocationsController < ApplicationController
     @location = Location.new(params[:location])
     @location.feature_ids = params[:features]
     @location.location_status = "Show Listing"
+    @location.rent_status = params[:location][:start_date]
     if @location.save
       flash[:notice] = "Location saved successfully!"
       redirect_to new_location_avatar_path(@location)
@@ -143,6 +144,7 @@ class LocationsController < ApplicationController
 
   def show
     @location = Location.find(params[:id])
+    @message = Message.new
     @map = GMap.new("map")
     @map.control_init(:map_type => true, :small_zoom => true)
     coordinates = [@location.latitude,@location.longitude]

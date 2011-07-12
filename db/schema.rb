@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110703232559) do
+ActiveRecord::Schema.define(:version => 20110710100218) do
 
   create_table "avatars", :force => true do |t|
     t.string   "caption"
@@ -94,6 +94,21 @@ ActiveRecord::Schema.define(:version => 20110703232559) do
     t.string   "street_number"
     t.string   "apartment"
     t.string   "nearest_metro"
+    t.integer  "quantity",                                        :default => 1
+    t.date     "renter_date"
+  end
+
+  create_table "messages", :force => true do |t|
+    t.integer  "receiver_id"
+    t.integer  "sender_id"
+    t.string   "subject"
+    t.text     "body"
+    t.string   "message_type"
+    t.integer  "transaction_id"
+    t.date     "rental_end_date"
+    t.boolean  "is_read",         :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "payments", :force => true do |t|
@@ -165,6 +180,7 @@ ActiveRecord::Schema.define(:version => 20110703232559) do
     t.float    "withdrawal_amount"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "reserve_status",      :default => false
   end
 
   create_table "users", :force => true do |t|

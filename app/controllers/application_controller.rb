@@ -24,9 +24,11 @@ class ApplicationController < ActionController::Base
     return @current_user if defined?(@current_user)
     @current_user = current_user_session && current_user_session.user
   end
+
   def confirmation_number
-    Base64.encode64(UUIDTools::UUID.random_create)[0..8]
+    Base64.encode64(UUIDTools::UUID.random_create)[0..7]
   end
+  
   def calculate_fee(amount, storage_type, person)
     case storage_type
     when "Parking"
