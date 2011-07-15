@@ -9,7 +9,7 @@ class PaymentsController < ApplicationController
       flash[:notice] = "You can not rent your own space! Please try someone else's space, thanks."
       return false
     end
-    @all_requests_of_current_user_for_location = current_user.locations_users.all :conditions => [ "location_id = ? and status = ?",@location.id,LocationsUser::PENDING ]
+    @all_requests_of_current_user_for_location = current_user.locations_users.all :conditions => [ "location_id = ? and status = ?",@location.id, (LocationsUser::PENDING).to_i ]
     p "vvvvvvvvvvvvvv"
     p @location.inspect
     p @all_requests_of_current_user_for_location.size.inspect
