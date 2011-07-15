@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
 
 
   has_many :locations_users
-  has_many :own_accepted_requests, :class_name => "LocationsUser", :conditions => ["status = #{LocationsUser::ACCEPTED}"]
+  has_many :own_accepted_requests, :class_name => "LocationsUser", :conditions => ['locations_users.status = ?', "#{LocationsUser::ACCEPTED}"]
   has_many :pending_requested_locations, :through => :locations_users, :source => "location", :conditions => ['locations_users.status = ?',"#{LocationsUser::PENDING}"]
   has_many :accepted_requested_locations, :through => :locations_users, :source => "location", :conditions => ['locations_users.status = ?',"#{LocationsUser::ACCEPTED}"]
   has_many :rejected_requested_locations, :through => :locations_users, :source => "location", :conditions => ['locations_users.status = ?',"#{LocationsUser::REJECTED}"]
