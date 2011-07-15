@@ -2,11 +2,11 @@
 <div style="float: left;width: 75%;border-left: 1px solid black;padding-left: 10px;">
   <h1> Who is renting from you?</h1>
   <hr></hr>
-  <% unless @seller_transactions.blank? %>
+  <% unless current_user.accepted_requests_of_customer_of_all_locations.blank? %>
     <div style="width: 100%;float: left;margin: 10px;">
-      <% @seller_transactions.each do |seller_transaction|  %>
-        <% location = seller_transaction.location %>
+      <% current_user.accepted_requests_of_customer_of_all_locations.each do |accepted_request|  %>
         <div style="width: 100%;float: left;margin: 5px;">
+          <% location = accepted_request.location %>
           <span style="width: 150px;float: left;height: 100px;">
             <% if location.avatars.size > 0 %>
               <%= image_tag(location.avatars.first.photo.url(:small), :border => "0", :height => "86", :width => "106", :alt => "space") %>
@@ -14,15 +14,15 @@
           </span>
           <span style="width: 250px;float: left;height: 100px;">
             <%= link_to location.headline, location_path(location) %><br/>
-            <% renter = location.renter(seller_transaction.renter_id) %>
-            Owner By: <%= link_to "#{renter.first_name} #{renter.last_name[0..0].capitalize if renter.last_name}.", user_path(renter)  %><br/>
-            Rented On: <%= location.renter_date.strftime("%B %d, %Y") if location.renter_date %><br/>
+            <% renter = accepted_request.user %>
+            Rented By: <%= link_to "#{renter.first_name} #{renter.last_name[0..0].capitalize if renter.last_name}.", user_path(renter)  %><br/>
+            Rented On: <%= accepted_request.request_response_date.strftime("%B %d, %Y") %><br/>
             Monthly Price: $<%= number_with_precision(location.price.to_f, :precision => 2) %><br/>
           </span>
           <span style="width: 250px;float: left;height: 100px;">
-            <%= link_to_remote "Contact Renter", :url => contact_renter_path(:id => renter.id, :location_id => location.id) %>
+            <%= link_to_remote "Contact Renter", :url => contact_renter_path(renter,accepted_request) %>
             &nbsp;
-            <%= link_to_remote "End Rental", :url => end_rental_path(:id => renter.id, :location_id => location.id) %>
+            <%= link_to_remote "End Rental", :url => end_rental_path(renter,accepted_request) %>
           </span>
         </div>
       <% end %>

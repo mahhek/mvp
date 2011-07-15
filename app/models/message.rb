@@ -1,12 +1,6 @@
 class Message < ActiveRecord::Base
   belongs_to :transaction
-  
-  def from
-    User.find_by_id(self.sender_id)
-  end
-
-  def to
-    User.find_by_id(self.receiver_id)
-  end
-
+  belongs_to :locations_user
+  belongs_to :sender, :class_name => 'User'
+  belongs_to :receiver, :class_name => 'User' 
 end

@@ -1,6 +1,7 @@
 class Transaction < ActiveRecord::Base
   belongs_to :user
   belongs_to :location
+  belongs_to :locations_user
 
   after_create :send_owner_message
 
@@ -17,7 +18,7 @@ class Transaction < ActiveRecord::Base
   def send_owner_message
     Message.new(:receiver_id => self.creator_id,
       :sender_id => self.renter_id,
-      :transaction_id => self.id,
+      :locations_user_id => self.locations_user_id,
       :message_type => "Reservation",
       :subject => "Reservation Request: Please Respont within 24 Hours.").save
   end

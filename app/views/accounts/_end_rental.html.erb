@@ -9,13 +9,15 @@
     <%= f.hidden_field :sender_id, :value => current_user.id %>
     <%= f.hidden_field :subject, :value => "Cancellation Request: Please Respont within 24 Hours." %>
     <%= f.hidden_field :message_type, :value => "Cancellation" %>
+    <%= f.hidden_field :locations_user_id, :value => @request_for_location.id %>
+
     <div style="width:100%;float: left;">
       <h3 style="width: 100%;float: left;margin: 0px;">
         Select a date to end this rental
       </h3>
     </div>
     <div style="width:100%;float: left;">
-      <%= f.text_field "rental_end_date", :value => @location.renter_date  %>
+      <%= text_field_tag "renting_end_date", @request_for_location.buyer_rental_date  %>
     </div>
     <div style="width:100%;float: left;margin-top: 10px;">
       <h3 style="width: 100%;float: left;margin: 0px;">

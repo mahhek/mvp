@@ -9,20 +9,20 @@
     <%= f.hidden_field :sender_id, :value => @message.receiver_id %>
     <%= f.hidden_field :message_type, :value => "Inquiry" %>
     <div style="width: 100%;float: left;margin-left: 10px;font-weight: bold;">
-      On <%= @message.created_at.strftime("%B/%d/%Y") %>, <%= @message.from.first_name %> wrote:
+      On <%= @message.created_at.strftime("%B/%d/%Y") %>, <%= @message.sender.first_name %> wrote:
     </div>
     <div style="width: 100%;float: left;margin: 10px;">
       <%= text_area_tag  "original_body", @message.message_type == "Inquiry" ? @message.body : @message.subject, :style => "width:595px;height:120px;", :disabled => true%>
     </div>
     <div style="width: 100%;float: left;margin-left: 10px;font-weight: bold;">
-      Send a reply to <%= @message.from.first_name %>:
+      Send a reply to <%= @message.sender.first_name %>:
     </div>
     <div style="width: 100%;float: left;margin: 10px;">
       <%= text_area_tag "message[body]", nil , :style => "width:595px;height:120px;" %>
     </div>
 
     <div style="width: 100%;float: right;text-align: right;margin: 10px;">
-      <%= link_to "Back", your_messages_path(current_user) %>&nbsp;&nbsp;<%= f.submit "Post a Reply" %>
+      <%= link_to "Back", your_messages_path(current_user) %>&nbsp;&nbsp;<%= f.submit "Post a Reply" , :onclick => "if($('#message_body').val()==''){alert('You reply is required to submit.');return false;}else{return true;}" %>
     </div>
 
   <% end %>

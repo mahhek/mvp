@@ -6,6 +6,9 @@ class Location < ActiveRecord::Base
   has_many :payments, :dependent => :destroy
   belongs_to :user
   
+  has_many :locations_users
+  has_many :customers_requests, :class_name => "LocationsUser", :conditions => ['status = ?',LocationsUser::ACCEPTED]
+  has_many :requested_users, :through => :locations_users, :source => "user"
 
   validates_presence_of :address, :phone, :headline, :description, :price, :message => ""
   validates_format_of :phone, :allow_blank => true,
@@ -30,10 +33,6 @@ class Location < ActiveRecord::Base
 
   def owner
     self.user
-  end
-
-  def renter(renter_id)
-    User.find_by_id(renter_id)
   end
 
   def find_nearest_city

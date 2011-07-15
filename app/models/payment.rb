@@ -1,6 +1,7 @@
 class Payment < ActiveRecord::Base
   belongs_to :user
   belongs_to :location
+  belongs_to :locations_user
 
   validates_presence_of :name, :email, :cc_number, :billing_address, :city, :state, :zip_code, :security_code, :phone_number
   #  validates_format_of :phone_number, :allow_blank => true,

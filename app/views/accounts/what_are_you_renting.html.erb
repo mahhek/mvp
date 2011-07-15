@@ -2,10 +2,10 @@
 <div style="float: left;width: 75%;border-left: 1px solid black;padding-left: 10px;">
   <h1> What are you renting?</h1>
   <hr></hr>
-  <% unless @renter_transactions.blank? %>
+  <% unless current_user.own_accepted_requests.blank? %>
     <div style="width: 100%;float: left;margin: 10px;">
-      <% @renter_transactions.each do |renter_transaction|  %>
-        <% location = renter_transaction.location %>
+      <% current_user.own_accepted_requests.each do |accepted_request|  %>
+        <% location = accepted_request.location %>
         <div style="width: 100%;float: left;margin: 5px;">
           <span style="width: 150px;float: left;height: 100px;">
             <% if location.avatars.size > 0 %>
@@ -15,14 +15,14 @@
           <span style="width: 250px;float: left;height: 100px;">
             <%= link_to location.headline, location_path(location) %><br/>
             <% owner = location.owner %>
-            Owner By: <%= link_to "#{owner.first_name} #{owner.last_name[0..0].capitalize if owner.last_name}.", user_path(owner)  %><br/>
-            Rented On: <%= location.renter_date.strftime("%B %d, %Y") if location.renter_date %><br/>
+            Owned By: <%= link_to "#{owner.first_name} #{owner.last_name[0..0].capitalize if owner.last_name}.", user_path(owner)  %><br/>
+            Rented On: <%= accepted_request.request_response_date.strftime("%B %d, %Y") %><br/>
             Monthly Price: $<%= number_with_precision(location.price.to_f, :precision => 2) %><br/>
           </span>
           <span style="width: 250px;float: left;height: 100px;">
-            <%= link_to_remote "Contact Owner", :url => contact_owner_path(:id => owner.id, :location_id => location.id) %>
+            <%= link_to_remote "Contact Owner", :url => contact_owner_path(owner,accepted_request) %>
             &nbsp;
-            <%= link_to_remote "End Rental", :url => end_rental_path(:id => owner.id, :location_id => location.id) %>
+            <%= link_to_remote "End Rental", :url => end_rental_path(owner,accepted_request) %>
           </span>
         </div>
       <% end %>

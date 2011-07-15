@@ -409,7 +409,7 @@
 .date-set {
     font-family: HelveticaLTStdFractions;
     float: left;
-    height: 30px;
+    height: 60px;
     width: 250px;
     font-size: 14px;
     color: #1d1d1f;
@@ -427,7 +427,7 @@
 #store-btn {
     float: left;
     width: 245px;
-    height: 34px;
+    height: 54px;
     padding-top: 12px;
 }
 #image-person {

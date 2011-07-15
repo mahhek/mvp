@@ -73,7 +73,7 @@
     <div id="form-price">
       <div class="white-bg">
         <div class="n-price">Starting On:</div>
-        <div class="p-price"><%= @location.renter_date.strftime("%B %d, %Y") if @location.renter_date %></div>
+        <div class="p-price"><%= @request_for_location.buyer_rental_date.strftime("%B %d, %Y") %></div>
       </div>
 
       <div class="white-bg2">
@@ -114,7 +114,7 @@
 
       <div class="white-bglarge">
         <div class="n-pricelarge">Cancellation:</div>
-        <div class="p-pricelarge">Cancel by <%= (@location.renter_date - 7.days).strftime("%B %d, %Y") if @location.renter_date %></div>
+        <div class="p-pricelarge">Cancel by <%= (@request_for_location.buyer_rental_date - 7.days).strftime("%B %d, %Y") %></div>
       </div>
 
       <div class="white-bg2large">
@@ -154,6 +154,8 @@
         <br/><br/>
         <%= f.text_field :phone_number, :value => "Phone Number", :class => "b-address", :onclick => "hideShowValue(this,'Phone Number','hide');", :onblur => "hideShowValue(this,'Phone Number','show');" %>
         <%= f.text_field :hear_about_us, :value => "How did you hear about us?", :class => "b-address", :onclick => "hideShowValue(this,'How did you hear about us?','hide');", :onblur => "hideShowValue(this,'How did you hear about us?','show');" %>
+          <%= f.hidden_field :locations_user_id, :value => @request_for_location.id %>
+
         <br/><br/>
         <a href="javascript:void(0);">
           <img border="0" height="40" width="184" alt="Reserve your space" src="/images/reserve-your-space-button.png" onclick="payment_form.submit();"/>

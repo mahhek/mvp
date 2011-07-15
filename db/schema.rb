@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110710100218) do
+ActiveRecord::Schema.define(:version => 20110714195335) do
 
   create_table "avatars", :force => true do |t|
     t.string   "caption"
@@ -95,7 +95,19 @@ ActiveRecord::Schema.define(:version => 20110710100218) do
     t.string   "apartment"
     t.string   "nearest_metro"
     t.integer  "quantity",                                        :default => 1
-    t.date     "renter_date"
+  end
+
+  create_table "locations_users", :force => true do |t|
+    t.integer  "location_id"
+    t.integer  "user_id"
+    t.string   "status"
+    t.date     "renting_start_date"
+    t.date     "buyer_rental_date"
+    t.date     "request_send_date"
+    t.date     "request_response_date"
+    t.date     "renting_end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "messages", :force => true do |t|
@@ -104,11 +116,10 @@ ActiveRecord::Schema.define(:version => 20110710100218) do
     t.string   "subject"
     t.text     "body"
     t.string   "message_type"
-    t.integer  "transaction_id"
-    t.date     "rental_end_date"
-    t.boolean  "is_read",         :default => false
+    t.boolean  "is_read",           :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "locations_user_id"
   end
 
   create_table "payments", :force => true do |t|
@@ -129,6 +140,7 @@ ActiveRecord::Schema.define(:version => 20110710100218) do
     t.string   "hear_about_us"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "locations_user_id"
   end
 
   create_table "rental_histories", :force => true do |t|
@@ -172,7 +184,6 @@ ActiveRecord::Schema.define(:version => 20110710100218) do
     t.float    "buyer_total"
     t.float    "seller_total"
     t.float    "storably_total"
-    t.date     "rent_date"
     t.date     "payment_date"
     t.integer  "creator_id"
     t.integer  "renter_id"
@@ -180,7 +191,7 @@ ActiveRecord::Schema.define(:version => 20110710100218) do
     t.float    "withdrawal_amount"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "reserve_status",      :default => false
+    t.integer  "locations_user_id"
   end
 
   create_table "users", :force => true do |t|

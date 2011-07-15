@@ -7,7 +7,10 @@ class LocationsController < ApplicationController
   end
 
   def send_contact_me_message
-    render :nothing => true
+    @location = Location.find_by_id(params[:location_id])
+    session[:return_to] = location_path(@location)
+    flash[:notice] = "You must be logged in to access this page."
+    redirect_to :controller => "welcome", :action => "signup_and_signin"
   end
 
   def search_location
@@ -17,6 +20,7 @@ class LocationsController < ApplicationController
     query = query + " AND ( city = '#{params[:requested_city]}' OR nearest_metro = '#{params[:requested_city]}' ) " unless params[:requested_city] == "Add My City!"
     query = query + " AND park_store = '#{params[:storage_menus]}'" unless params[:storage_menus] == "Both"
     query = query + " AND location_status = 'Show Listing'"
+    query = query + " AND rent_status = 'Available'"
     
 
     @locations = Location.paginate(:all, :conditions => [query] ,:page => params[:page], :per_page => 3, :order => "price ASC")
@@ -84,7 +88,7 @@ class LocationsController < ApplicationController
     @location = Location.new(params[:location])
     @location.feature_ids = params[:features]
     @location.location_status = "Show Listing"
-    @location.rent_status = params[:location][:start_date]
+    @location.rent_status = "Available"
     if @location.save
       flash[:notice] = "Location saved successfully!"
       redirect_to new_location_avatar_path(@location)

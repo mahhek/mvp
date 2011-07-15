@@ -3,6 +3,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :user_session,:collection => [:create => :get]
   map.resources :users, :collection  => {:update_password => :post }
   map.update_location_status "/location/update/status/:id", :controller => "locations", :action => "update_location_status"
+  map.update_request_status "/request/update/status/:id", :controller => "accounts", :action => "update_request_status"
+
   map.update_start_date "/location/update/start_date/:id", :controller => "locations", :action => "update_start_date"
   
   map.resources :locations do |location|
@@ -11,6 +13,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   
   map.reserve_location "/location/reserve/:location_id", :controller => 'payments', :action => 'new'
+  map.update_renter_date "/location/update_renter_date/:location_id", :controller => 'payments', :action => 'update_renter_date'
   map.search_location "/spaces/search_location", :controller => 'locations', :action => 'search_location'
 
   map.resources :accounts
@@ -22,13 +25,14 @@ ActionController::Routing::Routes.draw do |map|
   map.post_a_reply "account/message/reply", :controller => "accounts", :action => "post_a_reply"
   map.dashboard "account/:id/dashboard", :controller => "accounts", :action => "dashboard"
 
-  map.contact_owner "accounts/:id/contact/:location_id/owner", :controller => "accounts", :action => "contact_owner"
-  map.end_rental "accounts/:id/end/:location_id/rental", :controller => "accounts", :action => "end_rental"
+  map.contact_owner "accounts/:id/contact/:request_id/owner", :controller => "accounts", :action => "contact_owner"
+  map.end_rental "accounts/:id/end/:request_id/rental", :controller => "accounts", :action => "end_rental"
 
-  map.contact_renter "accounts/:id/contact/:location_id/renter", :controller => "accounts", :action => "contact_renter"
+  map.contact_renter "accounts/:id/contact/:request_id/renter", :controller => "accounts", :action => "contact_renter"
   map.send_contact_renter "accounts/contact/renter/send", :controller => "accounts", :action => "send_contact_renter"
   
   map.send_contact_owner "accounts/contact/owner/send", :controller => "accounts", :action => "send_contact_owner"
+  map.send_contact_me_message "contact/owner/:location_id", :controller => "locations", :action => "send_contact_me_message"
   map.send_end_rental "accounts/end/rental/send", :controller => "accounts", :action => "send_end_rental"
 
   map.amount_withdraw "/account/:id/withdraw", :controller => "accounts", :action => "withdraw_amount"

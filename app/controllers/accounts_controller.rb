@@ -39,16 +39,34 @@ class AccountsController < ApplicationController
     end
   end
 
-  def what_are_you_renting
-    @renter_transactions = @user.transactions_as_renter
-  end
+  def update_request_status
+    @message = Message.find_by_id(params[:id])
 
-  def your_customers
-    @seller_transactions = @user.transactions_as_seller
-  end
+    @request_for_location = @message.locations_user
+    @request_for_location.status = params["request_status_#{@message.id}_#{@request_for_location.id}"]
+    @request_for_location.request_response_date = Date.current
+    @text = ""
+    p "--------------------------------------------------"
+    p params["request_status_#{@message.id}_#{@request_for_location.id}"]
+    case params["request_status_#{@message.id}_#{@request_for_location.id}"].to_i
+    when LocationsUser::PENDING
+      @text = "Stauts udpated."
+    when LocationsUser::ACCEPTED
+      @request_for_location.location.update_attribute("quantity",@request_for_location.location.quantity - 1)
+      @text = "Request Accepted."
+    when LocationsUser::REJECTED
+      @text = "Request Rejected."
+    when LocationsUser::ENDED
+      @request_for_location.location.update_attribute("quantity",@request_for_location.location.quantity + 1)
+      @text = "Rent Ended."
+    end
+    @request_for_location.save
 
-  def your_messages
-    @messages = Message.find(:all, :conditions => ["receiver_id = ?", @user.id.to_i] )
+    render :update do |page|
+      page["drop_down_#{@message.id}_#{@request_for_location.id}"].hide
+      page["updated_request_msg_div_#{@message.id}_#{@request_for_location.id}"].show
+      page["updated_request_msg_div_#{@message.id}_#{@request_for_location.id}"].replace_html :text => @text
+    end
   end
 
   def view_message
@@ -65,7 +83,7 @@ class AccountsController < ApplicationController
 
   def delete_message
     Message.find_by_id(params[:message_id]).destroy
-    flash[:notice] = "Message delete Successfully!"
+    flash[:notice] = "Message deleted successfully!"
     redirect_to your_messages_path(current_user)
   end
 
@@ -83,6 +101,7 @@ class AccountsController < ApplicationController
 
   def contact_renter
     @message = Message.new
+    @request_for_location = LocationsUser.find_by_id(params[:request_id])
   end
 
   def send_contact_renter
@@ -93,14 +112,16 @@ class AccountsController < ApplicationController
     end
   end
 
-  def end_rental    
+  def end_rental
     @message = Message.new
-    @location = Location.find_by_id(params[:location_id])
+    @request_for_location = LocationsUser.find_by_id(params[:request_id])
   end
 
   def send_end_rental
     @message = Message.new(params[:message])
     @message.save
+    @request_for_location = LocationsUser.find_by_id(@message.locations_user_id)
+    @request_for_location.update_attribute("renting_end_date", params[:renting_end_date])
     render :update do |page|
       page << "$.modal.close();"
     end

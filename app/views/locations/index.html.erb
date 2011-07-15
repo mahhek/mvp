@@ -44,31 +44,30 @@
               </div>
       <%#*<div class="btnx-calander"><img src="img/calander-2.png" width="31" height="29" alt="calander"></div>%>
             </div>
+
+
+            <div class="listingx">
+              <%= select_tag "location_status_#{location.id}", options_for_select([["Show Listing" , "Show Listing"],["Hide Listing" , "Hide Listing"]], location.location_status) , :style => "width:135px; border: 1px solid #AFAFAF;height: 26px;line-height: 26px;width: 195px;" %>
+            </div>
+            <span id="updated_location_msg_div_<%= location.id %>" style="float: left;display: none;color: darkcyan;margin: 3px;font-size:11px;">
+              Space Updated
+            </span>
+            <%= observe_field( "location_status_#{location.id}", :on => :changed,
+              :url => update_location_status_path(location.id),
+              :with => "location_status_#{location.id}",
+              :success => "setTimeout('hide_updated_msg(#{location.id})', 2500);" )
+          %>
+            <script type="text/javascript">
+              function hide_updated_msg(location_id){
+                jQuery('#updated_location_msg_div_'+location_id).animate({ opacity: 'hide' }, "slow");
+              }
+            </script>
+
           <%else%>
-            <span style="float: left;color: red;">
+            <span style="float: left;color: red;margin-top: 8px;">
               Rented out!
             </span>
           <%end%>
-
-          <div class="listingx">
-            <%= select_tag "location_status_#{location.id}", options_for_select([["Show Listing" , "Show Listing"],["Hide Listing" , "Hide Listing"]], location.location_status) , :style => "width:135px; border: 1px solid #AFAFAF;
-    height: 26px;
-    line-height: 26px;
-    width: 195px;" %>
-          </div>
-          <span id="updated_location_msg_div_<%= location.id %>" style="float: left;display: none;color: darkcyan;margin: 3px;font-size:11px;">
-            Space Updated
-          </span>
-          <%= observe_field( "location_status_#{location.id}", :on => :changed,
-            :url => update_location_status_path(location.id),
-            :with => "location_status_#{location.id}",
-            :success => "setTimeout('hide_updated_msg(#{location.id})', 2500);" )
-        %>
-          <script type="text/javascript">
-            function hide_updated_msg(location_id){
-              jQuery('#updated_location_msg_div_'+location_id).animate({ opacity: 'hide' }, "slow");
-            }
-          </script>
         </div>
       </div>
     <%end%>
@@ -79,6 +78,6 @@
 
 <div class="btn-bar">
   <a href="/locations/new">
-    <img src="/images/add-more-btn.png" width="116" height="45" alt="add more" border="0">
+    <img src="/images/add-more-btn.png" width="116" height="45" alt="add more" border="0"/>
   </a>
 </div>

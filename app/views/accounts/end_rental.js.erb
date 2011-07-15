@@ -7,6 +7,6 @@ $.modal("<%= escape_javascript(render :partial => 'end_rental') %>");
 $(document).ready(function(){
 Date.firstDayOfWeek = 0;
 Date.format = 'yyyy-mm-dd';
-$('#message_rental_end_date').datePicker({startDate:'<%= @location.renter_date %>',clickInput:true});
+$('#renting_end_date').datePicker({startDate:'<%= @request_for_location.buyer_rental_date %>',clickInput:true});
 
 });

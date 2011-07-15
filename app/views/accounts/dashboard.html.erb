@@ -2,7 +2,7 @@
 <div style="float: left;width: 75%;border-left: 1px solid black;padding-left: 10px;">
 
   <h1>Your Dashboard</h1>
-  <hr></hr>
+  <hr/>
 
   <div style="float: left;width: 240px;height: 130px;margin: 35px;text-align: center;border: 1px solid gray;padding: 5px;">
     New Messages:<br/>
@@ -14,7 +14,7 @@
   <div style="float: left;width: 240px;height: 130px;margin: 35px;text-align: center;border: 1px solid gray;padding: 5px;">
     Account Balance:<br/>
     <h1>
-      <%= link_to number_with_precision("$#{@user.recent_balance}", :precision => 2), account_path(@user), :style => "text-decoration:none;" %>
+      <%= link_to "$#{number_with_precision(@user.recent_balance, :precision => 2)}", account_path(@user), :style => "text-decoration:none;" %>
     </h1>
   </div>
 
@@ -55,9 +55,9 @@
 
   <h3>Spaces You Rent</h3>
   <hr></hr>
-  <% unless @user.rented_locations.blank? %>
+  <% unless @user.accepted_requested_locations.blank? %>
     <div style="width: 100%;float: left;margin: 10px;">
-      <% @user.rented_locations.each do |location|  %>
+      <% @user.accepted_requested_locations.each do |location|  %>
         <div style="width: 100%;float: left;margin: 5px;">
           <span style="width: 150px;float: left;height: 100px;">
             <% if location.avatars.size > 0 %>

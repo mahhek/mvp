@@ -1,3 +1,14 @@
+jQuery(window).load(function() {
+    setTimeout ( "hideFlash()", 2500);
+});
+
+
+
+function hideFlash(){
+    jQuery('#signup-color').slideUp('slow');
+}
+
+
 function hideShowValue(object, str,to_do){
     if(to_do == 'hide'){
         if($(object).val() == str ){
