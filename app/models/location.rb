@@ -7,7 +7,7 @@ class Location < ActiveRecord::Base
   belongs_to :user
   
   has_many :locations_users
-  has_many :customers_requests, :class_name => "LocationsUser", :conditions => ['status = ?',LocationsUser::ACCEPTED]
+  has_many :customers_requests, :class_name => "LocationsUser", :conditions => ["status = #{LocationsUser::ACCEPTED}"]
   has_many :requested_users, :through => :locations_users, :source => "user"
 
   validates_presence_of :address, :phone, :headline, :description, :price, :message => ""
