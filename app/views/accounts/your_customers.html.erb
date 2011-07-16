@@ -1,29 +1,40 @@
+<%= stylesheet_link_tag "dashboard"%>
+<%= stylesheet_link_tag "renting"%>
+
 <%= render :partial => "left_panel" %>
-<div style="float: left;width: 75%;border-left: 1px solid black;padding-left: 10px;">
-  <h1> Who is renting from you?</h1>
-  <hr></hr>
+
+
+<div id="right-dash">
+  <div id="dash-txt">Who is renting from you?</div>
   <% unless current_user.accepted_requests_of_customer_of_all_locations.blank? %>
-    <div style="width: 100%;float: left;margin: 10px;">
-      <% current_user.accepted_requests_of_customer_of_all_locations.each do |accepted_request|  %>
-        <div style="width: 100%;float: left;margin: 5px;">
-          <% location = accepted_request.location %>
-          <span style="width: 150px;float: left;height: 100px;">
+    <div id="rent-bg">
+      <% current_user.accepted_requests_of_customer_of_all_locations.each do |accepted_request| %>
+        <% location = accepted_request.location %>
+        <div class="rented-bg">
+          <div class="renter-img">
             <% if location.avatars.size > 0 %>
-              <%= image_tag(location.avatars.first.photo.url(:small), :border => "0", :height => "86", :width => "106", :alt => "space") %>
+              <%= image_tag(location.avatars.first.photo.url(:small), :border => "0", :height => "78", :width => "116", :alt => "space") %>
             <% end %>
-          </span>
-          <span style="width: 250px;float: left;height: 100px;">
-            <%= link_to location.headline, location_path(location) %><br/>
-            <% renter = accepted_request.user %>
-            Rented By: <%= link_to "#{renter.first_name} #{renter.last_name[0..0].capitalize if renter.last_name}.", user_path(renter)  %><br/>
-            Rented On: <%= accepted_request.request_response_date.strftime("%B %d, %Y") %><br/>
-            Monthly Price: $<%= number_with_precision(location.price.to_f, :precision => 2) %><br/>
-          </span>
-          <span style="width: 250px;float: left;height: 100px;">
-            <%= link_to_remote "Contact Renter", :url => contact_renter_path(renter,accepted_request) %>
-            &nbsp;
-            <%= link_to_remote "End Rental", :url => end_rental_path(renter,accepted_request) %>
-          </span>
+          </div>
+          <div class="rental-txt">
+            <%= link_to location.headline, location_path(location) %>
+          </div>
+          <% renter = accepted_request.user %>
+          <div class="details-rentedx">
+            Rented by:<br/>
+            Rented on:<br/>
+            Monthly rent:
+          </div>
+          <div class="details-rentedx2">
+            <%= link_to "#{renter.first_name} #{renter.last_name[0..0].capitalize if renter.last_name}.", user_path(renter)  %><br/>
+            <%= accepted_request.request_response_date.strftime("%B %d, %Y") %><br/>
+            $<%= number_with_precision(location.price.to_f, :precision => 2) %>
+          </div>
+          <div class="rented-btn">
+            <%= link_to_remote image_tag("contact-renter.png", :border => "0", :height => "33", :width => "116"), :url => contact_renter_path(renter,accepted_request) %>
+            &nbsp;&nbsp;
+            <%= link_to_remote image_tag("end-rental.png", :border => "0", :height => "33", :width => "90"), :url => end_rental_path(renter,accepted_request) %>
+          </div>
         </div>
       <% end %>
     </div>
@@ -31,4 +42,3 @@
     You do not have any space which is rented out.
   <% end %>
 </div>
-

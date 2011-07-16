@@ -1,84 +1,84 @@
+<%= stylesheet_link_tag "dashboard"%>
 <%= render :partial => "left_panel" %>
-<div style="float: left;width: 75%;border-left: 1px solid black;padding-left: 10px;">
 
-  <h1>Your Dashboard</h1>
-  <hr/>
+<div id="right-dash">
+  <div id="dash-txt">Your Dashboard</div>
+  <div id="gary-bg-dash">
 
-  <div style="float: left;width: 240px;height: 130px;margin: 35px;text-align: center;border: 1px solid gray;padding: 5px;">
-    New Messages:<br/>
-    <h1>
-      <%= link_to @user.unread_messages.size, your_messages_path(@user), :style => "text-decoration:none;" %>
-    </h1>
-  </div>
-
-  <div style="float: left;width: 240px;height: 130px;margin: 35px;text-align: center;border: 1px solid gray;padding: 5px;">
-    Account Balance:<br/>
-    <h1>
-      <%= link_to "$#{number_with_precision(@user.recent_balance, :precision => 2)}", account_path(@user), :style => "text-decoration:none;" %>
-    </h1>
-  </div>
-
-  <hr></hr>
-
-  <h3>Your Listings</h3>
-  <hr></hr>
-  <% unless @user.locations.blank? %>
-    <div style="width: 100%;float: left;margin: 10px;">
-      <% @user.locations.each do |location|  %>
-        <div style="width: 100%;float: left;margin: 5px;">
-          <span style="width: 150px;float: left;height: 100px;">
-            <% if location.avatars.size > 0 %>
-              <%= image_tag(location.avatars.first.photo.url(:small), :border => "0", :height => "86", :width => "106", :alt => "space") %>
-            <% end %>
-          </span>
-          <span style="width: 250px;float: left;height: 100px;">
-            <%= link_to location.headline, location_path(location) %><br/>
-          </span>
-          <span style="width: 125px;float: left;height: 100px;">
-            <%= location.rent_status %><br/>
-          </span>
-          <span style="width: 125px;float: left;height: 100px;">
-            $<%= number_with_precision(location.price.to_f, :precision => 2) %><br/>
-          </span>
-        </div>
-      <% end %>
+    <div class="widgets">
+      <div class="widget-x">New Messages<br><br>
+        <span class="arial-twentyfour">
+          <%= link_to @user.unread_messages.size, your_messages_path(@user), :style => "text-decoration:none;" %>
+        </span>
+      </div>
+      <div class="widget-x">Account Balance<br><br>
+        <span class="arial-twentyfour">
+          <%= link_to "$#{number_with_precision(@user.recent_balance, :precision => 2)}", account_path(@user), :style => "text-decoration:none;" %>
+        </span>
+      </div>
     </div>
-  <% else %>
-    You do not have any listing.
-  <% end %>
-  <hr></hr>
-  <div style="width: 100%;float: left;text-align: right;margin: 10px;">
-    <%= link_to "Add New Listing", new_location_path %>
+
+
+
+    <div class="listing-bg">
+      <div class="heading-listing">
+        <div class="listing-txt">Your listings</div>
+        <div class="listing-txt1">Status</div>
+      </div>
+      <% unless @user.locations.blank? %>
+        <% @user.locations.each do |location|  %>
+          <div class="list-wrapper">
+            <div class="dash-img">
+              <% if location.avatars.size > 0 %>
+                <%= image_tag(location.avatars.first.photo.url(:small), :border => "0", :height => "46", :width => "68", :alt => "space") %>
+              <% end %>
+            </div>
+            <div class="dash-img-txt"><%= link_to location.headline, location_path(location) %></div>
+            <div class="amount-txt"><%= location.rent_status %></div>
+            <div class="amount-txt2">$<%= number_with_precision(location.price.to_f, :precision => 2) %></div>
+          </div>
+        <% end %>
+      <% else %>
+        You do not have any listing.
+      <% end %>
+      <div class="add-listing-buttom">
+        <a href="<%= new_location_path %>">
+          <img border="0" height="36" width="126" alt="" src="/images/add-listing.png"/>
+        </a>        
+      </div>
+    </div>
+
+
+    <div class="listing-bg">
+      <div class="heading-listing">
+        <div class="listing-txt">Spaces you rent</div>
+        <div class="listing-txt1">Rented from</div>
+      </div>
+      <% unless @user.accepted_requested_locations.blank? %>
+        <% @user.accepted_requested_locations.each do |location|  %>
+          <div class="list-wrapper">
+            <div class="dash-img">
+              <% if location.avatars.size > 0 %>
+                <%= image_tag(location.avatars.first.photo.url(:small), :border => "0", :height => "46", :width => "68", :alt => "space") %>
+              <% end %>
+            </div>
+            <div class="dash-img-txt"><%= link_to location.headline, location_path(location) %></div>
+            <div class="amount-txt"><%= "#{location.owner.first_name} #{location.owner.last_name[0..0].capitalize if location.owner.last_name}." %></div>
+            <div class="amount-txt2">$<%= number_with_precision(location.price.to_f, :precision => 2) %></div>
+          </div>
+        <% end %>
+      <% else %>
+        You do not have any space you rent.
+      <% end %>
+
+
+    </div>
+
+
+
+
   </div>
 
-  <hr></hr>
-
-  <h3>Spaces You Rent</h3>
-  <hr></hr>
-  <% unless @user.accepted_requested_locations.blank? %>
-    <div style="width: 100%;float: left;margin: 10px;">
-      <% @user.accepted_requested_locations.each do |location|  %>
-        <div style="width: 100%;float: left;margin: 5px;">
-          <span style="width: 150px;float: left;height: 100px;">
-            <% if location.avatars.size > 0 %>
-              <%= image_tag(location.avatars.first.photo.url(:small), :border => "0", :height => "86", :width => "106", :alt => "space") %>
-            <% end %>
-          </span>
-          <span style="width: 250px;float: left;height: 100px;">
-            <%= link_to location.headline, location_path(location) %><br/>
-          </span>
-          <span style="width: 125px;float: left;height: 100px;">
-            <%= "#{location.owner.first_name} #{location.owner.last_name[0..0].capitalize if location.owner.last_name}." %><br/>
-          </span>
-          <span style="width: 125px;float: left;height: 100px;">
-            $<%= number_with_precision(location.price.to_f, :precision => 2) %><br/>
-          </span>
-        </div>
-      <% end %>
-    </div>
-  <% else %>
-    You do not have any space you rent.
-  <% end %>
 
 
 </div>

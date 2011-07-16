@@ -1,100 +1,56 @@
-<%= render :partial => "left_panel" %>
-<div style="float: left;width: 75%;border-left: 1px solid black;padding-left: 10px;">
-  <h1> Change Password </h1>
-  <% form_tag :controller =>"accounts", :action =>"update_password" do %>
-    <%= hidden_field_tag "id",  @user.id  %>
+<%= stylesheet_link_tag "dashboard"%>
+<%= stylesheet_link_tag "account"%>
 
-    <% if @user.errors.any? %>
-      <div id="error_explanation" style="float: left; margin-top: 10px;width: 100%;">
-        <ul>
-          <% @user.errors.full_messages.each do |msg| %>
-            <li style="list-style: none;"><%= msg %></li>
-          <% end %>
-        </ul>
+<%= render :partial => "left_panel" %>
+
+<% if @user.errors.any? %>
+  <div id="error_explanation" style="float: left; margin-top: 10px;width: 100%;">
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li style="list-style: none;"><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div id="right-dash">
+  <div id="dash-txt">Your account information</div>
+  <div id="account-bg">
+    <% form_tag :controller =>"accounts", :action =>"update_password" do %>
+      <%= hidden_field_tag "id",  @user.id  %>
+      <div class="change-pass">Change password<br/>
+        <%= password_field_tag :password %><br/>
+        <%= password_field_tag :password_confirmation %>
+        <span class="txt-small">&nbsp;&nbsp;6 characters minimum</span><br/>
+        <%= link_to image_tag("update-password.png", :border => "0", :height => "34", :width => "135", :class => "img-space23"),"javascript:void(0);", :onclick => "$(this).form.submit();" %>
       </div>
     <% end %>
 
-    <div id="gray-box">
-
-      <div class="bg-fields">
-        <div class="txt">New Password</div>
-        <div class="field-x">
-          <%= password_field_tag :password %>
-        </div>
-      </div>
-
-      <div class="bg-fields">
-        <div class="txt">Confirmation Password</div>
-        <div class="field-x">
-          <%= password_field_tag :password_confirmation %>
-        </div>
-      </div>
-
-      <div id="details">
-        <%= submit_tag "Change Password" %>
-      </div>
+    <div class="change-pass">Get Paid<br/>
+      <span class="arial">Available balance:</span> 
+      <span class="arial-blue">$<%= number_with_precision(@user.recent_balance, :precision => 2) %> </span><br/>
+      <%= link_to image_tag("withdraw-fund.png", :border => "0", :height => "34", :width => "128", :class => "img-space22"), amount_withdraw_path(@user) %>
     </div>
 
 
-  <% end %>
 
-  <hr/>
-
-  <h1> Get Paid </h1>
-  Available Balance: $<%= number_with_precision(@user.recent_balance, :precision => 2) %>
-  <br/>
-  <%= link_to "Withdraw Funds", amount_withdraw_path(@user) %>
-
-  <hr/>
-
-  <h1> Transaction History </h1>
-  <table width="100%" style="text-align: center;">
-    <tr>
-      <th>
-        Date
-      </th>
-      <th>
-        Amount
-      </th>
-      <th>
-        Listing
-      </th>
-      <th>
-        Confirmation Number
-      </th>
-      <th>
-        Type
-      </th>
-    </tr>
-    <% @user.transactions.each do |transaction| %>
-      <tr>
-        <td>
-          <%= transaction.created_at.strftime("%B %d, %Y") %>
-        </td>
-
-        <td>
-          <%= number_with_precision(transaction.withdrawer.nil? ? (@user.id == transaction.renter_id) ? transaction.buyer_total : transaction.seller_total  : transaction.withdrawal_amount, :precision => 2) %>
-        </td>
-
-        <td>
-          <% unless transaction.withdrawer.nil? %>
-            "Bank Account"
-          <%else%>
-            <%= link_to transaction.location.headline, location_path(transaction.location) if transaction.location %>
-          <%end%>
-        </td>
-
-        <td>
-          <%= transaction.confirmation_number %>
-        </td>
-        <td>
-          <%= transaction.withdrawer.nil? ? (@user.id == transaction.renter_id) ? "Payment" : "Deposit"  : "Withdrawal" %>
-        </td>
-      </tr>
-    <% end %>
-
-  </table>
-
+    <div class="change-pass1">
+      <div class="account-header"></div>
+      <% @user.transactions.each do |transaction| %>
+        <div class="<%= cycle('blue-form-bg','white-form-bg') %>">
+          <div class="formx-1"><%= transaction.created_at.strftime("%b %d, %y") %></div>
+          <div class="formx-2"><%= number_with_precision(transaction.withdrawer.nil? ? (@user.id == transaction.renter_id) ? transaction.buyer_total : transaction.seller_total  : transaction.withdrawal_amount, :precision => 2) %></div>
+          <div class="formx-3">
+            <% unless transaction.withdrawer.nil? %>
+              "Bank Account"
+            <%else%>
+              <%= link_to transaction.location.headline, location_path(transaction.location) if transaction.location %>
+            <%end%>
+          </div>
+          <div class="formx-4"><%= transaction.confirmation_number %></div>
+          <div class="formx-5"><%= transaction.withdrawer.nil? ? (@user.id == transaction.renter_id) ? "Payment" : "Deposit"  : "Withdrawal" %></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
-
-

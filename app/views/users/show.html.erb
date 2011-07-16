@@ -1,49 +1,34 @@
-<div id="get-list-header"></div>
+<%= stylesheet_link_tag "profile"%>
 
-<div id="left-photo">
+<div id="get-list-header">
+  <div id="manage-listing">Profile for <%= "#{@user.first_name} #{@user.last_name[0..0].capitalize if @user.last_name}." %></div>
+</div>
+
+<div id="profile-img">
   <% unless @user.photo_file_name.nil? %>
-    <div id="photo">
-      <%= image_tag(@user.photo.url(:medium) )%>
-    </div>
+    <%= link_to image_tag(@user.photo.url(:medium), :border => "0", :height => "185", :width => "235" ), "javascript:void(0);"%>
   <% end %>
 </div>
 
-<div id="gray-box">
-  <h1>
-    Profile For
-  </h1>
-  <div class="bg-fields">
-    <div class="txt"></div>
-    <div class="field-x">
-      <%= "#{@user.first_name} #{@user.last_name[0..0].capitalize if @user.last_name}." %>
-    </div>
+<div class="profile-gray">
+
+  <div class="white-box">
+    <div class="txt-1">City:</div>
+    <div class="txt-2"><%= @user.city %></div>
   </div>
 
-  <div class="bg-fields">
-    <div class="txt">City:</div>
-    <div class="field-x">
-      <%= @user.city %>
-    </div>
+  <div class="white-box">
+    <div class="txt-1">Occupation:</div>
+    <div class="txt-2"><%= @user.occupation %></div>
   </div>
 
-  <div class="bg-fields">
-    <div class="txt">Occupation:</div>
-    <div class="field-x">
-      <%= @user.occupation %>
-    </div>
+  <div class="white-box">
+    <div class="txt-1">School attended:</div>
+    <div class="txt-2"><%= @user.school_attended %></div>
   </div>
 
-  <div class="bg-fields">
-    <div class="txt">Schools Attended:</div>
-    <div class="field-x">
-      <%= @user.school_attended %>
-    </div>
-  </div>
-
-
-  <div id="details"><br/>
-    Anything you want to share with folks?<br/><br/>
+  <div id="aboutx-details">Anything you want to share with folks?</div>
+  <div id="aboutx-txt2">
     <%= @user.share %>
-    <br/><br/>
   </div>
 </div>

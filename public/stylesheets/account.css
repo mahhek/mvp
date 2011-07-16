@@ -1,0 +1,140 @@
+#account-bg {
+	width: 688px;
+	float: left;
+	padding-top: 5px;
+	padding-right: 10px;
+	padding-bottom: 15px;
+	padding-left: 10px;
+	margin-top: 5px;
+	background-color: #f9f9f9;
+}
+.change-pass {
+	font-family: FamiliarProBold;
+	width: 688px;
+	color: #373534;
+	font-size: 16px;
+	background-image: url(/images/doted-line.png);
+	background-repeat: repeat-x;
+	background-position: left bottom;
+	padding-bottom: 20px;
+	padding-top: 20px;
+	float: left;
+}
+.change-pass1 {
+	font-family: FamiliarProBold;
+	width: 688px;
+	color: #373534;
+	font-size: 16px;
+	background-image: url(..);
+	padding-bottom: 20px;
+	padding-top: 20px;
+	float: left;
+}
+.change-pass input {
+	height: 30px;
+	width: 270px;
+	margin-top: 7px;
+	border: 1px solid #cacac8;
+	color: #999;
+	line-height: 30px;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+.txt-small {
+	font-size: 12px;
+	color: #666;
+	font-family: Arial, Helvetica, sans-serif;
+	line-height: 10px;
+}
+.arial {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	line-height: 20px;
+}
+.arial-blue {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	color: #0086c5;
+	line-height: 20px;
+}
+.img-space22 {
+	margin-top: 5px;
+}
+.img-space23 {
+	margin-top: 10px;
+}
+.account-header {
+	float: left;
+	width: 688px;
+	background-image: url(/images/account-form.png);
+	height: 42px;
+	background-repeat: no-repeat;
+}
+.blue-form-bg {
+	float: left;
+	height: 35px;
+	width: 688px;
+	background-color: #eff9fe;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 35px;
+	color: #525252;
+}
+.white-form-bg {
+	float: left;
+	height: 35px;
+	width: 688px;
+	background-color: #FFF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 35px;
+	color: #525252;
+}
+.formx-1 {
+	line-height: 35px;
+	height: 35px;
+	float: left;
+	width: 70px;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #FFF;
+	text-align: center;
+}
+.formx-2 {
+	line-height: 35px;
+	height: 35px;
+	float: left;
+	width: 89px;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #FFF;
+	text-align: center;
+}
+.formx-3 {
+	line-height: 35px;
+	height: 35px;
+	float: left;
+	width: 98px;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #FFF;
+	text-align: center;
+}
+.formx-5 {
+	line-height: 35px;
+	height: 35px;
+	float: left;
+	width: 82px;
+	text-align: center;
+}
+.formx-4 {
+	line-height: 35px;
+	height: 35px;
+	float: left;
+	width: 329px;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #FFF;
+	text-align: left;
+	padding-left: 15px;
+}
