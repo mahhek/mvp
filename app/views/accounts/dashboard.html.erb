@@ -44,7 +44,7 @@
               <div class="details-rentedx2">
                 <%= link_to "#{renter.first_name} #{renter.last_name[0..0].capitalize if renter.last_name}.", user_path(renter)  %><br/>
                 <%= rental_request.buyer_rental_date.strftime("%B %d, %Y") %><br/>
-                $<%= number_with_precision(rental_request.transaction.price.to_f, :precision => 2) if rental_request.transaction.price%>
+                $<%= number_with_precision(rental_request.transaction.price.to_f, :precision => 2) if rental_request.transaction %>
               </div>
               <div class="rented-btn">
                 <%= link_to "Accept", change_request_status_path(rental_request, LocationsUser::ACCEPTED) %>
@@ -83,7 +83,7 @@
               <div class="details-rentedx2">
                 <%= link_to "#{renter.first_name} #{renter.last_name[0..0].capitalize if renter.last_name}.", user_path(renter)  %><br/>
                 <%= cancel_request.renting_end_date.strftime("%B %d, %Y") %><br/>
-                $<%= number_with_precision(cancel_request.transaction.price.to_f, :precision => 2) if cancel_request.transaction.price %>
+                $<%= number_with_precision(cancel_request.transaction.price.to_f, :precision => 2) if cancel_request.transaction %>
               </div>
               <div class="rented-btn">
                 <%= link_to "Accept", change_request_status_path(cancel_request, LocationsUser::ENDED) %>
