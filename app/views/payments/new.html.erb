@@ -89,13 +89,13 @@
 
       <div class="white-bg2">
         <div class="n-price">Service Fee:</div>
-        <% service_fee = sub_total * Commission.first.buyer %>
+        <% service_fee = calculate_fee(sub_total, @location.park_store, "Buyer") %>
         <div class="p-price">$<%= number_with_precision(service_fee.to_f, :precision => 2) %></div>
       </div>
 
       <div class="white-bg">
         <div class="n-price">Total:</div>
-        <% total = sub_total + service_fee %>
+        <% total = sub_total.to_f + service_fee.to_f %>
         <div class="p-price" style="font-weight: bold;">$<%= number_with_precision(total.to_f, :precision => 2) %></div>
       </div>
     </div>
@@ -140,7 +140,7 @@
   </div>
   <% form_for([@location,@payment], :html => { :name => "payment_form"} ) do |f| %>
     <%= f.hidden_field :user_id, :value => current_user.id if current_user%>
-    <%= f.hidden_field :amount, :value => total  %>
+    <%= f.hidden_field :amount, :value => @location.price  %>
     <div class="r-payment-details">
       <div id="billing-bg">
         <%= f.text_field :name, :value => "Name", :class => "b-address", :onclick => "hideShowValue(this,'Name','hide');", :onblur => "hideShowValue(this,'Name','show');"  %>

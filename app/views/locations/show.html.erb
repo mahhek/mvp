@@ -76,7 +76,7 @@
         <div style="float:left;margin-right: 5px;">
           When do you want it?
         </div>
-        <%= text_field_tag "renter_date", @location.start_date ,{:size => "15"}  %>
+        <%= text_field_tag "renter_date", @location.start_date.strftime("%m / %d / %y") ,{:size => "15"}  %>
         <script type="text/javascript">
           $(document).ready(function(){
             $('#map').css("margin", "0 auto");
@@ -84,7 +84,7 @@
             Date.format = 'mm / dd / yy';
 
             if($('#renter_date').val() == ""){
-              $('#renter_date').datePicker({startDate:'<%= @location.start_date %>',clickInput:true}).val(new Date().asString()).trigger('change');
+              $('#renter_date').datePicker({startDate:'<%= @location.start_date.strftime("%m / %d / %y") %>',clickInput:true}).val(new Date().asString()).trigger('change');
             }else{
               $('#renter_date').datePicker({startDate:'<%= @location.start_date.strftime("%m / %d / %y") %>',clickInput:true});
             }

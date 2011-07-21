@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
 
   filter_parameter_logging :password, :password_confirmation
   helper_method :current_user_session, :current_user
+  helper_method :calculate_fee
 
   private
 
