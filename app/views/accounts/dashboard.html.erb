@@ -62,7 +62,7 @@
     <div id="right-dash" style="padding: 0px;">
       <div id="dash-txt">Cancellation Requests</div>
       <% unless current_user.cancellation_requests_of_customers_of_all_locations.blank? %>
-        <div id="rent-bg">
+        <div id="rent-bg" style="padding: 0px;">
           <% current_user.cancellation_requests_of_customers_of_all_locations.each do |cancel_request| %>
             <% location = cancel_request.location %>
             <div class="rented-bg" style="padding: 0px;">
