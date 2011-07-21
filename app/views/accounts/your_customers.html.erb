@@ -6,9 +6,9 @@
 
 <div id="right-dash">
   <div id="dash-txt">Who is renting from you?</div>
-  <% unless current_user.accepted_requests_of_customer_of_all_locations.blank? %>
+  <% unless current_user.accepted_requests_of_customers_of_all_locations.blank? %>
     <div id="rent-bg">
-      <% current_user.accepted_requests_of_customer_of_all_locations.each do |accepted_request| %>
+      <% current_user.accepted_requests_of_customers_of_all_locations.each do |accepted_request| %>
         <% location = accepted_request.location %>
         <div class="rented-bg">
           <div class="renter-img">
@@ -28,7 +28,7 @@
           <div class="details-rentedx2">
             <%= link_to "#{renter.first_name} #{renter.last_name[0..0].capitalize if renter.last_name}.", user_path(renter)  %><br/>
             <%= accepted_request.request_response_date.strftime("%B %d, %Y") %><br/>
-            $<%= number_with_precision(location.price.to_f, :precision => 2) %>
+            $<%= number_with_precision(accepted_request.transaction.price.to_f, :precision => 2) %>
           </div>
           <div class="rented-btn">
             <%= link_to_remote image_tag("contact-renter.png", :border => "0", :height => "33", :width => "116"), :url => contact_renter_path(renter,accepted_request) %>
@@ -39,6 +39,6 @@
       <% end %>
     </div>
   <% else %>
-    You do not have any space which is rented out.
+    You do not currently have anyone renting from you.
   <% end %>
 </div>

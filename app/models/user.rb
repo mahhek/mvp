@@ -9,6 +9,31 @@ class User < ActiveRecord::Base
     c.merge_validates_uniqueness_of_email_field_options :message => 'address is already registered.'
 
   end
+  FACEBOOK_SCOPE = 'email,user_birthday'
+
+  def before_connect(facebook_session)
+    self.first_name = facebook_session.first_name
+    self.last_name = facebook_session.last_name
+    self.email = facebook_session.email
+    self.gender = facebook_session.gender
+    self.password = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{self.username}--")[0,6]
+    self.password_confirmation = self.password
+    self.active = true
+
+    # Set other tokens
+    self.single_access_token = Authlogic::Random.friendly_token
+    self.perishable_token = Authlogic::Random.friendly_token
+    reset_persistence_token
+  end
+
+  def self.new_or_find_by_facebook_oauth_access_token(access_token, options = {})
+    user = User.find_by_facebook_oauth_access_token(access_token)
+    if user.blank?
+      #code to create new user here
+    end
+    user
+  end
+  
   attr_accessor :password_confirmation
 
   validate :field_values
@@ -27,8 +52,16 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   has_many :locations, :order => "created_at DESC"
   
-  def accepted_requests_of_customer_of_all_locations
-    self.locations.collect { |location| location.customers_requests }.flatten
+  def accepted_requests_of_customers_of_all_locations
+    self.locations.collect { |location| location.customers_accepted_requests }.flatten
+  end
+
+  def rental_requests_of_customers_of_all_locations
+    self.locations.collect { |location| location.customers_rental_requests }.flatten
+  end
+
+  def cancellation_requests_of_customers_of_all_locations
+    self.locations.collect { |location| location.customers_cancellation_requests }.flatten
   end
 
   has_many :payments, :dependent => :destroy

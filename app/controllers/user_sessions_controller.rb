@@ -1,30 +1,32 @@
 class UserSessionsController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => :destroy
-
+  
   def new
     @user_session = UserSession.new
   end
 
   #  def create
   #    @user_session = UserSession.new(params[:user_session])
-  #    if @user_session.save
-  #      flash[:notice] = "Login successful !"
-  #      render :update do |page|
-  #        page << "window.location='/homepage'"
+
+
   #      end
   #    else
   #      render :update do |page|
   #        page[:errors_div_session].replace_html :partial => "layouts/errors", :locals => {:object => @user_session}
   #      end
   #    end
+  #    if @user_session.save
+  #      flash[:notice] = "Login successful !"
+  #      render :update do |page|
+  #        page << "window.location='/homepage'"g
   #  end
 
   def create
     if request.xhr?
       @user_session = UserSession.new(params[:user_session])
       if @user_session.save
-#        flash[:notice] = "Login successful !"
+        #        flash[:notice] = "Login successful !"
         render :update do |page|
           if session[:return_to]
             if session[:return_to] == "/locations"
@@ -63,6 +65,7 @@ class UserSessionsController < ApplicationController
             flash[:notice] = "An account already exists with this email, please login to connect it with your Facebook account."
             redirect_to login_path
           else
+            z
             flash[:notice] = "Could not login."
             render :action => :new
           end
@@ -100,7 +103,7 @@ class UserSessionsController < ApplicationController
 
   def destroy
     current_user_session.destroy
-#    flash[:notice] = "Logout successful!"
+    #    flash[:notice] = "Logout successful!"
     redirect_to root_url
   end
 end

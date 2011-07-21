@@ -81,12 +81,12 @@
           $(document).ready(function(){
             $('#map').css("margin", "0 auto");
             Date.firstDayOfWeek = 0;
-            Date.format = 'yyyy-mm-dd';
+            Date.format = 'mm / dd / yy';
 
             if($('#renter_date').val() == ""){
               $('#renter_date').datePicker({startDate:'<%= @location.start_date %>',clickInput:true}).val(new Date().asString()).trigger('change');
             }else{
-              $('#renter_date').datePicker({startDate:'<%= @location.start_date %>',clickInput:true});
+              $('#renter_date').datePicker({startDate:'<%= @location.start_date.strftime("%m / %d / %y") %>',clickInput:true});
             }
           });
         </script>
@@ -109,7 +109,7 @@
       <% else %>
         <%= image_tag("missing_70.png") %>
       <% end %>
-      <%= link_to "#{@location.user.first_name} #{@location.user.last_name[0..0].capitalize if @location.user.last_name}.", user_path(@location.user)  %>
+      <%= link_to "#{@location.user.first_name[0..6]} #{@location.user.last_name[0..0].capitalize if @location.user.last_name}.", user_path(@location.user)  %>
       <br/>
       <span class="hel-14"></span></div>
 

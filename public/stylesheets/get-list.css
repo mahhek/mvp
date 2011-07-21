@@ -285,40 +285,22 @@
     width: 478px;
     padding-top: 10px;
 }
-#field-caption {
-    float: left;
-    width: 478px;
-    padding-top: 10px;
-    height: 33px;
-}
+
 #field-caption {
 
     float: left;
-
     width: 466px;
-
-    height: 31px;
-
+    height: auto;
     margin-top: 10px;
-
     font-family: arial,helvitica;
-
     font-size: 14px;
-
     border: 1px solid #AFAFAF;
-
     line-height: 31px;
-
     padding-left: 5px;
-
     background-color: white;
-
     -webkit-box-shadow: 1px 1px 3px rgba(77, 78, 83, 0.2);
-
     -moz-box-shadow: 1px 1px 3px rgba(77, 78, 83, 0.2);
-
     box-shadow: 1px 1px 3px rgba(77, 78, 83, 0.2);
-
 } 
 #about-header {
     height: 41px;

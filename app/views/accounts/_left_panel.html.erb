@@ -5,7 +5,7 @@
     <% end %>
   </div>
 
-  <div id="username">Hi <%= @user.first_name %>!</div>
+  <div id="username">Hi <%= @user.first_name[0..6] %>!</div>
   <div id="edit-profile">
     <%= link_to image_tag("edit-profile.png", :border => "0", :height => "25", :width => "73"), edit_user_path(@user)  %>
   </div>
@@ -43,7 +43,7 @@
     </li>
 
     <li>
-      <a style="background-image: url('/images/profile-icon.png'); background-repeat: no-repeat; background-position: 6px 50%;" href="<%= user_path(@user)  %>">
+      <a style="background-image: url('/images/profile-icon.png'); background-repeat: no-repeat; background-position: 6px 50%;" href="<%= edit_user_path(@user)  %>">
         Your profile
       </a>
     </li>

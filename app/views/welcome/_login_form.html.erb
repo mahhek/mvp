@@ -4,7 +4,19 @@
 
     <div id="facebook-login">
       <div id="fb-txt">Using Facebook: </div>
-      <div id="fb-btn"><a href="#"><img border="0" height="22" width="154" alt="fb-btn" src="/images/fb-login.png"></a></div>
+      <div id="fb-btn">
+        <%= fb_connect_async_js %>
+
+        <% if current_facebook_user %>
+
+          <%= "Welcome #{current_facebook_user.first_name} !" %>
+
+          <%= fb_logout_link("Logout of fb", request.url) %><br />
+        <% else  %>
+          <%= fb_login_and_redirect('fb', :perms => 'email') %>
+        <% end %>
+
+      </div>
     </div>
 
     <div id="user-txt">Or, Your Username &amp; Password:</div>

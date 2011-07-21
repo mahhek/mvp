@@ -20,6 +20,6 @@ class Transaction < ActiveRecord::Base
       :sender_id => self.renter_id,
       :locations_user_id => self.locations_user_id,
       :message_type => "Reservation",
-      :subject => "Reservation Request: Please Respont within 24 Hours.").save
+      :subject => "Reservation Request: Please Respond within 24 Hours").save
   end
 end

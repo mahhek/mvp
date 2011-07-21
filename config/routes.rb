@@ -4,6 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users, :collection  => {:update_password => :post }
   map.update_location_status "/location/update/status/:id", :controller => "locations", :action => "update_location_status"
   map.update_request_status "/request/update/status/:id", :controller => "accounts", :action => "update_request_status"
+  map.change_request_status "/request/update/status/:id/:status", :controller => "accounts", :action => "change_request_status"
 
   map.update_start_date "/location/update/start_date/:id", :controller => "locations", :action => "update_start_date"
   
@@ -11,7 +12,7 @@ ActionController::Routing::Routes.draw do |map|
     location.resources :avatars
     location.resources :payments
   end
-  
+  map.oauth_callback "/fb_oauth/create", :controller=>"user_sessions", :action=>"create"
   map.reserve_location "/location/reserve/:location_id", :controller => 'payments', :action => 'new'
   map.update_renter_date "/location/update_renter_date/:location_id", :controller => 'payments', :action => 'update_renter_date'
   map.search_location "/spaces/search_location", :controller => 'locations', :action => 'search_location'

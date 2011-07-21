@@ -7,7 +7,7 @@
 
     <%= f.hidden_field :receiver_id, :value => @user.id %>
     <%= f.hidden_field :sender_id, :value => current_user.id %>
-    <%= f.hidden_field :subject, :value => "Cancellation Request: Please Respont within 24 Hours." %>
+    <%= f.hidden_field :subject, :value => "Cancellation Request: Please Respond within 24 Hours" %>
     <%= f.hidden_field :message_type, :value => "Cancellation" %>
     <%= f.hidden_field :locations_user_id, :value => @request_for_location.id %>
 

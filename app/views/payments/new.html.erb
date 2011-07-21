@@ -154,12 +154,12 @@
         <br/><br/>
         <%= f.text_field :phone_number, :value => "Phone Number", :class => "b-address", :onclick => "hideShowValue(this,'Phone Number','hide');", :onblur => "hideShowValue(this,'Phone Number','show');" %>
         <%= f.text_field :hear_about_us, :value => "How did you hear about us?", :class => "b-address", :onclick => "hideShowValue(this,'How did you hear about us?','hide');", :onblur => "hideShowValue(this,'How did you hear about us?','show');" %>
-          <%= f.hidden_field :locations_user_id, :value => @request_for_location.id %>
+        <%= f.hidden_field :locations_user_id, :value => @request_for_location.id %>
 
         <br/><br/>
-        <a href="javascript:void(0);">
-          <img border="0" height="40" width="184" alt="Reserve your space" src="/images/reserve-your-space-button.png" onclick="payment_form.submit();"/>
-        </a>
+
+        <img border="0" height="40" width="184" alt="Reserve your space" src="/images/reserve-your-space-button.png" onclick="payment_form.submit();"/>
+
         <br/>
         <span class="hel-14">You will not be charged until the owner accepts your offer. </span></div>
 

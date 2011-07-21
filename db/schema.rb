@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110714195335) do
+ActiveRecord::Schema.define(:version => 20110719112047) do
 
   create_table "avatars", :force => true do |t|
     t.string   "caption"
@@ -198,15 +198,15 @@ ActiveRecord::Schema.define(:version => 20110714195335) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "username"
-    t.string   "email",                                  :null => false
-    t.string   "crypted_password",                       :null => false
-    t.string   "password_salt",                          :null => false
-    t.string   "persistence_token",                      :null => false
-    t.string   "single_access_token",                    :null => false
-    t.string   "perishable_token",                       :null => false
-    t.boolean  "active",              :default => false
-    t.integer  "login_count",         :default => 0,     :null => false
-    t.integer  "failed_login_count",  :default => 0,     :null => false
+    t.string   "email",                                    :null => false
+    t.string   "crypted_password",                         :null => false
+    t.string   "password_salt",                            :null => false
+    t.string   "persistence_token",                        :null => false
+    t.string   "single_access_token",                      :null => false
+    t.string   "perishable_token",                         :null => false
+    t.boolean  "active",                :default => false
+    t.integer  "login_count",           :default => 0,     :null => false
+    t.integer  "failed_login_count",    :default => 0,     :null => false
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"
@@ -225,7 +225,9 @@ ActiveRecord::Schema.define(:version => 20110714195335) do
     t.string   "city"
     t.integer  "renter_id"
     t.date     "rent_date"
-    t.float    "recent_balance",      :default => 0.0
+    t.float    "recent_balance",        :default => 0.0
+    t.string   "facebook_uid"
+    t.string   "facebook_access_token"
   end
 
 end

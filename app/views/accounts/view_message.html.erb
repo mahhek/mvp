@@ -13,7 +13,7 @@
       <%= f.hidden_field :receiver_id, :value => @message.sender_id %>
       <%= f.hidden_field :sender_id, :value => @message.receiver_id %>
       <%= f.hidden_field :message_type, :value => "Inquiry" %>
-      <div class="inquiry-txt">On <%= @message.created_at.strftime("%B/%d/%Y") %>, <%= @message.sender.first_name %> wrote:</div>
+      <div class="inquiry-txt">On <%= @message.created_at.strftime("%B %d,  %Y") %> <%= @message.sender.first_name %> wrote:</div>
       <div class="comments-inquiry">
         <%= @message.message_type == "Inquiry" ? @message.body : @message.subject %>
       </div>

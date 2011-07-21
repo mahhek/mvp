@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag "dashboard"%>
+<%= stylesheet_link_tag "renting"%>
 <%= render :partial => "left_panel" %>
 
 <div id="right-dash">
@@ -19,33 +20,82 @@
     </div>
 
 
-
-    <div class="listing-bg">
-      <div class="heading-listing">
-        <div class="listing-txt">Your listings</div>
-        <div class="listing-txt1">Status</div>
-      </div>
-      <% unless @user.locations.blank? %>
-        <% @user.locations.each do |location|  %>
-          <div class="list-wrapper">
-            <div class="dash-img">
-              <% if location.avatars.size > 0 %>
-                <%= image_tag(location.avatars.first.photo.url(:small), :border => "0", :height => "46", :width => "68", :alt => "space") %>
-              <% end %>
+    <div id="right-dash" style="padding: 0px;">
+      <div id="dash-txt">Rental requests</div>
+      <% unless current_user.rental_requests_of_customers_of_all_locations.blank? %>
+        <div id="rent-bg" style="padding: 0px;">
+          <% current_user.rental_requests_of_customers_of_all_locations.each do |rental_request| %>
+            <% location = rental_request.location %>
+            <div class="rented-bg">
+              <div class="renter-img">
+                <% if location.avatars.size > 0 %>
+                  <%= image_tag(location.avatars.first.photo.url(:small), :border => "0", :height => "78", :width => "116", :alt => "space") %>
+                <% end %>
+              </div>
+              <div class="rental-txt">
+                <%= link_to location.headline, location_path(location) %>
+              </div>
+              <% renter = rental_request.user %>
+              <div class="details-rentedx">
+                Requested by:<br/>
+                Rental on:<br/>
+                Monthly rent:
+              </div>
+              <div class="details-rentedx2">
+                <%= link_to "#{renter.first_name} #{renter.last_name[0..0].capitalize if renter.last_name}.", user_path(renter)  %><br/>
+                <%= rental_request.buyer_rental_date.strftime("%B %d, %Y") %><br/>
+                $<%= number_with_precision(rental_request.transaction.price.to_f, :precision => 2) %>
+              </div>
+              <div class="rented-btn">
+                <%= link_to "Accept", change_request_status_path(rental_request, LocationsUser::ACCEPTED) %>
+                &nbsp;&nbsp;
+                <%= link_to "Decline", change_request_status_path(rental_request, LocationsUser::REJECTED) %>
+              </div>
             </div>
-            <div class="dash-img-txt"><%= link_to location.headline, location_path(location) %></div>
-            <div class="amount-txt"><%= location.rent_status %></div>
-            <div class="amount-txt2">$<%= number_with_precision(location.price.to_f, :precision => 2) %></div>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       <% else %>
-        You do not have any listing.
+        No Rental Request!
       <% end %>
-      <div class="add-listing-buttom">
-        <a href="<%= new_location_path %>">
-          <img border="0" height="36" width="126" alt="" src="/images/add-listing.png"/>
-        </a>        
-      </div>
+    </div>
+
+    <div id="right-dash" style="padding: 0px;">
+      <div id="dash-txt">Cancellation Requests</div>
+      <% unless current_user.cancellation_requests_of_customers_of_all_locations.blank? %>
+        <div id="rent-bg">
+          <% current_user.cancellation_requests_of_customers_of_all_locations.each do |cancel_request| %>
+            <% location = cancel_request.location %>
+            <div class="rented-bg" style="padding: 0px;">
+              <div class="renter-img">
+                <% if location.avatars.size > 0 %>
+                  <%= image_tag(location.avatars.first.photo.url(:small), :border => "0", :height => "78", :width => "116", :alt => "space") %>
+                <% end %>
+              </div>
+              <div class="rental-txt">
+                <%= link_to location.headline, location_path(location) %>
+              </div>
+              <% renter = cancel_request.user %>
+              <div class="details-rentedx">
+                Canceled by:<br/>
+                Cancel on:<br/>
+                Monthly rent:
+              </div>
+              <div class="details-rentedx2">
+                <%= link_to "#{renter.first_name} #{renter.last_name[0..0].capitalize if renter.last_name}.", user_path(renter)  %><br/>
+                <%= cancel_request.renting_end_date.strftime("%B %d, %Y") %><br/>
+                $<%= number_with_precision(cancel_request.transaction.price.to_f, :precision => 2) %>
+              </div>
+              <div class="rented-btn">
+                <%= link_to "Accept", change_request_status_path(cancel_request, LocationsUser::ENDED) %>
+                &nbsp;&nbsp;
+                <%= link_to "Decline", change_request_status_path(cancel_request, LocationsUser::REJECTED) %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        No Ending Request!
+      <% end %>
     </div>
 
 

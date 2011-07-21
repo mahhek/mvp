@@ -338,22 +338,15 @@ body {
 .erro_messages {
     width: 815px;
     float: left;
-
     background-color: #D24824;
-
     margin-top: 5px;
-
+    margin-left: 30px;
     color: white;
-
     font-family: arial,helvitica;
-
     -webkit-border-radius: 5px;
-
     -moz-border-radius: 5px;
-
     border-radius: 5px;
-
-    padding-top: 2px;
+    padding: 5px;
 
 } 
 #featuer-boxes {

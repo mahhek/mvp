@@ -68,6 +68,32 @@ class AccountsController < ApplicationController
       page["updated_request_msg_div_#{@message.id}_#{@request_for_location.id}"].replace_html :text => @text
     end
   end
+  
+  
+  def change_request_status    
+    @request_for_location = LocationsUser.find_by_id(params[:id])
+    @request_for_location.status = params[:status]
+    @request_for_location.request_response_date = Date.current
+    @text = ""
+    
+    case params[:status].to_i
+    when LocationsUser::PENDING
+      @text = "Stauts udpated."
+    when LocationsUser::ACCEPTED
+      @request_for_location.location.update_attribute("quantity",@request_for_location.location.quantity - 1)
+      @text = "Request Accepted."
+    when LocationsUser::REJECTED
+      @text = "Request Rejected."
+    when LocationsUser::ENDED
+      @request_for_location.location.update_attribute("quantity",@request_for_location.location.quantity + 1)
+      @text = "Rent Ended."
+    end
+    @request_for_location.save
+    flash[:notice] = @text
+    redirect_to dashboard_path(current_user)    
+  end
+
+
 
   def view_message
     @message = Message.find_by_id(params[:message_id])
