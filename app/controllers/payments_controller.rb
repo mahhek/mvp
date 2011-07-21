@@ -27,7 +27,7 @@ class PaymentsController < ApplicationController
     if current_user
       if can_user_send_request
         @request_for_location = LocationsUser.new
-        @request_for_location.buyer_rental_date = params[:renter_date]
+        @request_for_location.buyer_rental_date = Date.strptime(params[:renter_date], '%m / %d / %y')
         @request_for_location.renting_start_date = @location.start_date
         @request_for_location.request_send_date = Date.current
         @request_for_location.user_id = current_user.id
