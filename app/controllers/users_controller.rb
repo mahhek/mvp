@@ -18,6 +18,33 @@ class UsersController < ApplicationController
     end
   end
 
+  def create_facebook_user
+    
+    if current_facebook_user
+      @user = User.find_by_fb_user_id(current_facebook_user.id.to_i)
+    end
+    if @user.blank?
+      
+      @facebook_user = current_facebook_user.fetch
+
+      @user = User.create :login => @facebook_user.email, :email => @facebook_user.email, :name => @facebook_user.name, :fb_user_id => @facebook_user.id
+      if @user.save
+        @user.profile = Profile.create(:benefactor_id => nil, :benefactor_invites =>   Setting.find_by_identifier("benefactor_invites").value.to_i)
+        redirect_to :controller => "profiles", :action => "show", :id => @user.profile.id
+      else
+        render "new"
+      end
+    elsif @user.fb_user_id.nil?
+      cc
+      @user.update_attribute :fb_user_id, current_facebook_user.id
+      redirect_to :controller => "dashboard", :url => "index"
+    else
+      ccc
+      redirect_to :controller => "dashboard", :url => "index"
+    end
+  end
+
+
   def activate
     @user = User.find_using_perishable_token(params[:activation_code], 1.week) || (raise Exception)
     raise Exception if @user.active?

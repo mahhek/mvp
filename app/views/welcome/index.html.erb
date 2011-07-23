@@ -60,7 +60,7 @@
     <% if space.avatars.size > 0 %>
       <div id="right-content">
         <div id="slider-img">
-          <%= link_to( image_tag(space.avatars.first.photo.url(:original), :height => "275", :width => "306", :border => "0"), location_path(space)) %>
+          <%#= link_to( image_tag(space.avatars.first.photo.url(:original), :height => "275", :width => "306", :border => "0"), location_path(space)) %>
         </div>
         <div id="details-storage">
           <div id="feature-heading"><%= space.park_store %></div>
@@ -93,5 +93,5 @@
 <div id="featuer-boxes">
   <%= link_to(image_tag("how-its-work.png", :height => "201", :width => "285", :alt => "how it works", :border => "0"), {:controller => "welcome", :action => "tell_me_more"}) %>
   <%= link_to(image_tag("list-your-space.png", :height => "201", :width => "285", :alt => "list your space", :border => "0", :class => "img-space"), new_location_path) %>
-  <%= link_to(image_tag("sign-up.png", :height => "201", :width => "286", :alt => "sign up", :border => "0"), {:controller => "welcome", :action => "signup_and_signin", :id => "signup"}) %>
+  <%= link_to(image_tag("why-list-space.png", :height => "201", :width => "286", :alt => "sign up", :border => "0"), {:controller => "welcome", :action => "signup_and_signin", :id => "signup"}) %>
 </div>

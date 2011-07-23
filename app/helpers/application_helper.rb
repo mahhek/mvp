@@ -15,4 +15,15 @@ module ApplicationHelper
     obj = instance_variable_get("@" + model.to_s)
     obj.respond_to?(field) ? obj.send(field) : nil
   end
+
+  def custom_fb_login_and_redirect(url, options = {})
+    js = update_page do |page|
+      page.redirect_to url
+    end.gsub(/\"/, '\'')
+
+    text = options.delete(:text)
+
+    content_tag("fb:login-button",text,options.merge(:onlogin=>js))
+  end
+
 end

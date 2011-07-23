@@ -1,5 +1,4 @@
-<!DOCTYPE HTML>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml" xml:lang="fr" lang="fr">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Storably</title>
@@ -20,7 +19,7 @@
   <body>
 
     <div id="header">
-      <div id="logo" onclick="window.location='/'" style="cursor: pointer;"><img src="/images/Storably-logo.png" width="105" height="35" alt="Storably" /></div>
+      <div id="logo" onclick="window.location='/'" style="cursor: pointer;"><img src="/images/logo.png" alt="Storably" /></div>
 
       <div id="nav">
         <div id="links">
@@ -33,11 +32,14 @@
             <%= link_to "Dashboard", dashboard_path(current_user) %>
             <%= link_to "Logout", user_session_path(current_user), :method => :delete %>
           <% end %>
+
           <a href="/welcome/tell_more">Tell Me More</a>
         </div>
         <div id="list-space-bt">
           <%= link_to "List Your Space", new_location_path %>
         </div>
+
+
       </div>
     </div>
 

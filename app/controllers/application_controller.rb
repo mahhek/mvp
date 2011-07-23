@@ -4,10 +4,11 @@ require 'utility'
 require 'google'
 require 'z_extended_string'
 class ApplicationController < ActionController::Base
-  include Facebooker2::Rails::Controller
+  
 
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  include Facebooker2::Rails::Controller
   
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password

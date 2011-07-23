@@ -1,5 +1,5 @@
 jQuery(window).load(function() {
-    setTimeout ( "hideFlash()", 2500);
+    setTimeout ( "hideFlash()", 6000);
 });
 
 

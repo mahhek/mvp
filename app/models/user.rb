@@ -1,17 +1,19 @@
 class User < ActiveRecord::Base
+  
   acts_as_authentic do |c|
 
-    c.login_field = 'email'
-    c.validate_login_field = false
-    c.require_password_confirmation = false
-    password_length_constraints = c.validates_length_of_password_field_options.reject { |k,v| [:minimum, :maximum].include?(k) }
-    c.validates_length_of_password_field_options = password_length_constraints.merge :within => 6..24
-    c.merge_validates_uniqueness_of_email_field_options :message => 'address is already registered.'
+#    c.login_field = 'email'
+#    c.validate_login_field = false
+#    c.require_password_confirmation = false
+#    password_length_constraints = c.validates_length_of_password_field_options.reject { |k,v| [:minimum, :maximum].include?(k) }
+#    c.validates_length_of_password_field_options = password_length_constraints.merge :within => 6..24
+#    c.merge_validates_uniqueness_of_email_field_options :message => 'address is already registered.'
 
   end
   FACEBOOK_SCOPE = 'email,user_birthday'
 
   def before_connect(facebook_session)
+    nnn
     self.first_name = facebook_session.first_name
     self.last_name = facebook_session.last_name
     self.email = facebook_session.email
