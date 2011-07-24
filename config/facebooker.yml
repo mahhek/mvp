@@ -4,9 +4,9 @@ development:
   api_key: 416b67ce07210481f8dcb5aec94ea07b
 
 production:
-  app_id: 416b67ce07210481f8dcb5aec94ea07b
+  app_id: 182821801781992
   secret: 1174804f35513fd331cf7f3c168fcc3c
-  api_key: 182821801781992
+  api_key: 416b67ce07210481f8dcb5aec94ea07b
 
 
 
