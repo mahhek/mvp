@@ -4,15 +4,29 @@
 
 <div id="right-dash">
   <div id="dash-txt">Your Dashboard</div>
+
   <div id="gary-bg-dash">
 
     <div class="widgets">
-      <div class="widget-x">New Messages<br><br>
+      <div class="widget-x">
+        <span>
+          <%= link_to "Check all the pending requests and mark them NOT RESPONDED if 24(for now 0 hours to test) hours passed.", :controller => "mvp_jobs", :action => "fetch_and_expire_requests" %>
+        </span>
+      </div>
+      <div class="widget-x">
+        <span>
+          <%= link_to "Check the transactions and transfer the funds to users balance if current date is equal to buyer rental date", :controller => "mvp_jobs", :action => "fetch_accepted_transactions_update_user_balance" %>
+        </span>
+      </div>
+    </div>
+
+    <div class="widgets">
+      <div class="widget-x">New Messages<br/><br/>
         <span class="arial-twentyfour">
           <%= link_to @user.unread_messages.size, your_messages_path(@user), :style => "text-decoration:none;" %>
         </span>
       </div>
-      <div class="widget-x">Account Balance<br><br>
+      <div class="widget-x">Account Balance<br/><br/>
         <span class="arial-twentyfour">
           <%= link_to "$#{number_with_precision(@user.recent_balance, :precision => 2)}", account_path(@user), :style => "text-decoration:none;" %>
         </span>

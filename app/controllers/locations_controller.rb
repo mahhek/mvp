@@ -9,7 +9,7 @@ class LocationsController < ApplicationController
   def send_contact_me_message
     @location = Location.find_by_id(params[:location_id])
     session[:return_to] = location_path(@location)
-    flash[:notice] = "You must be logged in to access this page."
+      flash[:notice] = "You must be logged in to access this page."
     redirect_to :controller => "welcome", :action => "signup_and_signin"
   end
 

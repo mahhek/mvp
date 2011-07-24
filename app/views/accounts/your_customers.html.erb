@@ -27,7 +27,7 @@
           </div>
           <div class="details-rentedx2">
             <%= link_to "#{renter.first_name} #{renter.last_name[0..0].capitalize if renter.last_name}.", user_path(renter)  %><br/>
-            <%= accepted_request.request_response_date.strftime("%B %d, %Y") %><br/>
+            <%= accepted_request.buyer_rental_date.strftime("%B %d, %Y") %><br/>
             $<%= number_with_precision(accepted_request.transaction.price.to_f, :precision => 2) %>
           </div>
           <div class="rented-btn">

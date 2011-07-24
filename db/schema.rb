@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110719112047) do
+ActiveRecord::Schema.define(:version => 20110723192925) do
 
   create_table "avatars", :force => true do |t|
     t.string   "caption"
@@ -101,11 +101,11 @@ ActiveRecord::Schema.define(:version => 20110719112047) do
     t.integer  "location_id"
     t.integer  "user_id"
     t.string   "status"
-    t.date     "renting_start_date"
-    t.date     "buyer_rental_date"
-    t.date     "request_send_date"
-    t.date     "request_response_date"
-    t.date     "renting_end_date"
+    t.datetime "renting_start_date"
+    t.datetime "buyer_rental_date"
+    t.datetime "request_send_date"
+    t.datetime "request_response_date"
+    t.datetime "renting_end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -192,6 +192,8 @@ ActiveRecord::Schema.define(:version => 20110719112047) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "locations_user_id"
+    t.integer  "status"
+    t.boolean  "is_fund_transfered",  :default => false
   end
 
   create_table "users", :force => true do |t|

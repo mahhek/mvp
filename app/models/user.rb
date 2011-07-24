@@ -12,29 +12,29 @@ class User < ActiveRecord::Base
   end
   FACEBOOK_SCOPE = 'email,user_birthday'
 
-#  def before_connect(facebook_session)
-#    nnn
-#    self.first_name = facebook_session.first_name
-#    self.last_name = facebook_session.last_name
-#    self.email = facebook_session.email
-#    self.gender = facebook_session.gender
-#    self.password = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{self.username}--")[0,6]
-#    self.password_confirmation = self.password
-#    self.active = true
-#
-#    # Set other tokens
-#    self.single_access_token = Authlogic::Random.friendly_token
-#    self.perishable_token = Authlogic::Random.friendly_token
-#    reset_persistence_token
-#  end
-#
-#  def self.new_or_find_by_facebook_oauth_access_token(access_token, options = {})
-#    user = User.find_by_facebook_oauth_access_token(access_token)
-#    if user.blank?
-#      #code to create new user here
-#    end
-#    user
-#  end
+  #  def before_connect(facebook_session)
+  #    nnn
+  #    self.first_name = facebook_session.first_name
+  #    self.last_name = facebook_session.last_name
+  #    self.email = facebook_session.email
+  #    self.gender = facebook_session.gender
+  #    self.password = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{self.username}--")[0,6]
+  #    self.password_confirmation = self.password
+  #    self.active = true
+  #
+  #    # Set other tokens
+  #    self.single_access_token = Authlogic::Random.friendly_token
+  #    self.perishable_token = Authlogic::Random.friendly_token
+  #    reset_persistence_token
+  #  end
+  #
+  #  def self.new_or_find_by_facebook_oauth_access_token(access_token, options = {})
+  #    user = User.find_by_facebook_oauth_access_token(access_token)
+  #    if user.blank?
+  #      #code to create new user here
+  #    end
+  #    user
+  #  end
   
   attr_accessor :password_confirmation
 
@@ -99,7 +99,7 @@ class User < ActiveRecord::Base
   end
 
   def transactions
-    Transaction.all :conditions => ["creator_id =? or renter_id=? or withdrawer=? ",self.id,self.id,self.id],
+    Transaction.all :conditions => ["( creator_id =? or renter_id=? or withdrawer=? ) and status = ? and is_fund_transfered =?",self.id,self.id,self.id, "#{Transaction::ACCEPTED}",1],
       :order => "created_at Desc"
   end
 

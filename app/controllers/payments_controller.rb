@@ -27,9 +27,9 @@ class PaymentsController < ApplicationController
     if current_user
       if can_user_send_request
         @request_for_location = LocationsUser.new
-        @request_for_location.buyer_rental_date = Date.strptime(params[:renter_date], '%m / %d / %y')
+        @request_for_location.buyer_rental_date = DateTime.strptime("#{params[:renter_date]} #{Time.now.strftime("%H:%M:%S")}", '%m / %d / %y %H:%M:%S').to_time
         @request_for_location.renting_start_date = @location.start_date
-        @request_for_location.request_send_date = Date.current
+        @request_for_location.request_send_date = Time.current
         @request_for_location.user_id = current_user.id
         @request_for_location.location_id = @location.id
         @request_for_location.status = LocationsUser::PENDING
@@ -77,13 +77,9 @@ class PaymentsController < ApplicationController
     @transaction.buyer_total = @payment.amount.to_f + @transaction.buyer_fee.to_f
     @transaction.seller_total = @payment.amount.to_f - @transaction.seller_fee.to_f
     @transaction.storably_total = @transaction.buyer_fee.to_f + @transaction.seller_fee.to_f
+    @transaction.status = Transaction::PENDING
+    @transaction.is_fund_transfered = false
     @transaction.save!
-
-    user = User.find_by_id(@transaction.creator_id)
-    if user
-      user.update_attribute("recent_balance", user.recent_balance.to_f + @transaction.seller_total.to_f )
-    end
-
   end
 
   

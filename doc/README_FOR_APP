@@ -1,2 +1,19 @@
 Use this README file to introduce your application and point to useful places in the API for learning more.
 Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+
+
+Mahhek,
+
+In terms of the payment process:
+
+1) Buyer finds a space and clicks on "Store It" along with a date that is today's date or later - this date is the requested date (For example: 8/1/11, while today's date is 7/22/11)
+2) This brings up the Payment Page - when clicking on "reserve your space" a request is sent to the seller. No payment is recorded and the transaction log / account balance should not change
+3) You should time stamp the request. The seller has 24 hours to accept the rental. The rental request should automatically disappear from the "rental request" list if the seller has not responded within 24 hours.
+4) When seller "accepts" rental from the dashboard home page, then you should check then the payment is only added to the account on the requested date (8/1/11). As a result, the transaction log will not be updated until 8/1/11, and the account balance will not increase until 8/1/11
+5) In the "Your Customers" section, the "Rented On" date should be the requested date (8/1/11) not today's date. However, this renter would be added to the "Your Customers" section on the day that the seller accepts the rental - in this case today.
+
+I hope this helps. Please let me know what questions you have.
+
+Regards,
+
+Apu

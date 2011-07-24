@@ -10,5 +10,6 @@ class LocationsUser < ActiveRecord::Base
   ACCEPTED   = 2
   REJECTED   = 3
   ENDED      = 4
+  NOTRESPONDED      = 5
 
 end

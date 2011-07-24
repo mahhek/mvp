@@ -9,6 +9,7 @@ class AvatarsController < ApplicationController
   def create    
     @avatar = @location.avatars.build(params[:avatar])
     if @avatar.save
+      flash[:notice] = "Photo uploaded successfully!"
       #      @location.update_attribute("location_status", params[:location_status])
       return redirect_to locations_path
     else

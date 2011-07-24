@@ -3,6 +3,9 @@ class Transaction < ActiveRecord::Base
   belongs_to :location
   belongs_to :locations_user
 
+  PENDING    = 1
+  ACCEPTED   = 2
+
   after_create :send_owner_message
 
   def seller
@@ -10,9 +13,17 @@ class Transaction < ActiveRecord::Base
     "#{user.first_name} #{user.last_name[0..0].capitalize if user.last_name}"
   end
 
+  def seller_user
+    User.find_by_id(self.creator_id)
+  end
+
   def renter
     user = User.find_by_id(self.renter_id)
     "#{user.first_name} #{user.last_name[0..0].capitalize if user.last_name}"
+  end
+
+  def renter_user
+    User.find_by_id(self.renter_id)
   end
 
   def send_owner_message
