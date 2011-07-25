@@ -38,15 +38,15 @@ module AuthlogicFacebookConnect
       end
       alias_method :facebook_uid_field=, :facebook_uid_field
 
-      # What session key field should be used for the facebook access token
+      # What session key field should be used for the facebook session key
       #
       #
-      # * <tt>Default:</tt> :facebook_access_token
+      # * <tt>Default:</tt> :facebook_session_key
       # * <tt>Accepts:</tt> Symbol
-      def facebook_access_token_field(value = nil)
-        rw_config(:facebook_access_token_field, value, :facebook_access_token)
+      def facebook_session_key_field(value = nil)
+        rw_config(:facebook_session_key_field, value, :facebook_session_key)
       end
-      alias_method :facebook_access_token_field=, :facebook_access_token_field
+      alias_method :facebook_session_key_field=, :facebook_session_key_field
 
       # Class representing facebook users we want to authenticate against
       #
@@ -84,13 +84,11 @@ module AuthlogicFacebookConnect
       end
 
       def validate_by_facebook_connect
-        facebook_client = controller.current_facebook_client
-        facebook_user = controller.current_facebook_user
-        facebook_user.fetch
-        self.attempted_record = facebook_user_class.find(:first, :conditions => { facebook_uid_field => facebook_user.id })
+        facebook_session = controller.facebook_session
+        self.attempted_record = facebook_user_class.find(:first, :conditions => { facebook_uid_field => facebook_session.user.uid })
 
         if self.attempted_record
-          self.attempted_record.send(:"#{facebook_access_token_field}=", facebook_client.access_token)
+          self.attempted_record.send(:"#{facebook_session_key_field}=", facebook_session.session_key)
           self.attempted_record.save
         end
 
@@ -103,12 +101,13 @@ module AuthlogicFacebookConnect
             new_user = klass.new
 
             if klass == facebook_user_class
-              new_user.send(:"#{facebook_uid_field}=", facebook_user.id)
-              new_user.send(:"#{facebook_access_token_field}=", facebook_client.access_token)
+              new_user.send(:"#{facebook_uid_field}=", facebook_session.user.uid)
+              new_user.send(:"#{facebook_session_key_field}=", facebook_session.session_key)
             else
-              new_user.send(:"build_#{facebook_user_class.to_s.underscore}", :"#{facebook_uid_field}" => facebook_user.id, :"#{facebook_access_token_field}" => facebook_client.access_token)
+              new_user.send(:"build_#{facebook_user_class.to_s.underscore}", :"#{facebook_uid_field}" => facebook_session.user.uid, :"#{facebook_session_key_field}" => facebook_session.session_key)
             end
-            new_user.before_connect(facebook_user) if new_user.respond_to?(:before_connect)
+
+            new_user.before_connect(facebook_session) if new_user.respond_to?(:before_connect)
 
             self.attempted_record = new_user
 
@@ -122,16 +121,16 @@ module AuthlogicFacebookConnect
             else
               self.attempted_record.save_with_validation(false)
             end
-#          rescue Facebooker::Session::SessionExpired
-#            errors.add_to_base(I18n.t('error_messages.facebooker_session_expired',
-#              :default => "Your Facebook Connect session has expired, please reconnect."))
-         end
+          rescue Facebooker::Session::SessionExpired
+            errors.add_to_base(I18n.t('error_messages.facebooker_session_expired',
+              :default => "Your Facebook Connect session has expired, please reconnect."))
+          end
         end
       end
 
       def authenticating_with_facebook_connect?
-        controller.fetch_client_and_user
-        attempted_record.nil? && errors.empty? && controller.current_facebook_client
+        controller.set_facebook_session
+        attempted_record.nil? && errors.empty? && controller.facebook_session
       end
 
       private
@@ -143,8 +142,8 @@ module AuthlogicFacebookConnect
         self.class.facebook_uid_field
       end
 
-      def facebook_access_token_field
-        self.class.facebook_access_token_field
+      def facebook_session_key_field
+        self.class.facebook_session_key_field
       end
 
       def facebook_user_class

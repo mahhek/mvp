@@ -34,13 +34,13 @@ Rails::Initializer.run do |config|
   # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
   # Run "rake -D time" for a list of tasks for finding time zone names.
   config.time_zone = 'UTC'
-  config.gem "authlogic"
+  config.gem "authlogic", :version => '2.1.5'
+  config.gem "facebooker2", :version => '0.0.5'
+  config.gem "mogli", :version => '0.0.16'
   config.gem "paperclip"
   config.gem "aws-s3", :lib => "aws/s3"
   config.gem "geokit"
-  config.gem 'uuidtools'
-  config.gem 'facebooker2', '0.0.5'
-  config.gem "mogli"
+  config.gem 'uuidtools'  
   config.gem 'json'
 
 
@@ -48,3 +48,4 @@ Rails::Initializer.run do |config|
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
 end
+

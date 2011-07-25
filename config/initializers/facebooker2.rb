@@ -1,1 +1,1 @@
-Facebooker2.load_facebooker_yaml 
+Facebooker2.load_facebooker_yaml

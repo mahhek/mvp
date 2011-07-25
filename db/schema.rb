@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110723192925) do
+ActiveRecord::Schema.define(:version => 20110724230901) do
 
   create_table "avatars", :force => true do |t|
     t.string   "caption"

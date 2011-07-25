@@ -6,13 +6,11 @@
       <div id="fb-txt">Using Facebook: </div>
       <div id="fb-btn">
         <%= fb_connect_async_js %>
-        <% if current_facebook_user %>
-          <%= "Welcome #{current_facebook_user.first_name} #{current_facebook_user.last_name}!" %>
-          or
-          <%= "Hello #{fb_name(current_facebook_user, :useyou => false)}!" %>
-          <%= fb_logout_link("Logout of fb", request.url) %><br />
+        <% if current_facebook_user && current_facebook_user.fetch %>
+          <%= fb_login_and_redirect(oauth_callback_url, :perms => User::FACEBOOK_SCOPE, :display => 'popup') %>
+          <%= " as #{current_facebook_user.first_name} #{current_facebook_user.last_name} (" + fb_logout_link("change account?", request.url) + ")" %>
         <% else %>
-          <%= fb_login_and_redirect(facebook_user_create_path, :perms => 'email,user_birthday') %>
+          <%= fb_login_and_redirect(oauth_callback_url, :perms => User::FACEBOOK_SCOPE, :display => 'popup') %>
         <% end %>
 
       </div>

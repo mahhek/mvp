@@ -13,7 +13,7 @@ ActionController::Routing::Routes.draw do |map|
     location.resources :payments
   end
   map.oauth_callback "/fb_oauth/create", :controller=>"user_sessions", :action=>"create"
-  map.facebook_user_create "/users/facebook/user/create", :controller=>"users", :action=>"create_facebook_user"
+  
   map.reserve_location "/location/reserve/:location_id", :controller => 'payments', :action => 'new'
   map.update_renter_date "/location/update_renter_date/:location_id", :controller => 'payments', :action => 'update_renter_date'
   map.search_location "/spaces/search_location", :controller => 'locations', :action => 'search_location'
