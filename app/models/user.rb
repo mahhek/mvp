@@ -112,7 +112,7 @@ class User < ActiveRecord::Base
   end
 
   def transactions
-    Transaction.all :conditions => ["( creator_id =? or renter_id=? or withdrawer=? ) and status = ? and is_fund_transfered =?",self.id,self.id,self.id, "#{Transaction::ACCEPTED}",true],
+    Transaction.all :conditions => ["( creator_id =? or renter_id=? or withdrawer=? ) and status = ? and is_fund_transfered = ?",self.id,self.id,self.id, "#{Transaction::ACCEPTED}",true],
       :order => "created_at Desc"
   end
 

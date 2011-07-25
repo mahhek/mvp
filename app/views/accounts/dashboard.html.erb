@@ -4,10 +4,11 @@
 
 <div id="right-dash">
   <div id="dash-txt">Your Dashboard</div>
+  <div id="dash-txt"><%= link_to "Recurring after 1 day for test", :controller => "mvp_jobs", :action => "recurring_payment_process" %></div>
 
   <div id="gary-bg-dash">
 
-    <div class="widgets">
+    <div class="widgets">      
       <div class="widget-x">
         <span>
           <%= link_to "Check all the pending requests and mark them NOT RESPONDED if 24(for now 0 hours to test) hours passed.", :controller => "mvp_jobs", :action => "fetch_and_expire_requests" %>

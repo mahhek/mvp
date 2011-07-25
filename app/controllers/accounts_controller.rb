@@ -81,7 +81,7 @@ class AccountsController < ApplicationController
       @text = "Stauts udpated."
     when LocationsUser::ACCEPTED
       @request_for_location.location.update_attribute("quantity",@request_for_location.location.quantity - 1)
-      @request_for_location.transaction.update_attribute("status",Transaction::ACCEPTED)
+      @request_for_location.transaction.update_attribute("status",Transaction::ACCEPTED)      
       @text = "Request Accepted."
     when LocationsUser::REJECTED
       @text = "Request Rejected."
