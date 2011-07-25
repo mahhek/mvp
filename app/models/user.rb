@@ -37,16 +37,16 @@ class User < ActiveRecord::Base
   #  end
 
 
-#  def before_connect(facebook_user)
-#    # facebook_uid and facebook_access_token are automatically set by the plugin
-#    self.first_name = facebook_user.first_name
-#    self.last_name = facebook_user.last_name
-#    self.gender = facebook_user.gender
-#    # Set other tokens
-#    self.single_access_token = Authlogic::Random.friendly_token
-#    self.perishable_token = Authlogic::Random.friendly_token
-#    reset_persistence_token
-#  end
+  #  def before_connect(facebook_user)
+  #    # facebook_uid and facebook_access_token are automatically set by the plugin
+  #    self.first_name = facebook_user.first_name
+  #    self.last_name = facebook_user.last_name
+  #    self.gender = facebook_user.gender
+  #    # Set other tokens
+  #    self.single_access_token = Authlogic::Random.friendly_token
+  #    self.perishable_token = Authlogic::Random.friendly_token
+  #    reset_persistence_token
+  #  end
 
   
   attr_accessor :password_confirmation
@@ -112,7 +112,7 @@ class User < ActiveRecord::Base
   end
 
   def transactions
-    Transaction.all :conditions => ["( creator_id =? or renter_id=? or withdrawer=? ) and status = ? and is_fund_transfered =?",self.id,self.id,self.id, "#{Transaction::ACCEPTED}",1],
+    Transaction.all :conditions => ["( creator_id =? or renter_id=? or withdrawer=? ) and status = ? and is_fund_transfered =?",self.id,self.id,self.id, "#{Transaction::ACCEPTED}",true],
       :order => "created_at Desc"
   end
 
