@@ -1,7 +1,7 @@
 rails --version 2.3.10
-authlogic  --version 2.1.5
-facebooker2 --version 0.0.5
-mogli --version 0.0.16
+authlogic  
+facebooker2 
+mogli
 paperclip  --version 2.3.11
 mysql     --version 2.8.1
 aws-s3
