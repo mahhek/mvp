@@ -5,13 +5,13 @@
     <div id="facebook-login">
       <div id="fb-txt">Using Facebook: </div>
       <div id="fb-btn">
-        <%= fb_connect_async_js %>
-        <% if current_facebook_user && current_facebook_user.fetch %>
-          <%= fb_login_and_redirect(oauth_callback_url, :perms => User::FACEBOOK_SCOPE, :display => 'popup') %>
-          <%= " as #{current_facebook_user.first_name} #{current_facebook_user.last_name} (" + fb_logout_link("change account?", request.url) + ")" %>
-        <% else %>
-          <%= fb_login_and_redirect(oauth_callback_url, :perms => User::FACEBOOK_SCOPE, :display => 'popup') %>
-        <% end %>
+        <%#= fb_connect_async_js %>
+        <%# if current_facebook_user && current_facebook_user.fetch %>
+          <%#= fb_login_and_redirect(oauth_callback_url, :perms => User::FACEBOOK_SCOPE, :display => 'popup') %>
+          <%#= " as #{current_facebook_user.first_name} #{current_facebook_user.last_name} (" + fb_logout_link("change account?", request.url) + ")" %>
+        <%# else %>
+          <%#= fb_login_and_redirect(oauth_callback_url, :perms => User::FACEBOOK_SCOPE, :display => 'popup') %>
+        <%# end %>
 
       </div>
     </div>
