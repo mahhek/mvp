@@ -1,7 +1,5 @@
 rails --version 2.3.10
-authlogic  
-facebooker2 
-mogli
+authlogic   --version 2.1.6
 paperclip  --version 2.3.11
 mysql     --version 2.8.1
 aws-s3
@@ -9,4 +7,5 @@ geokit
 crack
 uuidtools
 json
-
+facebooker2
+mogli
