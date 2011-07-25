@@ -1,11 +1,13 @@
 rails --version 2.3.10
 authlogic  --version 2.1.6
+authlogic  --version 2.1.5
+facebooker2 --version 0.0.5
+mogli --version 0.0.16
 paperclip  --version 2.3.11
 mysql     --version 2.8.1
 aws-s3
 geokit
 crack
 uuidtools
-facebooker2  
-mogli  
-oauth 
+
+
