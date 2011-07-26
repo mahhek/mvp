@@ -27,6 +27,13 @@ class MvpJobsController < ApplicationController
     recurring_requests.each do |recurring_request|
       seller = recurring_request.location.owner
       seller.update_attribute("recent_balance", seller.recent_balance.to_f + recurring_request.transaction.price )
+      new_transaction = Transaction.new
+      new_transaction = recurring_request.transaction.clone
+      new_transaction.confirmation_number = confirmation_number
+      new_transaction.payment_date = Time.now
+      new_transaction.locations_user_id = nil
+      new_transaction.is_fund_transfered = true
+      new_transaction.save
       recurring_request.update_attribute("next_payment_time", recurring_request.next_payment_time + 1.days)
     end
     flash[:notice] = "Done"
