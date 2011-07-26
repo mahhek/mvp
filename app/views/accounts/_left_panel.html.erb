@@ -13,31 +13,31 @@
 
   <ul id="dash-links">
     <li>
-      <a style="background-image: url('/images/message-icon.png'); background-repeat: no-repeat; background-position: 6px 50%;" class="active" href="<%= your_messages_path(current_user) %>">
+      <a style="background-image: url('/images/message-icon.png'); background-repeat: no-repeat; background-position: 6px 50%;" class="<%= (params[:action] == "your_messages" or params[:action] == "view_message") ? 'active' : '' %>" href="<%= your_messages_path(current_user) %>">
         Messages
       </a>
     </li>
 
     <li>
-      <a style="background-image: url('/images/manage-icons.png'); background-repeat: no-repeat; background-position: 6px 50%;" href="<%= locations_path %>">
+      <a style="background-image: url('/images/manage-icons.png'); background-repeat: no-repeat; background-position: 6px 50%;" class="<%= params[:action] == "" ? '' : '' %>" href="<%= locations_path %>">
         Manage your spaces
       </a>
     </li>
 
     <li>
-      <a style="background-image: url('/images/customers-icon.png'); background-repeat: no-repeat; background-position: 6px 50%;" href="<%= your_customers_path(current_user) %>">
+      <a style="background-image: url('/images/customers-icon.png'); background-repeat: no-repeat; background-position: 6px 50%;" class="<%= params[:action] == "your_customers" ? 'active' : "" %>" href="<%= your_customers_path(current_user) %>">
         Your customers
       </a>
     </li>
 
     <li>
-      <a style="background-image: url('/images/places-icon.png'); background-repeat: no-repeat; background-position: 6px 50%;" href="<%= what_are_you_renting_path(current_user) %>">
+      <a style="background-image: url('/images/places-icon.png'); background-repeat: no-repeat; background-position: 6px 50%;" class="<%= params[:action] == "what_are_you_renting" ? 'active' : "" %>" href="<%= what_are_you_renting_path(current_user) %>">
         Places you rent
       </a>
     </li>
 
     <li>
-      <a style="background-image: url('/images/your-account-icon.png'); background-repeat: no-repeat; background-position: 6px 50%;" href="<%= account_path(@user) %>">
+      <a style="background-image: url('/images/your-account-icon.png'); background-repeat: no-repeat; background-position: 6px 50%;" class="<%= (params[:action] == "show" or params[:action] == "dashboard") ? 'active' : "" %>" href="<%= account_path(@user) %>">
         Your account
       </a>
     </li>

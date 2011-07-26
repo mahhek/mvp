@@ -131,9 +131,11 @@
         <%= link_to image_tag("contact-me.png", :border=>"0"), send_contact_me_message_path(@location)  %>
       </div>
     <% else %>
-      <div id="store-btn">
-        <%= link_to_function image_tag("contact-me.png", :border=>"0"), "$('#contact_me_div').toggle('slow');"  %>
-      </div>
+      <% if current_user != @location.owner %>
+        <div id="store-btn">
+          <%= link_to_function image_tag("contact-me.png", :border=>"0"), "$('#contact_me_div').toggle('slow');"  %>
+        </div>
+      <% end %>
 
       <div style="float: left;width: 100%;margin-top: 10px;display: none;" id="contact_me_div">
         <% remote_form_for @message, :url => send_contact_owner_path , :html => {:id => "contact_me_form"}, :success => "$('#contact_me_div').toggle('slow');$('#contact_me').val('');" do |f| %>

@@ -16,13 +16,13 @@
 <div id="right-dash">
   <div id="dash-txt">Your account information</div>
   <div id="account-bg">
-    <% form_tag :controller =>"accounts", :action =>"update_password" do %>
+    <% form_tag({:controller =>"accounts", :action =>"update_password"}, :class => "update_password_form") do %>
       <%= hidden_field_tag "id",  @user.id  %>
       <div class="change-pass">Change password<br/>
         <%= password_field_tag :password %><br/>
         <%= password_field_tag :password_confirmation %>
         <span class="txt-small">&nbsp;&nbsp;6 characters minimum</span><br/>
-        <%= link_to image_tag("update-password.png", :border => "0", :height => "34", :width => "135", :class => "img-space23"),"javascript:void(0);", :onclick => "$(this).form.submit();" %>
+        <%= link_to image_tag("update-password.png", :border => "0", :height => "34", :width => "135", :class => "img-space23"),"javascript:void(0);", :onclick => "$('.update_password_form').submit();" %>
       </div>
     <% end %>
 

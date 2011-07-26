@@ -55,19 +55,8 @@
   <br/>
   <% if @avatar.new_record? %>
     <a href="javascript:void(0);">
-      <img src="/images/save-listing.png" alt="save all" border="0" onclick="if($('#avatar_photo').val() != ''){$('.new_avatar').submit();}else{alert('Please select some picture.');return false;}"/>
+      <img src="/images/save-listing.png" alt="save all" border="0" onclick="$('.new_avatar_form').submit();"/>
     </a>
   <%end%>
 </div>
-
-<script type="text/javascript">
-  function checkPhoto(){
-    if($('#avatar_photo').val() != ""){
-      return true;
-    }else{
-      alert('Please select some picture.');
-      return false;
-    }
-  }  
-</script>
 

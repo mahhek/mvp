@@ -6,17 +6,22 @@ class AvatarsController < ApplicationController
     @avatar = @location.avatars.build
   end
   
-  def create    
-    @avatar = @location.avatars.build(params[:avatar])
-    if @avatar.save
-      flash[:notice] = "Photo uploaded successfully!"
-      #      @location.update_attribute("location_status", params[:location_status])
-      return redirect_to locations_path
+  def create
+    if params[:avatar][:photo]
+      @avatar = @location.avatars.build(params[:avatar])
+      if @avatar.save
+        flash[:notice] = "Photo uploaded successfully!"
+        #      @location.update_attribute("location_status", params[:location_status])
+        return redirect_to locations_path
+      else
+        flash[:notice] = "unable to save photo!"
+        return render :action =>"new"
+      end    
     else
-      flash[:notice] = "unable to save photo!"
-      return render :action =>"new"
+      return redirect_to locations_path
     end
   end
+
 
   def edit
     @avatar = @location.avatars.find_by_id(params[:id])

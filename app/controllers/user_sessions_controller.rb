@@ -29,13 +29,12 @@ class UserSessionsController < ApplicationController
         #        flash[:notice] = "Login successful !"
         render :update do |page|
           if session[:return_to]
-            if session[:return_to] == "/locations"
-              session[:return_to] = "/locations/new"
-            end
             page << "window.location='#{session[:return_to]}'"
             session[:return_to] = nil
           else
-            page << "window.location='/locations'"
+            user = User.find_by_email(@user_session.email)
+            page << "window.location='/account/#{user.id}/dashboard'"
+            session[:return_to] = nil
           end
         end
       else
@@ -45,6 +44,11 @@ class UserSessionsController < ApplicationController
         end
       end
     else
+      p "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
+      p current_user.inspect
+      p current_facebook_user.inspect
+      p current_user_session.inspect
+
       if current_user
         if current_user_session.associatable_with_facebook_connect?
           if current_user_session.associate_with_facebook_connect
