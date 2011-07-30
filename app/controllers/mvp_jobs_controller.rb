@@ -13,6 +13,7 @@ class MvpJobsController < ApplicationController
     transactions.each do |transaction|
       if Date.current.strftime("%Y-%m-%d") >= transaction.locations_user.buyer_rental_date.strftime("%Y-%m-%d")
         transaction.locations_user.update_attribute("next_payment_time", transaction.locations_user.buyer_rental_date + 1.day)
+        
         seller = transaction.seller_user
         seller.update_attribute("recent_balance", seller.recent_balance.to_f + transaction.price )
         transaction.update_attribute("is_fund_transfered",true)
