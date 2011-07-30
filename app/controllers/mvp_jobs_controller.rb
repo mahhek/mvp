@@ -26,7 +26,6 @@ class MvpJobsController < ApplicationController
     recurring_requests = LocationsUser.find(:all, :conditions => ["status = ? and renting_end_date IS NULL and Date(next_payment_time) = ?", "#{LocationsUser::ACCEPTED}", "#{Date.current.strftime("%Y-%m-%d")}"])
     recurring_requests.each do |recurring_request|
       seller = recurring_request.location.owner
-      seller.update_attribute("recent_balance", seller.recent_balance.to_f + recurring_request.transaction.price )
       new_transaction = Transaction.new
       new_transaction = recurring_request.transaction.clone
       new_transaction.confirmation_number = confirmation_number
@@ -35,6 +34,7 @@ class MvpJobsController < ApplicationController
       new_transaction.is_fund_transfered = true
       new_transaction.save
       recurring_request.update_attribute("next_payment_time", recurring_request.next_payment_time + 1.day)
+      seller.update_attribute("recent_balance", seller.recent_balance.to_f + recurring_request.transaction.price.to_f )
     end
     flash[:notice] = "Done"
     redirect_to dashboard_path(current_user)
