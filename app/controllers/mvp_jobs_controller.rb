@@ -11,7 +11,7 @@ class MvpJobsController < ApplicationController
   def fetch_accepted_transactions_update_user_balance
     transactions = Transaction.find(:all, :conditions => ["status =? and is_fund_transfered =?", "#{Transaction::ACCEPTED}",false])
     transactions.each do |transaction|
-      if Time.now >= transaction.locations_user.buyer_rental_date
+      if Date.current.strftime("%Y-%m-%d") >= transaction.locations_user.buyer_rental_date.strftime("%Y-%m-%d")
         transaction.locations_user.update_attribute("next_payment_time", transaction.locations_user.buyer_rental_date + 1.day)
         seller = transaction.seller_user
         seller.update_attribute("recent_balance", seller.recent_balance.to_f + transaction.price )
