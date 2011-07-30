@@ -41,7 +41,7 @@ class MvpJobsController < ApplicationController
   end
 
   def show_all_request_that_are_accepted_and_not_ended_and_do_not_have_next_payment_equals_to_todays_date_date
-    @all_requests = LocationsUser.find(:all, :conditions => ["status = ? and renting_end_date IS NULL and Date(next_payment_time) > ?", "#{LocationsUser::ACCEPTED}", "#{Date.today}"])
+    @all_requests = LocationsUser.find(:all, :conditions => ["status = ? and renting_end_date IS NULL and Date(next_payment_time) > ?", "#{LocationsUser::ACCEPTED}", "#{Date.current.strftime("%Y-%m-%d")}"])
     @user = current_user
   end
 
