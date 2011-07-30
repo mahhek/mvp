@@ -47,7 +47,7 @@ class MvpJobsController < ApplicationController
 
   def change_date
     @l_request = LocationsUser.find_by_id(params[:id])
-    @l_request.update_attribute("next_payment_time", Time.now)
+    @l_request.update_attribute("next_payment_time", DateTime.now)
     flash[:notice] = "Date changed"
     redirect_to show_all_request_that_are_accepted_and_not_ended_and_do_not_have_next_payment_equals_to_todays_date_date_path
   end
