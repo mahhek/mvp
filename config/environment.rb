@@ -42,6 +42,7 @@ Rails::Initializer.run do |config|
   config.gem "geokit"
   config.gem 'uuidtools'  
   config.gem 'json'
+  
 
 
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.

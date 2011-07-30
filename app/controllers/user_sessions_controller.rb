@@ -22,6 +22,9 @@ class UserSessionsController < ApplicationController
   #        page << "window.location='/homepage'"g
   #  end
 
+
+
+
   def create
     if request.xhr?
       @user_session = UserSession.new(params[:user_session])
@@ -33,6 +36,7 @@ class UserSessionsController < ApplicationController
             session[:return_to] = nil
           else
             user = User.find_by_email(@user_session.email)
+            user.in_the_future
             page << "window.location='/account/#{user.id}/dashboard'"
             session[:return_to] = nil
           end

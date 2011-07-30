@@ -1,0 +1,17 @@
+<%= render :partial => "/accounts/left_panel" %>
+<%= stylesheet_link_tag "dashboard"%>
+
+<% unless @all_requests.blank? %>
+  <% @all_requests.each do |p_request| %>
+    <div style="width: 717px;float: left;" >
+      Owner:<%= p_request.location.owner.first_name %><br/>
+      Buyer: <%= p_request.user.first_name %><br/>
+      Location: <%= p_request.location.headline %><br/>
+      Next Payment Date: <%= p_request.next_payment_time.to_date %>
+      <%= link_to "Change Date to todays Date for recurring", change_date_path(p_request) %>
+      <hr/>
+    </div>
+  <% end %>
+<% else %>
+  No Request for recurring yet.
+<% end %>

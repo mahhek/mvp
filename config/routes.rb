@@ -13,6 +13,9 @@ ActionController::Routing::Routes.draw do |map|
     location.resources :payments
   end
   map.oauth_callback "/fb_oauth/create", :controller=>"user_sessions", :action=>"create"
+  map.show_all_request_that_are_accepted_and_not_ended_and_do_not_have_next_payment_equals_to_todays_date_date "/show_all_requests_for_recurring_to_change_date",
+    :controller => "mvp_jobs", :action => "show_all_request_that_are_accepted_and_not_ended_and_do_not_have_next_payment_equals_to_todays_date_date"
+  map.change_date "/changedate/:id", :controller => "mvp_jobs", :action => "change_date"
   
   map.reserve_location "/location/reserve/:location_id", :controller => 'payments', :action => 'new'
   map.update_renter_date "/location/update_renter_date/:location_id", :controller => 'payments', :action => 'update_renter_date'

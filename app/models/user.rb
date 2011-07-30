@@ -10,6 +10,12 @@ class User < ActiveRecord::Base
     c.merge_validates_uniqueness_of_email_field_options :message => 'address is already registered.'
 
   end
+
+  def in_the_future
+    puts "=============================>>>>>>>>>>>>>>> Some other code"
+  end
+  # 5.minutes.from_now will be evaluated when in_the_future is called
+  handle_asynchronously :in_the_future, :run_at => 5.minutes.from_now 
   FACEBOOK_SCOPE = 'email,user_birthday'
 
   #  def before_connect(facebook_session)
