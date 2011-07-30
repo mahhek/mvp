@@ -23,7 +23,7 @@ class MvpJobsController < ApplicationController
   end
 
   def recurring_payment_process
-    recurring_requests = LocationsUser.find(:all, :conditions => ["status = ? and renting_end_date IS NULL and Date(next_payment_time) = ?", "#{LocationsUser::ACCEPTED}", "#{Date.today}"])
+    recurring_requests = LocationsUser.find(:all, :conditions => ["status = ? and renting_end_date IS NULL and Date(next_payment_time) = ?", "#{LocationsUser::ACCEPTED}", "#{Date.current.strftime("%Y-%m-%d")}"])
     recurring_requests.each do |recurring_request|
       seller = recurring_request.location.owner
       seller.update_attribute("recent_balance", seller.recent_balance.to_f + recurring_request.transaction.price )
