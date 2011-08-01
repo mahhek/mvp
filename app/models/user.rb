@@ -11,12 +11,22 @@ class User < ActiveRecord::Base
 
   end
 
-  def in_the_future
-    puts "=============================>>>>>>>>>>>>>>> Some other code"
-  end
-  # 5.minutes.from_now will be evaluated when in_the_future is called
-  handle_asynchronously :in_the_future, :run_at => 5.minutes.from_now 
   FACEBOOK_SCOPE = 'email,user_birthday'
+  
+  def before_connect(facebook_session)
+    self.first_name = facebook_session.first_name
+    self.last_name = facebook_session.last_name
+    self.email = facebook_session.email
+    self.username = "#{facebook_session.first_name}.#{facebook_session.last_name}"
+    self.password = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{self.username}--")[0,6]
+    self.password_confirmation = self.password
+    self.active = true
+
+    # Set other tokens
+    self.single_access_token = Authlogic::Random.friendly_token
+    self.perishable_token = Authlogic::Random.friendly_token
+    reset_persistence_token
+  end
 
   #  def before_connect(facebook_session)
   #    nnn
@@ -57,7 +67,7 @@ class User < ActiveRecord::Base
   
   attr_accessor :password_confirmation
 
-  validate :field_values
+  #  validate :field_values
 
 
 

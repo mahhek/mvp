@@ -1,12 +1,25 @@
 development:
-  app_id: 182821801781992
-  secret: 1174804f35513fd331cf7f3c168fcc3c
-  api_key: 416b67ce07210481f8dcb5aec94ea07b
+  app_id: 165592873499050
+  secret: cab126af765f79b8c449ecc1cfc6af73
+  api_key: 0258d7e91ce6cbc06c5630c106c695f7
 
 production:
-  app_id: 182821801781992
-  secret: 1174804f35513fd331cf7f3c168fcc3c
-  api_key: 416b67ce07210481f8dcb5aec94ea07b
+  app_id: 165592873499050
+  secret: cab126af765f79b8c449ecc1cfc6af73
+  api_key: 0258d7e91ce6cbc06c5630c106c695f7
 
 
 
+
+
+#development:
+#  app_id: 182821801781992
+#  secret: 1174804f35513fd331cf7f3c168fcc3c
+#
+#production:
+#  app_id: 182821801781992
+#  secret: 1174804f35513fd331cf7f3c168fcc3c
+#
+#test:
+#  app_id: 182821801781992
+#  secret: 1174804f35513fd331cf7f3c168fcc3c

@@ -48,32 +48,30 @@ class UserSessionsController < ApplicationController
         end
       end
     else
-      p "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
-      p current_user.inspect
-      p current_facebook_user.inspect
-      p current_user_session.inspect
-
-      if current_facebook_user
-        @user = User.find_by_fb_user_id(current_facebook_user.id.to_i)
-      end
-      if @user.blank?
-
-        @facebook_user = current_facebook_user.fetch
-
-        @user = User.create :login => @facebook_user.email, :email => @facebook_user.email, :name => @facebook_user.name, :fb_user_id => @facebook_user.id
-        if @user.save
-          @user.profile = Profile.create(:benefactor_id => nil, :benefactor_invites =>   Setting.find_by_identifier("benefactor_invites").value.to_i)
-          redirect_to :controller => "profiles", :action => "show", :id => @user.profile.id
+      if current_user
+        if current_user_session.associatable_with_facebook_connect?
+          if current_user_session.associate_with_facebook_connect
+            flash[:notice] = "Your account is now associated with your facebook account"
+            redirect_to root_url
+          end
         else
-          render "new"
+          flash[:notice] = "Your facebook account is already connected"
+          redirect_to profile_url
         end
-      elsif @user.fb_user_id.nil?
-        cc
-        @user.update_attribute :fb_user_id, current_facebook_user.id
-        redirect_to :controller => "dashboard", :url => "index"
       else
-        ccc
-        redirect_to :controller => "dashboard", :url => "index"
+        @user_session = UserSession.new(params[:profile_session])
+        if @user_session.save
+          flash[:notice] = "Login successful!"
+          redirect_to root_url
+        else
+          if @user_session.errors.on(:facebook)
+            flash[:notice] = "An account already exists with this email, please login to connect it with your Facebook account."
+            redirect_to login_path
+          else
+            flash[:notice] = "Could not login."
+            render :action => :new
+          end
+        end
       end
     end
   end

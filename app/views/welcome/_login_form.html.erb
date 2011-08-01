@@ -8,18 +8,19 @@
         <%= fb_connect_async_js %>
         <% if current_facebook_user && current_facebook_user.fetch %>
           <%= fb_login_and_redirect(oauth_callback_url, :perms => User::FACEBOOK_SCOPE, :display => 'popup') %>
-          <%= " as #{current_facebook_user.first_name} #{current_facebook_user.last_name} (" + fb_logout_link("change account?", request.url) + ")" %>
+          <span style="width: 225px;float: left;font-size: 12px;">
+            <%= " as #{current_facebook_user.first_name} #{current_facebook_user.last_name[0..0].capitalize}. (" + fb_logout_link("change account?", request.url) + ")" %>
+          </span>
         <% else %>
           <%= fb_login_and_redirect(oauth_callback_url, :perms => User::FACEBOOK_SCOPE, :display => 'popup') %>
         <% end %>
-
       </div>
     </div>
 
     <div id="user-txt">Or, Your Username &amp; Password:</div>
   <%#= session[:return_to] %>
 
-    <div class="fieldx-bg">
+    <div class="fieldx-bg" style="padding-top:38px;">
       <div class="fieldx-txt">Email</div>
       <div class="fieldx-field">
         <%= f.text_field :email, :class=>"fieldx" %>
